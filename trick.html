@@ -260,6 +260,14 @@
       font-style: italic;
       text-transform: uppercase;
       font-size: 30px;
+      margin-bottom: 8px;
+    }
+
+    .form-subtitle {
+      color: #666;
+      font-size: 9px;
+      font-weight: 900;
+      letter-spacing: 1.3px;
       margin-bottom: 25px;
     }
 
@@ -362,6 +370,11 @@
     .submit-button:hover {
       background: #fff;
       border-color: #fff;
+    }
+
+    .submit-button:disabled {
+      opacity: .5;
+      cursor: wait;
     }
 
     .message {
@@ -469,6 +482,7 @@
     }
 
     @media (max-width: 700px) {
+
       nav {
         padding: 0 5%;
       }
@@ -529,14 +543,23 @@
 <div class="page">
 
   <nav>
+
     <a href="./index.html" class="logo">
       Y2K<span>SK8</span>DOCU
     </a>
 
     <div class="nav-links">
-      <a href="./explore.html">EXPLORE</a>
-      <a href="./dashboard.html">ARCHIVE</a>
+
+      <a href="./explore.html">
+        EXPLORE
+      </a>
+
+      <a href="./dashboard.html">
+        ARCHIVE
+      </a>
+
     </div>
+
   </nav>
 
   <main>
@@ -548,6 +571,7 @@
     <section id="pageContent" style="display:none;">
 
       <div class="hero">
+
         <div class="category" id="trickCategory">
           SKATE
         </div>
@@ -557,51 +581,83 @@
         </h1>
 
         <div class="notes" id="trickNotes"></div>
+
       </div>
 
       <section class="progress-section">
 
         <div class="section-heading">
-          <h2>Progression.</h2>
-          <span>TRICK DATA</span>
+
+          <h2>
+            Progression.
+          </h2>
+
+          <span>
+            TRICK DATA
+          </span>
+
         </div>
 
         <div class="stats">
 
           <div class="stat">
-            <div class="stat-number" id="sessionsLogged">
+
+            <div
+              class="stat-number"
+              id="sessionsLogged"
+            >
               0
             </div>
+
             <div class="stat-label">
               Sessions Logged
             </div>
+
           </div>
 
           <div class="stat">
-            <div class="stat-number" id="startingConfidence">
+
+            <div
+              class="stat-number"
+              id="startingConfidence"
+            >
               —
             </div>
+
             <div class="stat-label">
               Starting Confidence
             </div>
+
           </div>
 
           <div class="stat">
-            <div class="stat-number" id="currentConfidence">
+
+            <div
+              class="stat-number"
+              id="currentConfidence"
+            >
               —
             </div>
+
             <div class="stat-label">
               Current Confidence
             </div>
+
           </div>
 
           <div class="stat">
-            <div class="stat-number" id="personalBest">
+
+            <div
+              class="stat-number"
+              id="personalBest"
+            >
               —
             </div>
+
             <div class="stat-label">
               Personal Best
             </div>
+
           </div>
 
         </div>
@@ -609,25 +665,41 @@
         <div class="big-progress">
 
           <div class="progress-label">
-            <span>CONFIDENCE</span>
-            <span id="progressText">0 / 5</span>
+
+            <span>
+              CONFIDENCE
+            </span>
+
+            <span id="progressText">
+              0 / 5
+            </span>
+
           </div>
 
           <div class="progress-bar">
+
             <div
               class="progress-fill"
               id="progressFill"
               style="width:0%"
             ></div>
+
           </div>
 
         </div>
 
       </section>
 
+
       <section class="form-section">
 
-        <h2>Log A Session.</h2>
+        <h2>
+          Log A Session.
+        </h2>
+
+        <div class="form-subtitle">
+          ADD ANOTHER SESSION TO THIS TRICK.
+        </div>
 
         <form id="sessionForm">
 
@@ -642,27 +714,47 @@
               <div class="confidence-options">
 
                 <label>
-                  <input type="radio" name="confidence" value="1">
+                  <input
+                    type="radio"
+                    name="confidence"
+                    value="1"
+                  >
                   <span>1</span>
                 </label>
 
                 <label>
-                  <input type="radio" name="confidence" value="2">
+                  <input
+                    type="radio"
+                    name="confidence"
+                    value="2"
+                  >
                   <span>2</span>
                 </label>
 
                 <label>
-                  <input type="radio" name="confidence" value="3">
+                  <input
+                    type="radio"
+                    name="confidence"
+                    value="3"
+                  >
                   <span>3</span>
                 </label>
 
                 <label>
-                  <input type="radio" name="confidence" value="4">
+                  <input
+                    type="radio"
+                    name="confidence"
+                    value="4"
+                  >
                   <span>4</span>
                 </label>
 
                 <label>
-                  <input type="radio" name="confidence" value="5">
+                  <input
+                    type="radio"
+                    name="confidence"
+                    value="5"
+                  >
                   <span>5</span>
                 </label>
 
@@ -677,6 +769,7 @@
               </label>
 
               <select id="visibility">
+
                 <option value="private">
                   PRIVATE — ONLY ME
                 </option>
@@ -684,6 +777,7 @@
                 <option value="public">
                   PUBLIC — EVERYONE
                 </option>
+
               </select>
 
             </div>
@@ -725,11 +819,15 @@
             LOG SESSION
           </button>
 
-          <div id="formMessage" class="message"></div>
+          <div
+            id="formMessage"
+            class="message"
+          ></div>
 
         </form>
 
       </section>
+
 
       <section>
 
@@ -737,11 +835,15 @@
           Session History.
         </h2>
 
-        <div id="sessionsContainer" class="sessions"></div>
+        <div
+          id="sessionsContainer"
+          class="sessions"
+        ></div>
 
       </section>
 
     </section>
+
 
     <div id="loading" class="empty">
       LOADING TRICK...
@@ -749,54 +851,117 @@
 
   </main>
 
+
   <footer>
+
     <div>
-      Y2KSK8DOCU <span>●</span> SKATE. DOCUMENT. PROGRESS.
+      Y2KSK8DOCU <span>●</span>
+      SKATE. DOCUMENT. PROGRESS.
     </div>
 
     <div>
       PRIVATE / PUBLIC ARCHIVE
     </div>
+
   </footer>
 
 </div>
 
+
 <script>
 
-  const client = window.supabaseClient;
+  const client =
+    window.supabaseClient;
 
-  const params = new URLSearchParams(window.location.search);
-  const trickId = params.get("id");
+  const params =
+    new URLSearchParams(
+      window.location.search
+    );
+
+  const trickId =
+    params.get("id");
 
   let currentUser = null;
   let currentTrick = null;
   let sessions = [];
 
-  const loading = document.getElementById("loading");
-  const pageContent = document.getElementById("pageContent");
 
-  const trickName = document.getElementById("trickName");
-  const trickCategory = document.getElementById("trickCategory");
-  const trickNotes = document.getElementById("trickNotes");
+  const loading =
+    document.getElementById("loading");
 
-  const sessionsLogged = document.getElementById("sessionsLogged");
-  const startingConfidence = document.getElementById("startingConfidence");
-  const currentConfidence = document.getElementById("currentConfidence");
-  const personalBest = document.getElementById("personalBest");
+  const pageContent =
+    document.getElementById("pageContent");
 
-  const progressFill = document.getElementById("progressFill");
-  const progressText = document.getElementById("progressText");
+  const trickName =
+    document.getElementById("trickName");
 
-  const sessionForm = document.getElementById("sessionForm");
-  const submitButton = document.getElementById("submitButton");
-  const formMessage = document.getElementById("formMessage");
+  const trickCategory =
+    document.getElementById("trickCategory");
+
+  const trickNotes =
+    document.getElementById("trickNotes");
+
+  const sessionsLogged =
+    document.getElementById("sessionsLogged");
+
+  const startingConfidence =
+    document.getElementById(
+      "startingConfidence"
+    );
+
+  const currentConfidence =
+    document.getElementById(
+      "currentConfidence"
+    );
+
+  const personalBest =
+    document.getElementById(
+      "personalBest"
+    );
+
+  const progressFill =
+    document.getElementById(
+      "progressFill"
+    );
+
+  const progressText =
+    document.getElementById(
+      "progressText"
+    );
+
+  const sessionForm =
+    document.getElementById(
+      "sessionForm"
+    );
+
+  const submitButton =
+    document.getElementById(
+      "submitButton"
+    );
+
+  const formMessage =
+    document.getElementById(
+      "formMessage"
+    );
 
   const sessionsContainer =
-    document.getElementById("sessionsContainer");
+    document.getElementById(
+      "sessionsContainer"
+    );
+
+
+  /*
+    ----------------------------------------
+    ESCAPE
+    ----------------------------------------
+  */
 
   function escapeHTML(value) {
 
-    if (value === null || value === undefined) {
+    if (
+      value === null ||
+      value === undefined
+    ) {
       return "";
     }
 
@@ -806,136 +971,234 @@
       .replace(/>/g, "&gt;")
       .replace(/"/g, "&quot;")
       .replace(/'/g, "&#039;");
+  }
+
+
+  /*
+    ----------------------------------------
+    MESSAGE
+    ----------------------------------------
+  */
+
+  function showMessage(
+    message,
+    type
+  ) {
+
+    formMessage.textContent =
+      message;
+
+    formMessage.className =
+      "message " + type;
 
   }
 
-  function showMessage(message, type) {
 
-    formMessage.textContent = message;
-    formMessage.className = "message " + type;
-
-  }
+  /*
+    ----------------------------------------
+    AUTH
+    ----------------------------------------
+  */
 
   async function getUser() {
 
     const {
       data,
       error
-    } = await client.auth.getSession();
+    } =
+      await client.auth.getSession();
 
-    if (error || !data.session) {
-      window.location.href = "./auth.html";
+    if (
+      error ||
+      !data.session
+    ) {
+
+      window.location.href =
+        "./auth.html";
+
       return null;
     }
 
     return data.session.user;
-
   }
+
+
+  /*
+    ----------------------------------------
+    LOAD TRICK
+    ----------------------------------------
+  */
 
   async function loadTrick() {
 
     const {
       data,
       error
-    } = await client
-      .from("tricks")
-      .select(`
-        id,
-        name,
-        category,
-        confidence,
-        notes,
-        visibility,
-        created_at,
-        updated_at
-      `)
-      .eq("id", trickId)
-      .eq("user_id", currentUser.id)
-      .single();
+    } =
+      await client
+        .from("tricks")
+        .select(`
+          id,
+          name,
+          category,
+          confidence,
+          notes,
+          visibility,
+          created_at,
+          updated_at
+        `)
+        .eq("id", trickId)
+        .eq(
+          "user_id",
+          currentUser.id
+        )
+        .single();
 
-    if (error || !data) {
-      throw new Error("Trick not found.");
+    if (
+      error ||
+      !data
+    ) {
+
+      throw new Error(
+        "Trick not found."
+      );
     }
 
-    currentTrick = data;
+    currentTrick =
+      data;
 
-    trickName.textContent = data.name;
+    trickName.textContent =
+      data.name;
+
     trickCategory.textContent =
-      data.category || "SKATE";
+      data.category ||
+      "SKATE";
 
     if (data.notes) {
-      trickNotes.textContent = data.notes;
-    } else {
-      trickNotes.style.display = "none";
-    }
 
+      trickNotes.textContent =
+        data.notes;
+
+    } else {
+
+      trickNotes.style.display =
+        "none";
+    }
   }
+
+
+  /*
+    ----------------------------------------
+    LOAD SESSIONS
+    ----------------------------------------
+  */
 
   async function loadSessions() {
 
     const {
       data,
       error
-    } = await client
-      .from("sessions")
-      .select(`
-        id,
-        trick_id,
-        confidence,
-        notes,
-        created_at,
-        videos (
+    } =
+      await client
+        .from("sessions")
+        .select(`
           id,
-          storage_path,
-          visibility,
-          created_at
+          trick_id,
+          confidence,
+          notes,
+          created_at,
+          videos (
+            id,
+            storage_path,
+            visibility,
+            created_at
+          )
+        `)
+        .eq(
+          "trick_id",
+          trickId
         )
-      `)
-      .eq("trick_id", trickId)
-      .eq("user_id", currentUser.id)
-      .order("created_at", {
-        ascending: true
-      });
+        .eq(
+          "user_id",
+          currentUser.id
+        )
+        .order(
+          "created_at",
+          {
+            ascending: true
+          }
+        );
 
     if (error) {
       throw error;
     }
 
-    sessions = data || [];
+    sessions =
+      data || [];
 
     renderStats();
-    await renderSessions();
 
+    await renderSessions();
   }
+
+
+  /*
+    ----------------------------------------
+    STATS
+    ----------------------------------------
+  */
 
   function renderStats() {
 
-    sessionsLogged.textContent = sessions.length;
+    sessionsLogged.textContent =
+      sessions.length;
 
-    if (sessions.length === 0) {
+    if (
+      sessions.length === 0
+    ) {
 
       startingConfidence.textContent =
-        currentTrick.confidence + "/5";
+        currentTrick.confidence +
+        "/5";
 
       currentConfidence.textContent =
-        currentTrick.confidence + "/5";
+        currentTrick.confidence +
+        "/5";
 
       personalBest.textContent =
-        currentTrick.confidence + "/5";
+        currentTrick.confidence +
+        "/5";
 
-      updateProgress(currentTrick.confidence);
+      updateProgress(
+        currentTrick.confidence
+      );
 
       return;
     }
 
-    const values = sessions
-      .map(session => Number(session.confidence))
-      .filter(value => !isNaN(value));
+    const values =
+      sessions
+        .map(
+          session =>
+            Number(
+              session.confidence
+            )
+        )
+        .filter(
+          value =>
+            !isNaN(value)
+        );
 
-    const first = values[0];
-    const current = values[values.length - 1];
+    const first =
+      values[0];
 
-    const best = Math.max(...values);
+    const current =
+      values[
+        values.length - 1
+      ];
+
+    const best =
+      Math.max(...values);
 
     startingConfidence.textContent =
       first + "/5";
@@ -946,74 +1209,122 @@
     personalBest.textContent =
       best + "/5";
 
-    updateProgress(current);
-
+    updateProgress(
+      current
+    );
   }
 
-  function updateProgress(confidence) {
+
+  /*
+    ----------------------------------------
+    PROGRESS
+    ----------------------------------------
+  */
+
+  function updateProgress(
+    confidence
+  ) {
 
     const value =
-      Math.max(1, Math.min(5, Number(confidence) || 1));
+      Math.max(
+        1,
+        Math.min(
+          5,
+          Number(confidence) || 1
+        )
+      );
 
     progressFill.style.width =
       (value * 20) + "%";
 
     progressText.textContent =
       value + " / 5";
-
   }
 
-  async function getVideoUrl(video) {
 
-    if (!video || !video.storage_path) {
+  /*
+    ----------------------------------------
+    VIDEO URL
+    ----------------------------------------
+  */
+
+  async function getVideoUrl(
+    video
+  ) {
+
+    if (
+      !video ||
+      !video.storage_path
+    ) {
+
       return null;
     }
 
+
     /*
-      PUBLIC VIDEOS
-      are stored in public-videos.
+      PUBLIC
     */
 
-    if (video.visibility === "public") {
+    if (
+      video.visibility ===
+      "public"
+    ) {
 
       const {
         data
-      } = client
-        .storage
-        .from("public-videos")
-        .getPublicUrl(video.storage_path);
+      } =
+        client
+          .storage
+          .from(
+            "public-videos"
+          )
+          .getPublicUrl(
+            video.storage_path
+          );
 
       return data.publicUrl;
-
     }
 
+
     /*
-      PRIVATE VIDEOS
-      remain in the private videos bucket.
+      PRIVATE
     */
 
     const {
       data,
       error
-    } = await client
-      .storage
-      .from("videos")
-      .createSignedUrl(
-        video.storage_path,
-        3600
-      );
+    } =
+      await client
+        .storage
+        .from("videos")
+        .createSignedUrl(
+          video.storage_path,
+          3600
+        );
 
-    if (error || !data) {
+    if (
+      error ||
+      !data
+    ) {
+
       return null;
     }
 
     return data.signedUrl;
-
   }
+
+
+  /*
+    ----------------------------------------
+    RENDER SESSIONS
+    ----------------------------------------
+  */
 
   async function renderSessions() {
 
-    if (sessions.length === 0) {
+    if (
+      sessions.length === 0
+    ) {
 
       sessionsContainer.innerHTML = `
         <div class="empty">
@@ -1024,31 +1335,46 @@
       return;
     }
 
-    sessionsContainer.innerHTML = "";
 
-    for (const session of sessions) {
+    sessionsContainer.innerHTML =
+      "";
+
+
+    for (
+      const session of sessions
+    ) {
 
       const date =
-        new Date(session.created_at)
-          .toLocaleDateString();
+        new Date(
+          session.created_at
+        ).toLocaleDateString();
+
 
       const sessionElement =
-        document.createElement("article");
+        document.createElement(
+          "article"
+        );
 
-      sessionElement.className = "session";
+      sessionElement.className =
+        "session";
+
 
       sessionElement.innerHTML = `
 
         <div class="session-top">
 
           <div>
+
             <div class="session-confidence">
-              ${escapeHTML(session.confidence)}/5
+              ${escapeHTML(
+                session.confidence
+              )}/5
             </div>
 
             <div class="session-date">
               ${escapeHTML(date)}
             </div>
+
           </div>
 
         </div>
@@ -1057,7 +1383,9 @@
           session.notes
             ? `
               <div class="session-notes">
-                ${escapeHTML(session.notes)}
+                ${escapeHTML(
+                  session.notes
+                )}
               </div>
             `
             : ""
@@ -1065,58 +1393,100 @@
 
       `;
 
-      const videos =
-        session.videos || [];
 
-      for (const video of videos) {
+      const videos =
+        session.videos ||
+        [];
+
+
+      for (
+        const video of videos
+      ) {
 
         const videoUrl =
-          await getVideoUrl(video);
+          await getVideoUrl(
+            video
+          );
+
 
         if (videoUrl) {
 
           const player =
-            document.createElement("video");
+            document.createElement(
+              "video"
+            );
 
-          player.controls = true;
-          player.playsInline = true;
-          player.preload = "metadata";
-          player.src = videoUrl;
+          player.controls =
+            true;
 
-          sessionElement.appendChild(player);
+          player.playsInline =
+            true;
+
+          player.preload =
+            "metadata";
+
+          player.src =
+            videoUrl;
+
+
+          sessionElement.appendChild(
+            player
+          );
+
 
           const badge =
-            document.createElement("div");
+            document.createElement(
+              "div"
+            );
 
-          badge.className = "visibility";
+          badge.className =
+            "visibility";
 
           badge.textContent =
-            video.visibility === "public"
+            video.visibility ===
+            "public"
               ? "PUBLIC CLIP"
               : "PRIVATE CLIP";
 
-          sessionElement.appendChild(badge);
+
+          sessionElement.appendChild(
+            badge
+          );
 
         }
 
       }
 
-      sessionsContainer.appendChild(sessionElement);
 
+      sessionsContainer.appendChild(
+        sessionElement
+      );
     }
-
   }
 
-  async function handleSubmit(event) {
+
+  /*
+    ----------------------------------------
+    SUBMIT SESSION
+    ----------------------------------------
+  */
+
+  async function handleSubmit(
+    event
+  ) {
 
     event.preventDefault();
+
 
     const selectedConfidence =
       document.querySelector(
         'input[name="confidence"]:checked'
       );
 
-    if (!selectedConfidence) {
+
+    if (
+      !selectedConfidence
+    ) {
 
       showMessage(
         "SELECT A CONFIDENCE LEVEL.",
@@ -1124,189 +1494,321 @@
       );
 
       return;
-
     }
 
+
     const confidence =
-      Number(selectedConfidence.value);
+      Number(
+        selectedConfidence.value
+      );
+
 
     const notes =
       document
-        .getElementById("sessionNotes")
+        .getElementById(
+          "sessionNotes"
+        )
         .value
         .trim();
 
+
     const visibility =
       document
-        .getElementById("visibility")
+        .getElementById(
+          "visibility"
+        )
         .value;
+
 
     const videoFile =
       document
-        .getElementById("videoFile")
+        .getElementById(
+          "videoFile"
+        )
         .files[0];
 
-    submitButton.disabled = true;
-    submitButton.textContent = "SAVING...";
 
-    showMessage("", "");
+    submitButton.disabled =
+      true;
 
-    let uploadedPath = null;
+    submitButton.textContent =
+      "SAVING...";
+
+
+    showMessage(
+      "",
+      ""
+    );
+
+
+    let uploadedPath =
+      null;
+
+    let uploadedBucket =
+      null;
+
+    let createdSessionId =
+      null;
+
 
     try {
 
       /*
-        1. CREATE SESSION
+        ------------------------------
+        CREATE SESSION
+        ------------------------------
       */
 
       const {
         data: session,
         error: sessionError
-      } = await client
-        .from("sessions")
-        .insert({
-          trick_id: trickId,
-          user_id: currentUser.id,
-          confidence: confidence,
-          notes: notes || null
-        })
-        .select()
-        .single();
+      } =
+        await client
+          .from("sessions")
+          .insert({
+            trick_id:
+              trickId,
+            user_id:
+              currentUser.id,
+            confidence:
+              confidence,
+            notes:
+              notes || null
+          })
+          .select()
+          .single();
+
 
       if (sessionError) {
         throw sessionError;
       }
 
+
+      createdSessionId =
+        session.id;
+
+
       /*
-        2. UPLOAD VIDEO IF PROVIDED
+        ------------------------------
+        UPLOAD VIDEO
+        ------------------------------
       */
 
       if (videoFile) {
 
         const originalName =
-          videoFile.name || "clip.mp4";
+          videoFile.name ||
+          "clip.mp4";
+
 
         const safeName =
           originalName
-            .replace(/[^a-zA-Z0-9._-]/g, "-")
-            .replace(/-+/g, "-")
-            .substring(0, 120);
+            .replace(
+              /[^a-zA-Z0-9._-]/g,
+              "-"
+            )
+            .replace(
+              /-+/g,
+              "-"
+            )
+            .substring(
+              0,
+              120
+            );
+
 
         const uniqueName =
-          crypto.randomUUID() + "-" + safeName;
+          crypto.randomUUID() +
+          "-" +
+          safeName;
 
-        /*
-          PUBLIC → public-videos
-          PRIVATE → videos
-        */
 
         const bucket =
           visibility === "public"
             ? "public-videos"
             : "videos";
 
+
+        uploadedBucket =
+          bucket;
+
+
         uploadedPath =
           currentUser.id +
           "/" +
           uniqueName;
 
+
         const {
           error: uploadError
-        } = await client
-          .storage
-          .from(bucket)
-          .upload(
-            uploadedPath,
-            videoFile,
-            {
-              cacheControl: "3600",
-              upsert: false,
-              contentType:
-                videoFile.type || "video/mp4"
-            }
-          );
+        } =
+          await client
+            .storage
+            .from(bucket)
+            .upload(
+              uploadedPath,
+              videoFile,
+              {
+                cacheControl:
+                  "3600",
+                upsert:
+                  false,
+                contentType:
+                  videoFile.type ||
+                  "video/mp4"
+              }
+            );
+
 
         if (uploadError) {
           throw uploadError;
         }
 
+
         /*
-          3. SAVE VIDEO DATABASE RECORD
+          SAVE VIDEO RECORD
         */
 
         const {
           error: videoError
-        } = await client
-          .from("videos")
-          .insert({
-            session_id: session.id,
-            user_id: currentUser.id,
-            storage_path: uploadedPath,
-            visibility: visibility
-          });
+        } =
+          await client
+            .from("videos")
+            .insert({
+              session_id:
+                session.id,
+              user_id:
+                currentUser.id,
+              storage_path:
+                uploadedPath,
+              visibility:
+                visibility
+            });
+
 
         if (videoError) {
-
-          /*
-            Clean up uploaded file
-            if database insert fails.
-          */
 
           await client
             .storage
             .from(bucket)
-            .remove([uploadedPath]);
+            .remove([
+              uploadedPath
+            ]);
 
-          uploadedPath = null;
+          uploadedPath =
+            null;
 
           throw videoError;
         }
-
       }
 
+
       /*
-        4. UPDATE TRICK CURRENT CONFIDENCE
+        ------------------------------
+        UPDATE TRICK CONFIDENCE
+        ------------------------------
       */
 
       const {
         error: updateError
-      } = await client
-        .from("tricks")
-        .update({
-          confidence: confidence,
-          updated_at: new Date().toISOString()
-        })
-        .eq("id", trickId)
-        .eq("user_id", currentUser.id);
+      } =
+        await client
+          .from("tricks")
+          .update({
+            confidence:
+              confidence,
+            updated_at:
+              new Date()
+                .toISOString()
+          })
+          .eq(
+            "id",
+            trickId
+          )
+          .eq(
+            "user_id",
+            currentUser.id
+          );
+
 
       if (updateError) {
+
         console.warn(
           "Could not update trick confidence:",
           updateError
         );
+
       }
 
+
       /*
-        5. RESET FORM
+        ------------------------------
+        RESET
+        ------------------------------
       */
 
       sessionForm.reset();
+
 
       showMessage(
         "SESSION LOGGED SUCCESSFULLY.",
         "success"
       );
 
-      /*
-        6. RELOAD EVERYTHING
-      */
 
       await loadTrick();
+
       await loadSessions();
+
 
     } catch (error) {
 
       console.error(error);
+
+
+      /*
+        Clean up session if
+        something failed after it
+        was created.
+      */
+
+      if (createdSessionId) {
+
+        await client
+          .from("sessions")
+          .delete()
+          .eq(
+            "id",
+            createdSessionId
+          )
+          .eq(
+            "user_id",
+            currentUser.id
+          );
+
+      }
+
+
+      /*
+        Clean up storage if needed.
+      */
+
+      if (
+        uploadedPath &&
+        uploadedBucket
+      ) {
+
+        await client
+          .storage
+          .from(
+            uploadedBucket
+          )
+          .remove([
+            uploadedPath
+          ]);
+
+      }
+
 
       showMessage(
         error.message ||
@@ -1314,34 +1816,57 @@
         "error"
       );
 
+
     } finally {
 
-      submitButton.disabled = false;
-      submitButton.textContent = "LOG SESSION";
+      submitButton.disabled =
+        false;
+
+      submitButton.textContent =
+        "LOG SESSION";
 
     }
-
   }
+
+
+  /*
+    ----------------------------------------
+    INIT
+    ----------------------------------------
+  */
 
   async function init() {
 
     try {
 
       if (!trickId) {
-        throw new Error("Missing trick ID.");
+
+        throw new Error(
+          "Missing trick ID."
+        );
       }
 
-      currentUser = await getUser();
+
+      currentUser =
+        await getUser();
+
 
       if (!currentUser) {
         return;
       }
 
+
       await loadTrick();
+
       await loadSessions();
 
-      loading.style.display = "none";
-      pageContent.style.display = "block";
+
+      loading.style.display =
+        "none";
+
+      pageContent.style.display =
+        "block";
+
 
     } catch (error) {
 
@@ -1350,16 +1875,18 @@
       loading.textContent =
         "TRICK COULD NOT BE LOADED.";
 
-      loading.style.color = "#ff4444";
+      loading.style.color =
+        "#ff4444";
 
     }
-
   }
+
 
   sessionForm.addEventListener(
     "submit",
     handleSubmit
   );
+
 
   init();
 
