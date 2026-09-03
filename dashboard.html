@@ -1,15 +1,17 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 
-  <title>ARCHIVE // Y2K SK8 DOCU</title>
+  <title>My Tricks — y2ksk8docu</title>
 
   <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
   <script src="./supabase.js"></script>
 
   <style>
+    @import url('https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Permanent+Marker&family=Roboto+Mono:wght@400;500;700&display=swap');
+
     * {
       box-sizing: border-box;
       margin: 0;
@@ -18,11 +20,11 @@
 
     body {
       background:
-        radial-gradient(circle at top right, rgba(255,0,0,.13), transparent 30%),
-        radial-gradient(circle at bottom left, rgba(255,0,0,.08), transparent 30%),
-        #050505;
-      color: #f5f5f5;
-      font-family: Arial, Helvetica, sans-serif;
+        radial-gradient(circle at 20% 20%, rgba(180, 0, 0, 0.14), transparent 30%),
+        radial-gradient(circle at 80% 80%, rgba(255, 0, 0, 0.08), transparent 30%),
+        #070707;
+      color: #f3f3f3;
+      font-family: "Roboto Mono", monospace;
       min-height: 100vh;
     }
 
@@ -31,387 +33,402 @@
       position: fixed;
       inset: 0;
       pointer-events: none;
-      opacity: .06;
+      opacity: 0.08;
       background-image:
-        linear-gradient(rgba(255,255,255,.15) 1px, transparent 1px),
-        linear-gradient(90deg, rgba(255,255,255,.15) 1px, transparent 1px);
-      background-size: 4px 4px;
+        repeating-linear-gradient(
+          0deg,
+          transparent,
+          transparent 3px,
+          rgba(255,255,255,0.05) 4px
+        );
+      z-index: 999;
     }
 
+    a {
+      color: inherit;
+      text-decoration: none;
+    }
+
+    button,
+    input,
+    textarea,
+    select {
+      font: inherit;
+    }
+
+    button {
+      cursor: pointer;
+    }
+
+    /* NAV */
+
     header {
+      width: 100%;
+      border-bottom: 1px solid #242424;
+      background: rgba(5, 5, 5, 0.94);
       position: sticky;
       top: 0;
-      z-index: 50;
-      background: rgba(5,5,5,.94);
-      backdrop-filter: blur(14px);
-      border-bottom: 1px solid rgba(255,0,0,.3);
+      z-index: 100;
+      backdrop-filter: blur(10px);
     }
 
     .nav {
-      max-width: 1200px;
-      min-height: 76px;
+      max-width: 1400px;
       margin: auto;
-      padding: 0 24px;
+      min-height: 82px;
+      padding: 18px 28px;
+
       display: flex;
       align-items: center;
       justify-content: space-between;
-      gap: 20px;
+      gap: 25px;
     }
 
     .logo {
-      color: white;
-      text-decoration: none;
-      font-family: Georgia, "Times New Roman", serif;
-      font-size: 24px;
-      font-weight: 900;
-      letter-spacing: -1px;
-      text-shadow: 2px 2px 0 #9b0000;
+      font-family: "Permanent Marker", cursive;
+      font-size: 27px;
+      color: #ff1616;
+      text-shadow:
+        2px 2px 0 #650000,
+        0 0 14px rgba(255, 0, 0, 0.3);
+      transform: rotate(-2deg);
       white-space: nowrap;
-    }
-
-    .logo span {
-      color: #ff1717;
     }
 
     .nav-right {
       display: flex;
       align-items: center;
-      gap: 8px;
-    }
-
-    .nav-right a,
-    .nav-right button {
-      border: 1px solid transparent;
-      background: transparent;
-      color: #ccc;
-      text-decoration: none;
-      padding: 10px 12px;
-      font-size: 10px;
-      font-weight: 900;
-      letter-spacing: 1.5px;
-      cursor: pointer;
-    }
-
-    .nav-right a:hover,
-    .nav-right button:hover {
-      color: #ff1717;
-      border-color: rgba(255,0,0,.3);
+      justify-content: flex-end;
+      gap: 18px;
+      flex-wrap: wrap;
     }
 
     .user-name {
-      color: #ff1717;
-      font-size: 10px;
-      font-weight: 900;
-      letter-spacing: 1px;
-      margin-right: 5px;
+      color: #999;
+      font-size: 12px;
     }
+
+    .nav-link {
+      font-size: 12px;
+      font-weight: 700;
+      letter-spacing: 1px;
+      color: #ddd;
+      transition: 0.2s ease;
+    }
+
+    .nav-link:hover {
+      color: #ff1717;
+    }
+
+    .sign-out {
+      border: 1px solid #3a3a3a;
+      background: #111;
+      color: #ddd;
+      padding: 9px 14px;
+      font-size: 11px;
+      letter-spacing: 1px;
+      transition: 0.2s ease;
+    }
+
+    .sign-out:hover {
+      border-color: #ff1b1b;
+      color: #ff1b1b;
+    }
+
+    /* MAIN */
 
     main {
-      width: min(1150px, calc(100% - 32px));
-      margin: 55px auto 100px;
+      max-width: 1400px;
+      margin: auto;
+      padding: 65px 28px 100px;
     }
 
-    .top {
-      margin-bottom: 35px;
+    .top-section {
+      display: flex;
+      justify-content: space-between;
+      align-items: flex-end;
+      gap: 30px;
+      margin-bottom: 45px;
     }
 
     .eyebrow {
-      color: #ff1717;
-      font-size: 10px;
-      font-weight: 900;
-      letter-spacing: 4px;
+      color: #ff1818;
+      font-size: 11px;
+      font-weight: 700;
+      letter-spacing: 3px;
       margin-bottom: 10px;
     }
 
     h1 {
-      font-family: Georgia, "Times New Roman", serif;
-      font-size: clamp(48px, 9vw, 90px);
-      line-height: .85;
-      letter-spacing: -5px;
+      font-family: "Bebas Neue", sans-serif;
+      font-size: clamp(60px, 9vw, 125px);
+      line-height: 0.82;
+      letter-spacing: 2px;
       text-transform: uppercase;
-      text-shadow: 5px 5px 0 rgba(255,0,0,.3);
-    }
-
-    .top-row {
-      display: flex;
-      justify-content: space-between;
-      align-items: end;
-      gap: 20px;
+      color: #f4f4f4;
+      text-shadow: 4px 4px 0 #760000;
     }
 
     .add-button {
+      background: #e50909;
       border: none;
-      background: #ff1717;
       color: white;
-      padding: 15px 20px;
-      font-size: 11px;
-      font-weight: 900;
-      letter-spacing: 1.5px;
-      cursor: pointer;
-      white-space: nowrap;
+      padding: 16px 25px;
+      font-weight: 700;
+      font-size: 13px;
+      letter-spacing: 1px;
+      box-shadow: 5px 5px 0 #520000;
+      transition: 0.2s ease;
     }
 
     .add-button:hover {
-      background: #d60000;
+      background: #ff1717;
+      transform: translate(-2px, -2px);
+      box-shadow: 7px 7px 0 #520000;
     }
+
+    /* STATS */
 
     .stats {
       display: grid;
       grid-template-columns: repeat(3, 1fr);
-      gap: 12px;
-      margin-bottom: 45px;
+      gap: 14px;
+      margin-bottom: 55px;
     }
 
     .stat {
-      border: 1px solid #292929;
-      background: #090909;
-      padding: 23px;
-    }
-
-    .stat-number {
-      color: #ff1717;
-      font-family: Georgia, serif;
-      font-size: 42px;
-      font-weight: 900;
-    }
-
-    .stat-label {
-      margin-top: 5px;
-      color: #777;
-      font-size: 9px;
-      font-weight: 900;
-      letter-spacing: 2px;
-    }
-
-    .section-title {
-      font-family: Georgia, serif;
-      font-size: 34px;
-      letter-spacing: -2px;
-      margin-bottom: 20px;
-      text-transform: uppercase;
-    }
-
-    .tricks {
-      display: grid;
-      grid-template-columns: repeat(2, 1fr);
-      gap: 15px;
-    }
-
-    .trick-card {
+      background: #101010;
+      border: 1px solid #262626;
+      padding: 25px;
       position: relative;
-      border: 1px solid #292929;
-      background:
-        linear-gradient(145deg, rgba(255,0,0,.045), transparent),
-        #090909;
-      padding: 24px;
-      transition: border-color .2s, transform .2s;
-    }
-
-    .trick-card:hover {
-      border-color: rgba(255,0,0,.5);
-      transform: translateY(-2px);
-    }
-
-    .trick-top {
-      display: flex;
-      justify-content: space-between;
-      align-items: start;
-      gap: 15px;
-    }
-
-    .category {
-      color: #ff1717;
-      font-size: 9px;
-      font-weight: 900;
-      letter-spacing: 2px;
-      text-transform: uppercase;
-      margin-bottom: 7px;
-    }
-
-    .trick-name {
-      font-family: Georgia, serif;
-      font-size: 28px;
-      line-height: 1;
-      text-transform: uppercase;
-    }
-
-    .visibility {
-      padding: 6px 8px;
-      border: 1px solid #333;
-      color: #888;
-      font-size: 8px;
-      font-weight: 900;
-      letter-spacing: 1px;
-      white-space: nowrap;
-    }
-
-    .visibility.public {
-      color: #ff1717;
-      border-color: rgba(255,0,0,.35);
-    }
-
-    .confidence {
-      margin-top: 22px;
-    }
-
-    .confidence-row {
-      display: flex;
-      justify-content: space-between;
-      color: #888;
-      font-size: 9px;
-      font-weight: 900;
-      letter-spacing: 1px;
-      margin-bottom: 7px;
-    }
-
-    .bar {
-      height: 8px;
-      background: #222;
       overflow: hidden;
     }
 
-    .bar-fill {
+    .stat::after {
+      content: "";
+      position: absolute;
+      width: 70px;
+      height: 70px;
+      right: -30px;
+      bottom: -30px;
+      border: 1px solid #3a0000;
+      transform: rotate(45deg);
+    }
+
+    .stat-label {
+      color: #777;
+      font-size: 10px;
+      letter-spacing: 2px;
+      margin-bottom: 12px;
+    }
+
+    .stat-value {
+      font-family: "Bebas Neue", sans-serif;
+      font-size: 45px;
+      color: #ff1b1b;
+    }
+
+    /* ARCHIVE */
+
+    .archive-heading {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      border-bottom: 1px solid #292929;
+      padding-bottom: 14px;
+      margin-bottom: 20px;
+    }
+
+    .archive-heading h2 {
+      font-family: "Bebas Neue", sans-serif;
+      font-size: 36px;
+      letter-spacing: 1px;
+    }
+
+    .archive-heading span {
+      color: #666;
+      font-size: 10px;
+      letter-spacing: 2px;
+    }
+
+    .trick-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 16px;
+    }
+
+    .trick-card {
+      background: #0f0f0f;
+      border: 1px solid #292929;
+      padding: 25px;
+      position: relative;
+      transition: 0.2s ease;
+    }
+
+    .trick-card:hover {
+      border-color: #7c1010;
+      transform: translateY(-3px);
+    }
+
+    .trick-category {
+      color: #ff1717;
+      font-size: 10px;
+      letter-spacing: 2px;
+      text-transform: uppercase;
+      margin-bottom: 12px;
+    }
+
+    .trick-name {
+      font-family: "Bebas Neue", sans-serif;
+      font-size: 38px;
+      letter-spacing: 1px;
+      margin-bottom: 20px;
+      line-height: 0.95;
+    }
+
+    .confidence-label {
+      display: flex;
+      justify-content: space-between;
+      color: #777;
+      font-size: 10px;
+      margin-bottom: 8px;
+      letter-spacing: 1px;
+    }
+
+    .confidence-bar {
+      height: 7px;
+      width: 100%;
+      background: #242424;
+      overflow: hidden;
+      margin-bottom: 20px;
+    }
+
+    .confidence-fill {
       height: 100%;
-      background: #ff1717;
+      background: #e50909;
     }
 
-    .notes {
-      margin-top: 16px;
-      color: #888;
-      font-size: 12px;
-      line-height: 1.55;
+    .trick-notes {
+      color: #999;
+      font-size: 11px;
+      line-height: 1.7;
+      min-height: 42px;
+      margin-bottom: 22px;
     }
 
-    .date {
-      margin-top: 16px;
-      color: #555;
+    .visibility {
+      display: inline-block;
+      padding: 5px 8px;
       font-size: 9px;
       letter-spacing: 1px;
-      font-weight: 900;
+      border: 1px solid #333;
+      color: #888;
+      margin-bottom: 18px;
     }
 
     .card-actions {
       display: flex;
       gap: 8px;
-      margin-top: 20px;
-      padding-top: 16px;
-      border-top: 1px solid #1d1d1d;
+      flex-wrap: wrap;
     }
 
-    .card-actions button,
-    .clips-button {
+    .card-button {
       border: 1px solid #333;
-      background: transparent;
-      color: #aaa;
-      padding: 9px 11px;
-      font-size: 9px;
-      font-weight: 900;
+      background: #151515;
+      color: #ddd;
+      padding: 9px 12px;
+      font-size: 10px;
       letter-spacing: 1px;
-      cursor: pointer;
+      transition: 0.2s ease;
     }
 
-    .card-actions button:hover,
-    .clips-button:hover {
-      color: white;
+    .card-button:hover {
       border-color: #ff1717;
+      color: #ff1717;
     }
 
-    .delete-button:hover {
-      color: #ff1717 !important;
-      border-color: #ff1717 !important;
+    .card-button.primary {
+      background: #b90000;
+      border-color: #b90000;
+      color: white;
+    }
+
+    .card-button.primary:hover {
+      background: #e50909;
+      border-color: #e50909;
+      color: white;
     }
 
     .empty {
-      grid-column: 1 / -1;
       border: 1px dashed #333;
-      padding: 60px 20px;
+      padding: 70px 25px;
       text-align: center;
-      color: #666;
+      color: #777;
     }
 
-    .empty strong {
-      display: block;
-      color: #ff1717;
-      font-family: Georgia, serif;
-      font-size: 30px;
+    .empty h3 {
+      font-family: "Bebas Neue", sans-serif;
+      color: #ddd;
+      font-size: 42px;
       margin-bottom: 10px;
     }
 
     .empty p {
-      font-size: 12px;
-      line-height: 1.6;
+      font-size: 11px;
+      margin-bottom: 25px;
     }
 
     /* MODAL */
 
-    .modal {
+    .modal-backdrop {
       position: fixed;
       inset: 0;
-      z-index: 100;
+      background: rgba(0, 0, 0, 0.82);
       display: none;
       align-items: center;
       justify-content: center;
       padding: 20px;
-      background: rgba(0,0,0,.8);
-      backdrop-filter: blur(8px);
+      z-index: 500;
+      backdrop-filter: blur(6px);
     }
 
-    .modal.open {
+    .modal-backdrop.show {
       display: flex;
     }
 
-    .modal-box {
+    .modal {
       width: min(600px, 100%);
       max-height: 90vh;
       overflow-y: auto;
-      border: 1px solid rgba(255,0,0,.4);
-      background: #090909;
-      padding: 30px;
-      box-shadow: 0 30px 100px rgba(0,0,0,.7);
+      background: #0d0d0d;
+      border: 1px solid #3c3c3c;
+      box-shadow: 12px 12px 0 #500000;
+      padding: 32px;
     }
 
-    .modal-head {
-      display: flex;
-      justify-content: space-between;
-      gap: 20px;
-      align-items: center;
-      margin-bottom: 25px;
+    .modal h2 {
+      font-family: "Bebas Neue", sans-serif;
+      font-size: 48px;
+      margin-bottom: 5px;
     }
 
-    .modal-head h2 {
-      font-family: Georgia, serif;
-      font-size: 35px;
-      text-transform: uppercase;
-      letter-spacing: -2px;
-    }
-
-    .close {
-      border: none;
-      background: transparent;
+    .modal-subtitle {
       color: #777;
-      font-size: 25px;
-      cursor: pointer;
+      font-size: 10px;
+      letter-spacing: 1px;
+      margin-bottom: 28px;
     }
 
-    .close:hover {
-      color: #ff1717;
-    }
-
-    .form {
-      display: grid;
-      gap: 18px;
-    }
-
-    .field {
-      display: grid;
-      gap: 8px;
+    .form-group {
+      margin-bottom: 20px;
     }
 
     label {
-      color: #ff1717;
-      font-size: 9px;
-      font-weight: 900;
-      letter-spacing: 2px;
+      display: block;
+      color: #999;
+      font-size: 10px;
+      letter-spacing: 1.5px;
+      margin-bottom: 8px;
       text-transform: uppercase;
     }
 
@@ -419,35 +436,33 @@
     textarea,
     select {
       width: 100%;
+      background: #151515;
       border: 1px solid #333;
-      background: #050505;
       color: white;
-      padding: 14px;
+      padding: 13px;
       outline: none;
-      font-family: Arial, Helvetica, sans-serif;
-      font-size: 13px;
+      border-radius: 0;
     }
 
     input:focus,
     textarea:focus,
     select:focus {
-      border-color: #ff1717;
+      border-color: #d20b0b;
     }
 
     textarea {
       min-height: 110px;
       resize: vertical;
-      line-height: 1.5;
     }
 
     select {
-      cursor: pointer;
+      appearance: auto;
     }
 
-    .confidence-picker {
+    .confidence-options {
       display: grid;
       grid-template-columns: repeat(5, 1fr);
-      gap: 6px;
+      gap: 7px;
     }
 
     .confidence-option {
@@ -461,111 +476,119 @@
     }
 
     .confidence-option label {
-      display: flex;
-      justify-content: center;
-      align-items: center;
-      height: 48px;
       border: 1px solid #333;
-      color: #777;
+      background: #151515;
+      padding: 13px 5px;
+      text-align: center;
+      color: #888;
       cursor: pointer;
-      font-family: Georgia, serif;
-      font-size: 20px;
+      margin: 0;
+      font-size: 13px;
     }
 
     .confidence-option input:checked + label {
-      background: #ff1717;
-      color: white;
+      background: #b60000;
       border-color: #ff1717;
-    }
-
-    .modal-actions {
-      display: flex;
-      justify-content: flex-end;
-      gap: 10px;
-      margin-top: 10px;
-    }
-
-    .cancel-button,
-    .save-button {
-      padding: 13px 18px;
-      font-size: 10px;
-      font-weight: 900;
-      letter-spacing: 1.5px;
-      cursor: pointer;
-    }
-
-    .cancel-button {
-      border: 1px solid #333;
-      background: transparent;
-      color: #aaa;
-    }
-
-    .save-button {
-      border: none;
-      background: #ff1717;
       color: white;
     }
 
-    .save-button:hover {
-      background: #d60000;
+    .modal-buttons {
+      display: flex;
+      gap: 10px;
+      justify-content: flex-end;
+      margin-top: 30px;
     }
 
-    .status {
-      display: none;
-      padding: 12px;
+    .modal-button {
+      padding: 12px 18px;
+      border: 1px solid #333;
+      background: #151515;
+      color: #ddd;
       font-size: 11px;
-      line-height: 1.5;
+      letter-spacing: 1px;
     }
 
-    .status.show {
-      display: block;
+    .modal-button:hover {
+      border-color: #aaa;
     }
 
-    .status.error {
-      color: #ff7777;
-      border: 1px solid rgba(255,0,0,.3);
-      background: rgba(255,0,0,.05);
+    .modal-button.save {
+      background: #d30909;
+      border-color: #d30909;
+      color: white;
     }
 
-    @media (max-width: 750px) {
+    .modal-button.save:hover {
+      background: #ff1717;
+    }
 
+    .error {
+      color: #ff4444;
+      font-size: 11px;
+      margin-top: 12px;
+      display: none;
+    }
+
+    /* RESPONSIVE */
+
+    @media (max-width: 950px) {
+      .trick-grid {
+        grid-template-columns: repeat(2, 1fr);
+      }
+    }
+
+    @media (max-width: 700px) {
       .nav {
-        padding: 0 14px;
-      }
-
-      .user-name {
-        display: none;
-      }
-
-      .nav-right a,
-      .nav-right button {
-        padding: 7px;
-        font-size: 9px;
-      }
-
-      main {
-        margin-top: 35px;
-      }
-
-      .top-row {
         align-items: flex-start;
         flex-direction: column;
       }
 
-      .add-button {
+      .nav-right {
         width: 100%;
+        justify-content: flex-start;
+      }
+
+      main {
+        padding: 45px 18px 80px;
+      }
+
+      .top-section {
+        flex-direction: column;
+        align-items: flex-start;
       }
 
       .stats {
         grid-template-columns: 1fr;
       }
 
-      .tricks {
+      .trick-grid {
         grid-template-columns: 1fr;
       }
 
-      .modal-box {
-        padding: 20px;
+      h1 {
+        font-size: 75px;
+      }
+    }
+
+    @media (max-width: 450px) {
+      .nav-right {
+        gap: 11px;
+      }
+
+      .user-name {
+        width: 100%;
+      }
+
+      .modal {
+        padding: 22px;
+      }
+
+      .modal-buttons {
+        flex-direction: column;
+      }
+
+      .modal-button {
+        width: 100%;
       }
     }
   </style>
@@ -573,672 +596,568 @@
 
 <body>
 
-<header>
+  <!-- NAVIGATION -->
 
-  <nav class="nav">
+  <header>
+    <nav class="nav">
 
-    <a href="./index.html" class="logo">
-      Y2K<span>SK8</span>DOCU
-    </a>
-
-    <div class="nav-right">
-
-      <span id="userName" class="user-name"></span>
-
-      <a href="./explore.html">
-        EXPLORE
+      <a href="./index.html" class="logo">
+        y2ksk8docu
       </a>
 
-      <a href="./account.html">
-        ACCOUNT
-      </a>
+      <div class="nav-right">
 
-      <button id="signOutButton">
-        SIGN OUT
+        <span id="userName" class="user-name">
+          LOADING...
+        </span>
+
+        <a href="./explore.html" class="nav-link">
+          EXPLORE
+        </a>
+
+        <a href="./account.html" class="nav-link">
+          ACCOUNT
+        </a>
+
+        <button id="signOutButton" class="sign-out">
+          SIGN OUT
+        </button>
+
+      </div>
+
+    </nav>
+  </header>
+
+
+  <!-- MAIN -->
+
+  <main>
+
+    <section class="top-section">
+
+      <div>
+        <div class="eyebrow">
+          YOUR SKATE ARCHIVE
+        </div>
+
+        <h1>
+          MY<br>
+          TRICKS.
+        </h1>
+      </div>
+
+      <button id="addTrickButton" class="add-button">
+        + ADD TRICK
       </button>
 
-    </div>
+    </section>
 
-  </nav>
 
-</header>
+    <!-- STATS -->
 
-<main>
+    <section class="stats">
 
-  <div class="top">
+      <div class="stat">
+        <div class="stat-label">
+          TRICKS LOGGED
+        </div>
 
-    <div class="eyebrow">
-      PERSONAL SKATE ARCHIVE
-    </div>
-
-    <div class="top-row">
-
-      <h1>
-        MY<br>TRICKS.
-      </h1>
-
-      <button
-        id="addTrickButton"
-        class="add-button"
-      >
-        + LOG NEW TRICK
-      </button>
-
-    </div>
-
-  </div>
-
-  <div class="stats">
-
-    <div class="stat">
-
-      <div
-        id="trickCount"
-        class="stat-number"
-      >
-        0
+        <div id="tricksCount" class="stat-value">
+          0
+        </div>
       </div>
 
-      <div class="stat-label">
-        TRICKS LOGGED
+      <div class="stat">
+        <div class="stat-label">
+          AVERAGE CONFIDENCE
+        </div>
+
+        <div id="averageConfidence" class="stat-value">
+          0.0
+        </div>
       </div>
 
-    </div>
+      <div class="stat">
+        <div class="stat-label">
+          PUBLIC TRICKS
+        </div>
 
-    <div class="stat">
-
-      <div
-        id="averageConfidence"
-        class="stat-number"
-      >
-        0.0
+        <div id="publicCount" class="stat-value">
+          0
+        </div>
       </div>
 
-      <div class="stat-label">
-        AVG CONFIDENCE
+    </section>
+
+
+    <!-- TRICK ARCHIVE -->
+
+    <section>
+
+      <div class="archive-heading">
+
+        <h2>
+          TRICK ARCHIVE
+        </h2>
+
+        <span id="archiveStatus">
+          LOADING...
+        </span>
+
       </div>
 
-    </div>
+      <div id="trickGrid" class="trick-grid"></div>
 
-    <div class="stat">
+    </section>
 
-      <div
-        id="publicCount"
-        class="stat-number"
-      >
-        0
-      </div>
+  </main>
 
-      <div class="stat-label">
-        PUBLIC TRICKS
-      </div>
 
-    </div>
+  <!-- ADD / EDIT MODAL -->
 
-  </div>
+  <div id="modalBackdrop" class="modal-backdrop">
 
-  <section>
-
-    <h2 class="section-title">
-      TRICK ARCHIVE.
-    </h2>
-
-    <div
-      id="tricks"
-      class="tricks"
-    ></div>
-
-  </section>
-
-</main>
-
-<!-- MODAL -->
-
-<div
-  id="trickModal"
-  class="modal"
->
-
-  <div class="modal-box">
-
-    <div class="modal-head">
+    <div class="modal">
 
       <h2 id="modalTitle">
-        LOG TRICK.
+        ADD TRICK
       </h2>
 
-      <button
-        id="closeModal"
-        class="close"
-        type="button"
-      >
-        ×
-      </button>
+      <div class="modal-subtitle">
+        LOG IT. REMEMBER IT. GET BETTER.
+      </div>
+
+
+      <form id="trickForm">
+
+        <div class="form-group">
+
+          <label for="trickName">
+            Trick Name
+          </label>
+
+          <input
+            id="trickName"
+            type="text"
+            placeholder="e.g. Kickflip"
+            required
+          />
+
+        </div>
+
+
+        <div class="form-group">
+
+          <label for="trickCategory">
+            Category
+          </label>
+
+          <input
+            id="trickCategory"
+            type="text"
+            placeholder="e.g. Flip / Street / Grind"
+          />
+
+        </div>
+
+
+        <div class="form-group">
+
+          <label>
+            Confidence
+          </label>
+
+          <div class="confidence-options">
+
+            <div class="confidence-option">
+              <input
+                type="radio"
+                name="confidence"
+                id="confidence1"
+                value="1"
+              />
+              <label for="confidence1">1</label>
+            </div>
+
+            <div class="confidence-option">
+              <input
+                type="radio"
+                name="confidence"
+                id="confidence2"
+                value="2"
+              />
+              <label for="confidence2">2</label>
+            </div>
+
+            <div class="confidence-option">
+              <input
+                type="radio"
+                name="confidence"
+                id="confidence3"
+                value="3"
+              />
+              <label for="confidence3">3</label>
+            </div>
+
+            <div class="confidence-option">
+              <input
+                type="radio"
+                name="confidence"
+                id="confidence4"
+                value="4"
+              />
+              <label for="confidence4">4</label>
+            </div>
+
+            <div class="confidence-option">
+              <input
+                type="radio"
+                name="confidence"
+                id="confidence5"
+                value="5"
+              />
+              <label for="confidence5">5</label>
+            </div>
+
+          </div>
+
+        </div>
+
+
+        <div class="form-group">
+
+          <label for="trickNotes">
+            Notes
+          </label>
+
+          <textarea
+            id="trickNotes"
+            placeholder="How does it feel? What needs work?"
+          ></textarea>
+
+        </div>
+
+
+        <div class="form-group">
+
+          <label for="trickVisibility">
+            Visibility
+          </label>
+
+          <select id="trickVisibility">
+
+            <option value="private">
+              PRIVATE — ONLY YOU
+            </option>
+
+            <option value="public">
+              PUBLIC — SHOW THE SKATE WORLD
+            </option>
+
+          </select>
+
+        </div>
+
+
+        <div id="formError" class="error"></div>
+
+
+        <div class="modal-buttons">
+
+          <button
+            type="button"
+            id="cancelButton"
+            class="modal-button"
+          >
+            CANCEL
+          </button>
+
+          <button
+            type="submit"
+            class="modal-button save"
+          >
+            SAVE TRICK
+          </button>
+
+        </div>
+
+      </form>
 
     </div>
 
-    <form
-      id="trickForm"
-      class="form"
-    >
-
-      <div class="field">
-
-        <label for="trickName">
-          Trick Name
-        </label>
-
-        <input
-          id="trickName"
-          type="text"
-          maxlength="80"
-          required
-          placeholder="Kickflip"
-        >
-
-      </div>
-
-      <div class="field">
-
-        <label for="category">
-          Category
-        </label>
-
-        <select id="category">
-
-          <option value="">
-            Select category
-          </option>
-
-          <option value="Flatground">
-            Flatground
-          </option>
-
-          <option value="Flip Trick">
-            Flip Trick
-          </option>
-
-          <option value="Grind">
-            Grind
-          </option>
-
-          <option value="Slide">
-            Slide
-          </option>
-
-          <option value="Manual">
-            Manual
-          </option>
-
-          <option value="Stairs">
-            Stairs
-          </option>
-
-          <option value="Transition">
-            Transition
-          </option>
-
-          <option value="Other">
-            Other
-          </option>
-
-        </select>
-
-      </div>
-
-      <div class="field">
-
-        <label>
-          Confidence
-        </label>
-
-        <div class="confidence-picker">
-
-          <div class="confidence-option">
-            <input
-              type="radio"
-              name="confidence"
-              id="confidence1"
-              value="1"
-            >
-            <label for="confidence1">1</label>
-          </div>
-
-          <div class="confidence-option">
-            <input
-              type="radio"
-              name="confidence"
-              id="confidence2"
-              value="2"
-            >
-            <label for="confidence2">2</label>
-          </div>
-
-          <div class="confidence-option">
-            <input
-              type="radio"
-              name="confidence"
-              id="confidence3"
-              value="3"
-            >
-            <label for="confidence3">3</label>
-          </div>
-
-          <div class="confidence-option">
-            <input
-              type="radio"
-              name="confidence"
-              id="confidence4"
-              value="4"
-            >
-            <label for="confidence4">4</label>
-          </div>
-
-          <div class="confidence-option">
-            <input
-              type="radio"
-              name="confidence"
-              id="confidence5"
-              value="5"
-            >
-            <label for="confidence5">5</label>
-          </div>
-
-        </div>
-
-      </div>
-
-      <div class="field">
-
-        <label for="notes">
-          Notes
-        </label>
-
-        <textarea
-          id="notes"
-          maxlength="1000"
-          placeholder="What are you working on?"
-        ></textarea>
-
-      </div>
-
-      <div class="field">
-
-        <label for="visibility">
-          Visibility
-        </label>
-
-        <select id="visibility">
-
-          <option value="private">
-            Private
-          </option>
-
-          <option value="public">
-            Public
-          </option>
-
-        </select>
-
-      </div>
-
-      <div
-        id="formStatus"
-        class="status"
-      ></div>
-
-      <div class="modal-actions">
-
-        <button
-          type="button"
-          id="cancelButton"
-          class="cancel-button"
-        >
-          CANCEL
-        </button>
-
-        <button
-          type="submit"
-          class="save-button"
-        >
-          SAVE TRICK
-        </button>
-
-      </div>
-
-    </form>
-
   </div>
 
-</div>
 
-<script>
+  <script>
 
-  const client = window.supabaseClient;
+    const client = window.supabaseClient;
 
-  let currentUser = null;
-  let tricks = [];
-  let editingTrickId = null;
+    let currentUser = null;
+    let editingTrickId = null;
+    let tricks = [];
 
-  const tricksContainer =
-    document.getElementById("tricks");
 
-  const modal =
-    document.getElementById("trickModal");
+    /*
+      ----------------------------------------
+      AUTH CHECK
+      ----------------------------------------
+    */
 
-  const trickForm =
-    document.getElementById("trickForm");
+    async function checkAuth() {
 
-  const modalTitle =
-    document.getElementById("modalTitle");
+      const {
+        data: { session },
+        error
+      } = await client.auth.getSession();
 
-  const trickName =
-    document.getElementById("trickName");
+      if (error || !session) {
 
-  const category =
-    document.getElementById("category");
+        window.location.href = "./auth.html";
+        return false;
 
-  const notes =
-    document.getElementById("notes");
-
-  const visibility =
-    document.getElementById("visibility");
-
-  const formStatus =
-    document.getElementById("formStatus");
-
-  function escapeHtml(value) {
-
-    return String(value || "")
-      .replace(/&/g, "&amp;")
-      .replace(/</g, "&lt;")
-      .replace(/>/g, "&gt;")
-      .replace(/"/g, "&quot;")
-      .replace(/'/g, "&#039;");
-  }
-
-  function formatDate(date) {
-
-    return new Date(date).toLocaleDateString(
-      undefined,
-      {
-        year: "numeric",
-        month: "short",
-        day: "numeric"
       }
-    );
-  }
 
-  function getSelectedConfidence() {
+      currentUser = session.user;
 
-    const selected =
-      document.querySelector(
-        'input[name="confidence"]:checked'
-      );
-
-    return selected
-      ? Number(selected.value)
-      : 1;
-  }
-
-  function setConfidence(value) {
-
-    const input =
-      document.querySelector(
-        `input[name="confidence"][value="${value}"]`
-      );
-
-    if (input) {
-      input.checked = true;
-    }
-  }
-
-  function showFormError(message) {
-
-    formStatus.textContent = message;
-    formStatus.className =
-      "status show error";
-  }
-
-  function clearFormError() {
-
-    formStatus.textContent = "";
-    formStatus.className = "status";
-  }
-
-  function openModal(trick = null) {
-
-    clearFormError();
-
-    if (trick) {
-
-      editingTrickId = trick.id;
-
-      modalTitle.textContent =
-        "EDIT TRICK.";
-
-      trickName.value =
-        trick.name || "";
-
-      category.value =
-        trick.category || "";
-
-      notes.value =
-        trick.notes || "";
-
-      visibility.value =
-        trick.visibility || "private";
-
-      setConfidence(
-        trick.confidence || 1
-      );
-
-    } else {
-
-      editingTrickId = null;
-
-      modalTitle.textContent =
-        "LOG TRICK.";
-
-      trickForm.reset();
-
-      setConfidence(1);
-
-      visibility.value =
-        "private";
+      return true;
     }
 
-    modal.classList.add("open");
 
-    setTimeout(() => {
-      trickName.focus();
-    }, 50);
-  }
+    /*
+      ----------------------------------------
+      LOAD PROFILE
+      ----------------------------------------
+    */
 
-  function closeModal() {
+    async function loadProfile() {
 
-    modal.classList.remove("open");
+      const { data, error } = await client
+        .from("profiles")
+        .select("username, display_name")
+        .eq("id", currentUser.id)
+        .maybeSingle();
 
-    editingTrickId = null;
+      if (error) {
 
-    trickForm.reset();
+        console.error("Profile error:", error);
 
-    setConfidence(1);
+        document.getElementById("userName").textContent =
+          currentUser.email || "SKATER";
 
-    clearFormError();
-  }
+        return;
+      }
 
-  function renderStats() {
+      if (data) {
 
-    const count =
-      tricks.length;
+        document.getElementById("userName").textContent =
+          "@" + data.username;
 
-    const average =
-      count
-        ? (
-            tricks.reduce(
-              (sum, trick) =>
-                sum + Number(trick.confidence || 0),
-              0
-            ) / count
-          ).toFixed(1)
-        : "0.0";
+      } else {
 
-    const publicCount =
-      tricks.filter(
-        trick =>
-          trick.visibility === "public"
+        document.getElementById("userName").textContent =
+          currentUser.email || "SKATER";
+
+      }
+    }
+
+
+    /*
+      ----------------------------------------
+      LOAD TRICKS
+      ----------------------------------------
+    */
+
+    async function loadTricks() {
+
+      document.getElementById("archiveStatus").textContent =
+        "LOADING...";
+
+      const { data, error } = await client
+        .from("tricks")
+        .select("*")
+        .eq("user_id", currentUser.id)
+        .order("created_at", { ascending: false });
+
+      if (error) {
+
+        console.error("Tricks error:", error);
+
+        document.getElementById("archiveStatus").textContent =
+          "ERROR";
+
+        showError(
+          "Could not load your tricks. Check the browser console."
+        );
+
+        return;
+      }
+
+      tricks = data || [];
+
+      renderStats();
+      renderTricks();
+
+      document.getElementById("archiveStatus").textContent =
+        `${tricks.length} TRICK${tricks.length === 1 ? "" : "S"}`;
+    }
+
+
+    /*
+      ----------------------------------------
+      STATS
+      ----------------------------------------
+    */
+
+    function renderStats() {
+
+      const total = tricks.length;
+
+      const publicTotal = tricks.filter(
+        trick => trick.visibility === "public"
       ).length;
 
-    document.getElementById(
-      "trickCount"
-    ).textContent = count;
+      const average =
+        total === 0
+          ? 0
+          : tricks.reduce(
+              (sum, trick) => sum + Number(trick.confidence || 0),
+              0
+            ) / total;
 
-    document.getElementById(
-      "averageConfidence"
-    ).textContent = average;
+      document.getElementById("tricksCount").textContent =
+        total;
 
-    document.getElementById(
-      "publicCount"
-    ).textContent = publicCount;
-  }
+      document.getElementById("publicCount").textContent =
+        publicTotal;
 
-  function renderTricks() {
-
-    if (!tricks.length) {
-
-      tricksContainer.innerHTML = `
-
-        <div class="empty">
-
-          <strong>
-            NO TRICKS LOGGED.
-          </strong>
-
-          <p>
-            Start documenting your progression.
-            Every landed trick belongs in the archive.
-          </p>
-
-        </div>
-      `;
-
-      return;
+      document.getElementById("averageConfidence").textContent =
+        average.toFixed(1);
     }
 
-    tricksContainer.innerHTML =
-      tricks.map(trick => {
+
+    /*
+      ----------------------------------------
+      ESCAPE HTML
+      ----------------------------------------
+    */
+
+    function escapeHtml(value) {
+
+      if (value === null || value === undefined) {
+        return "";
+      }
+
+      return String(value)
+        .replaceAll("&", "&amp;")
+        .replaceAll("<", "&lt;")
+        .replaceAll(">", "&gt;")
+        .replaceAll('"', "&quot;")
+        .replaceAll("'", "&#039;");
+    }
+
+
+    /*
+      ----------------------------------------
+      RENDER TRICKS
+      ----------------------------------------
+    */
+
+    function renderTricks() {
+
+      const grid = document.getElementById("trickGrid");
+
+      if (!tricks.length) {
+
+        grid.innerHTML = `
+          <div class="empty" style="grid-column: 1 / -1;">
+
+            <h3>NO TRICKS YET.</h3>
+
+            <p>
+              Start building your skate archive.
+            </p>
+
+            <button
+              class="add-button"
+              onclick="openAddModal()"
+            >
+              + ADD YOUR FIRST TRICK
+            </button>
+
+          </div>
+        `;
+
+        return;
+      }
+
+
+      grid.innerHTML = tricks.map(trick => {
 
         const confidence =
           Number(trick.confidence || 1);
 
+        const percentage =
+          (confidence / 5) * 100;
+
+        const visibility =
+          trick.visibility === "public"
+            ? "PUBLIC"
+            : "PRIVATE";
+
         return `
 
-          <article
-            class="trick-card"
-            data-id="${trick.id}"
-          >
+          <article class="trick-card">
 
-            <div class="trick-top">
+            <div class="trick-category">
+              ${escapeHtml(trick.category || "UNCATEGORIZED")}
+            </div>
 
-              <div>
+            <div class="trick-name">
+              ${escapeHtml(trick.name)}
+            </div>
 
-                ${
-                  trick.category
-                    ? `
-                      <div class="category">
-                        ${escapeHtml(
-                          trick.category
-                        )}
-                      </div>
-                    `
-                    : ""
-                }
+            <div class="confidence-label">
+              <span>CONFIDENCE</span>
+              <span>${confidence}/5</span>
+            </div>
 
-                <div class="trick-name">
-                  ${escapeHtml(
-                    trick.name
-                  )}
-                </div>
-
-              </div>
-
+            <div class="confidence-bar">
               <div
-                class="visibility ${
-                  trick.visibility === "public"
-                    ? "public"
-                    : ""
-                }"
-              >
-                ${
-                  trick.visibility === "public"
-                    ? "PUBLIC"
-                    : "PRIVATE"
-                }
-              </div>
-
+                class="confidence-fill"
+                style="width:${percentage}%"
+              ></div>
             </div>
 
-            <div class="confidence">
-
-              <div class="confidence-row">
-
-                <span>
-                  CONFIDENCE
-                </span>
-
-                <span>
-                  ${confidence}/5
-                </span>
-
-              </div>
-
-              <div class="bar">
-
-                <div
-                  class="bar-fill"
-                  style="width:${confidence * 20}%"
-                ></div>
-
-              </div>
-
+            <div class="trick-notes">
+              ${
+                escapeHtml(
+                  trick.notes || "No notes yet."
+                )
+              }
             </div>
 
-            ${
-              trick.notes
-                ? `
-                  <div class="notes">
-                    ${escapeHtml(
-                      trick.notes
-                    )}
-                  </div>
-                `
-                : ""
-            }
-
-            <div class="date">
-              LOGGED ${formatDate(
-                trick.created_at
-              )}
+            <div class="visibility">
+              ${visibility}
             </div>
 
             <div class="card-actions">
 
-              <button
-                class="clips-button"
-                onclick="openClips('${trick.id}')"
+              <a
+                class="card-button primary"
+                href="./trick.html?id=${encodeURIComponent(trick.id)}"
               >
                 OPEN / CLIPS
-              </button>
+              </a>
 
               <button
-                onclick="editTrick('${trick.id}')"
+                class="card-button"
+                onclick="openEditModal('${trick.id}')"
               >
                 EDIT
               </button>
 
               <button
-                class="delete-button"
+                class="card-button"
                 onclick="deleteTrick('${trick.id}')"
               >
                 DELETE
@@ -1247,382 +1166,427 @@
             </div>
 
           </article>
+
         `;
 
       }).join("");
-  }
-
-  async function loadTricks() {
-
-    const {
-      data,
-      error
-    } = await client
-      .from("tricks")
-      .select(`
-        id,
-        name,
-        category,
-        confidence,
-        notes,
-        visibility,
-        created_at,
-        updated_at
-      `)
-      .eq("user_id", currentUser.id)
-      .order("created_at", {
-        ascending: false
-      });
-
-    if (error) {
-
-      console.error(error);
-
-      tricksContainer.innerHTML = `
-        <div class="empty">
-          <strong>COULD NOT LOAD ARCHIVE.</strong>
-          <p>Please refresh and try again.</p>
-        </div>
-      `;
-
-      return;
     }
 
-    tricks = data || [];
-
-    renderStats();
-    renderTricks();
-  }
-
-  async function createTrick(formData) {
-
-    const confidence =
-      formData.confidence;
-
-    const {
-      data: trick,
-      error
-    } = await client
-      .from("tricks")
-      .insert({
-        user_id: currentUser.id,
-        name: formData.name,
-        category: formData.category || null,
-        confidence,
-        notes: formData.notes || null,
-        visibility: formData.visibility
-      })
-      .select()
-      .single();
-
-    if (error) {
-      throw error;
-    }
 
     /*
-     * Create the first progression session.
-     */
-    const {
-      error: sessionError
-    } = await client
-      .from("sessions")
-      .insert({
-        trick_id: trick.id,
-        user_id: currentUser.id,
-        confidence,
-        notes: formData.notes || null
+      ----------------------------------------
+      MODAL
+      ----------------------------------------
+    */
+
+    function openAddModal() {
+
+      editingTrickId = null;
+
+      document.getElementById("modalTitle").textContent =
+        "ADD TRICK";
+
+      document.getElementById("trickForm").reset();
+
+      document.getElementById("confidence1").checked = true;
+
+      document.getElementById("trickVisibility").value =
+        "private";
+
+      document.getElementById("formError").style.display =
+        "none";
+
+      document.getElementById("modalBackdrop")
+        .classList.add("show");
+    }
+
+
+    function openEditModal(id) {
+
+      const trick = tricks.find(
+        item => item.id === id
+      );
+
+      if (!trick) {
+        return;
+      }
+
+      editingTrickId = id;
+
+      document.getElementById("modalTitle").textContent =
+        "EDIT TRICK";
+
+      document.getElementById("trickName").value =
+        trick.name || "";
+
+      document.getElementById("trickCategory").value =
+        trick.category || "";
+
+      document.getElementById("trickNotes").value =
+        trick.notes || "";
+
+      document.getElementById("trickVisibility").value =
+        trick.visibility || "private";
+
+
+      const confidenceInput =
+        document.querySelector(
+          `input[name="confidence"][value="${trick.confidence}"]`
+        );
+
+      if (confidenceInput) {
+        confidenceInput.checked = true;
+      }
+
+      document.getElementById("formError").style.display =
+        "none";
+
+      document.getElementById("modalBackdrop")
+        .classList.add("show");
+    }
+
+
+    function closeModal() {
+
+      document.getElementById("modalBackdrop")
+        .classList.remove("show");
+
+      editingTrickId = null;
+    }
+
+
+    /*
+      ----------------------------------------
+      FORM SUBMIT
+      ----------------------------------------
+    */
+
+    document.getElementById("trickForm")
+      .addEventListener("submit", async function(event) {
+
+        event.preventDefault();
+
+        const name =
+          document.getElementById("trickName")
+            .value
+            .trim();
+
+        const category =
+          document.getElementById("trickCategory")
+            .value
+            .trim();
+
+        const notes =
+          document.getElementById("trickNotes")
+            .value
+            .trim();
+
+        const visibility =
+          document.getElementById("trickVisibility")
+            .value;
+
+        const confidenceInput =
+          document.querySelector(
+            'input[name="confidence"]:checked'
+          );
+
+        const confidence =
+          confidenceInput
+            ? Number(confidenceInput.value)
+            : 1;
+
+
+        if (!name) {
+
+          showFormError(
+            "Give the trick a name."
+          );
+
+          return;
+        }
+
+
+        const saveButton =
+          document.querySelector(
+            '#trickForm button[type="submit"]'
+          );
+
+        saveButton.disabled = true;
+        saveButton.textContent = "SAVING...";
+
+
+        try {
+
+          if (editingTrickId) {
+
+            /*
+              UPDATE EXISTING TRICK
+            */
+
+            const { error } = await client
+              .from("tricks")
+              .update({
+                name,
+                category: category || null,
+                confidence,
+                notes: notes || null,
+                visibility,
+                updated_at: new Date().toISOString()
+              })
+              .eq("id", editingTrickId)
+              .eq("user_id", currentUser.id);
+
+            if (error) {
+              throw error;
+            }
+
+          } else {
+
+            /*
+              CREATE NEW TRICK
+            */
+
+            const { data: newTrick, error } =
+              await client
+                .from("tricks")
+                .insert({
+                  user_id: currentUser.id,
+                  name,
+                  category: category || null,
+                  confidence,
+                  notes: notes || null,
+                  visibility
+                })
+                .select()
+                .single();
+
+            if (error) {
+              throw error;
+            }
+
+
+            /*
+              CREATE FIRST SESSION
+              SO PROGRESSION STARTS AT THIS CONFIDENCE.
+            */
+
+            const { error: sessionError } =
+              await client
+                .from("sessions")
+                .insert({
+                  trick_id: newTrick.id,
+                  user_id: currentUser.id,
+                  confidence,
+                  notes: notes || null
+                });
+
+            if (sessionError) {
+
+              console.error(
+                "Initial session error:",
+                sessionError
+              );
+
+            }
+
+          }
+
+
+          closeModal();
+
+          await loadTricks();
+
+        } catch (error) {
+
+          console.error(
+            "Save trick error:",
+            error
+          );
+
+          showFormError(
+            error.message ||
+            "Something went wrong while saving."
+          );
+
+        } finally {
+
+          saveButton.disabled = false;
+          saveButton.textContent = "SAVE TRICK";
+
+        }
+
       });
 
-    if (sessionError) {
 
-      /*
-       * If the session fails, remove
-       * the trick so we don't leave
-       * half-created progression data.
-       */
-      await client
+    /*
+      ----------------------------------------
+      DELETE TRICK
+      ----------------------------------------
+    */
+
+    async function deleteTrick(id) {
+
+      const trick = tricks.find(
+        item => item.id === id
+      );
+
+      if (!trick) {
+        return;
+      }
+
+
+      const confirmed =
+        confirm(
+          `Delete "${trick.name}"?\n\nThis will remove the trick and its progression history.`
+        );
+
+      if (!confirmed) {
+        return;
+      }
+
+
+      const { error } = await client
         .from("tricks")
         .delete()
-        .eq("id", trick.id);
+        .eq("id", id)
+        .eq("user_id", currentUser.id);
 
-      throw sessionError;
-    }
-  }
 
-  async function updateTrick(
-    trickId,
-    formData
-  ) {
+      if (error) {
 
-    const {
-      error
-    } = await client
-      .from("tricks")
-      .update({
-        name: formData.name,
-        category: formData.category || null,
-        confidence: formData.confidence,
-        notes: formData.notes || null,
-        visibility: formData.visibility,
-        updated_at: new Date().toISOString()
-      })
-      .eq("id", trickId)
-      .eq("user_id", currentUser.id);
+        console.error(
+          "Delete error:",
+          error
+        );
 
-    if (error) {
-      throw error;
-    }
-  }
-
-  trickForm.addEventListener(
-    "submit",
-    async event => {
-
-      event.preventDefault();
-
-      clearFormError();
-
-      const name =
-        trickName.value.trim();
-
-      if (!name) {
-
-        showFormError(
-          "Enter a trick name."
+        alert(
+          "Could not delete this trick."
         );
 
         return;
       }
 
-      const formData = {
 
-        name,
-
-        category:
-          category.value,
-
-        confidence:
-          getSelectedConfidence(),
-
-        notes:
-          notes.value.trim(),
-
-        visibility:
-          visibility.value
-
-      };
-
-      const saveButton =
-        trickForm.querySelector(
-          ".save-button"
-        );
-
-      saveButton.disabled = true;
-      saveButton.textContent =
-        "SAVING...";
-
-      try {
-
-        if (editingTrickId) {
-
-          await updateTrick(
-            editingTrickId,
-            formData
-          );
-
-        } else {
-
-          await createTrick(
-            formData
-          );
-        }
-
-        closeModal();
-
-        await loadTricks();
-
-      } catch (error) {
-
-        console.error(error);
-
-        showFormError(
-          error.message ||
-          "Could not save trick."
-        );
-
-      } finally {
-
-        saveButton.disabled = false;
-        saveButton.textContent =
-          "SAVE TRICK";
-      }
-    }
-  );
-
-  window.editTrick = function(id) {
-
-    const trick =
-      tricks.find(
-        item => item.id === id
-      );
-
-    if (!trick) {
-      return;
+      await loadTricks();
     }
 
-    openModal(trick);
-  };
-
-  window.openClips = function(id) {
-
-    window.location.href =
-      "./trick.html?id=" +
-      encodeURIComponent(id);
-  };
-
-  window.deleteTrick = async function(id) {
-
-    const trick =
-      tricks.find(
-        item => item.id === id
-      );
-
-    if (!trick) {
-      return;
-    }
-
-    const confirmed =
-      confirm(
-        `Delete "${trick.name}" from your archive? This will also delete its progression sessions.`
-      );
-
-    if (!confirmed) {
-      return;
-    }
-
-    const {
-      error
-    } = await client
-      .from("tricks")
-      .delete()
-      .eq("id", id)
-      .eq("user_id", currentUser.id);
-
-    if (error) {
-
-      console.error(error);
-
-      alert(
-        "Could not delete this trick."
-      );
-
-      return;
-    }
-
-    await loadTricks();
-  };
-
-  document
-    .getElementById("addTrickButton")
-    .addEventListener(
-      "click",
-      () => openModal()
-    );
-
-  document
-    .getElementById("closeModal")
-    .addEventListener(
-      "click",
-      closeModal
-    );
-
-  document
-    .getElementById("cancelButton")
-    .addEventListener(
-      "click",
-      closeModal
-    );
-
-  modal.addEventListener(
-    "click",
-    event => {
-
-      if (event.target === modal) {
-        closeModal();
-      }
-
-    }
-  );
-
-  document.addEventListener(
-    "keydown",
-    event => {
-
-      if (
-        event.key === "Escape" &&
-        modal.classList.contains("open")
-      ) {
-        closeModal();
-      }
-
-    }
-  );
-
-  document
-    .getElementById("signOutButton")
-    .addEventListener(
-      "click",
-      async () => {
-
-        await client.auth.signOut();
-
-        window.location.href =
-          "./auth.html";
-      }
-    );
-
-  async function init() {
-
-    const {
-      data: { session },
-      error
-    } = await client.auth.getSession();
-
-    if (error || !session) {
-
-      window.location.href =
-        "./auth.html";
-
-      return;
-    }
-
-    currentUser =
-      session.user;
 
     /*
-     * Load profile username
-     */
-    const {
-      data: profile
-    } = await client
-      .from("profiles")
-      .select("username")
-      .eq("id", currentUser.id)
-      .single();
+      ----------------------------------------
+      ERROR HELPERS
+      ----------------------------------------
+    */
 
-    document.getElementById(
-      "userName"
-    ).textContent =
-      profile?.username
-        ? "@" + profile.username
-        : "";
+    function showFormError(message) {
 
-    await loadTricks();
-  }
+      const error =
+        document.getElementById("formError");
 
-  init();
+      error.textContent = message;
+      error.style.display = "block";
+    }
 
-</script>
+
+    function showError(message) {
+
+      console.error(message);
+    }
+
+
+    /*
+      ----------------------------------------
+      BUTTON EVENTS
+      ----------------------------------------
+    */
+
+    document.getElementById("addTrickButton")
+      .addEventListener(
+        "click",
+        openAddModal
+      );
+
+
+    document.getElementById("cancelButton")
+      .addEventListener(
+        "click",
+        closeModal
+      );
+
+
+    document.getElementById("modalBackdrop")
+      .addEventListener(
+        "click",
+        function(event) {
+
+          if (
+            event.target ===
+            document.getElementById("modalBackdrop")
+          ) {
+
+            closeModal();
+
+          }
+
+        }
+      );
+
+
+    /*
+      ----------------------------------------
+      SIGN OUT
+      ----------------------------------------
+    */
+
+    document.getElementById("signOutButton")
+      .addEventListener(
+        "click",
+        async function() {
+
+          const { error } =
+            await client.auth.signOut();
+
+          if (error) {
+
+            console.error(
+              "Sign out error:",
+              error
+            );
+
+            return;
+          }
+
+          window.location.href =
+            "./auth.html";
+
+        }
+      );
+
+
+    /*
+      ----------------------------------------
+      START DASHBOARD
+      ----------------------------------------
+    */
+
+    async function startDashboard() {
+
+      const authenticated =
+        await checkAuth();
+
+      if (!authenticated) {
+        return;
+      }
+
+      await loadProfile();
+
+      await loadTricks();
+
+    }
+
+
+    startDashboard();
+
+  </script>
 
 </body>
 </html>
