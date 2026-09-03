@@ -1,4 +1,3 @@
-```html
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -14,6 +13,9 @@
     href="https://fonts.googleapis.com/css2?family=Archivo+Black&family=Space+Mono:wght@400;700&display=swap"
     rel="stylesheet"
   >
+
+  <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+  <script src="./supabase.js"></script>
 
   <style>
 
@@ -350,21 +352,22 @@
 
 <header>
 
-  <a href="index.html" class="logo">
+  <a href="./index.html" class="logo">
     Y2KSK8DOCU
   </a>
 
   <nav>
 
-    <a href="explore.html" class="active">
+    <a href="./explore.html" class="active">
       EXPLORE
     </a>
 
-    <a href="dashboard.html">
+    <a href="./dashboard.html">
       MY ARCHIVE
     </a>
 
-    <a href="auth.html">
+    <!-- FIXED: ACCOUNT NOW GOES TO ACCOUNT PAGE -->
+    <a href="./account.html">
       ACCOUNT
     </a>
 
@@ -436,9 +439,6 @@
 
 </main>
 
-
-<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
-<script src="./supabase.js"></script>
 
 <script>
 
@@ -634,7 +634,7 @@
 
 
             <a
-              href="profile.html?username=${encodeURIComponent(username)}"
+              href="./profile.html?username=${encodeURIComponent(username)}"
               class="open-btn"
             >
               VIEW SKATER
@@ -742,4 +742,3 @@
 
 </body>
 </html>
-```
