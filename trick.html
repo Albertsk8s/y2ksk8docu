@@ -1,14 +1,12 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Trick — Y2KSK8DOCU</title>
 
-  <title>TRICK // y2ksk8docu</title>
-
-  <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Archivo+Black&family=Space+Mono:wght@400;700&display=swap" rel="stylesheet">
+  <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+  <script src="./supabase.js"></script>
 
   <style>
     * {
@@ -18,9 +16,12 @@
     }
 
     body {
-      background: #080808;
-      color: #f2f2f2;
-      font-family: "Space Mono", monospace;
+      background:
+        radial-gradient(circle at 10% 10%, rgba(255, 0, 0, .12), transparent 30%),
+        radial-gradient(circle at 90% 80%, rgba(255, 0, 0, .08), transparent 30%),
+        #080808;
+      color: #f4f4f4;
+      font-family: Arial, Helvetica, sans-serif;
       min-height: 100vh;
     }
 
@@ -29,177 +30,237 @@
       position: fixed;
       inset: 0;
       pointer-events: none;
-      opacity: 0.06;
+      opacity: .035;
       background-image:
-        repeating-linear-gradient(
-          0deg,
-          transparent,
-          transparent 3px,
-          #fff 4px
-        );
-      z-index: 999;
+        linear-gradient(rgba(255,255,255,.3) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(255,255,255,.3) 1px, transparent 1px);
+      background-size: 5px 5px;
+      z-index: 0;
     }
 
-    header {
-      height: 76px;
-      border-bottom: 1px solid #252525;
+    a {
+      color: inherit;
+      text-decoration: none;
+    }
+
+    .page {
+      position: relative;
+      z-index: 1;
+      min-height: 100vh;
+    }
+
+    nav {
+      height: 82px;
+      padding: 0 6%;
       display: flex;
       align-items: center;
       justify-content: space-between;
-      padding: 0 5%;
+      border-bottom: 1px solid rgba(255,255,255,.08);
+      background: rgba(8,8,8,.92);
+      backdrop-filter: blur(12px);
       position: sticky;
       top: 0;
-      background: rgba(8, 8, 8, 0.94);
-      backdrop-filter: blur(10px);
-      z-index: 100;
+      z-index: 20;
     }
 
     .logo {
-      color: #ff2020;
-      font-family: "Archivo Black", sans-serif;
-      font-size: 22px;
-      letter-spacing: -1px;
-      text-decoration: none;
+      font-family: Georgia, "Times New Roman", serif;
+      font-weight: 900;
+      font-size: 25px;
+      letter-spacing: -1.5px;
+      transition: .2s;
     }
 
-    .back {
-      color: #aaa;
-      text-decoration: none;
-      font-size: 12px;
-      transition: 0.2s;
+    .logo:hover {
+      color: #ff1a1a;
+      transform: rotate(-1deg);
     }
 
-    .back:hover {
-      color: #ff2020;
+    .logo span {
+      color: #ff1a1a;
+    }
+
+    .nav-links {
+      display: flex;
+      gap: 28px;
+      align-items: center;
+    }
+
+    .nav-links a {
+      font-size: 11px;
+      font-weight: 900;
+      letter-spacing: 1.5px;
+    }
+
+    .nav-links a:hover {
+      color: #ff1a1a;
     }
 
     main {
-      width: min(1100px, 90%);
-      margin: 0 auto;
-      padding: 70px 0 100px;
+      width: min(1050px, 90%);
+      margin: auto;
+      padding: 65px 0 100px;
     }
 
-    .eyebrow {
-      color: #ff2020;
-      font-size: 11px;
-      letter-spacing: 3px;
-      margin-bottom: 12px;
+    .back {
+      display: inline-block;
+      color: #777;
+      font-size: 10px;
+      font-weight: 900;
+      letter-spacing: 1.5px;
+      margin-bottom: 35px;
     }
 
-    h1 {
-      font-family: "Archivo Black", sans-serif;
-      font-size: clamp(42px, 8vw, 90px);
-      line-height: 0.9;
-      text-transform: uppercase;
-      letter-spacing: -4px;
-      word-break: break-word;
-      margin-bottom: 20px;
+    .back:hover {
+      color: #ff1a1a;
     }
 
-    .notes {
-      color: #aaa;
-      max-width: 700px;
-      line-height: 1.7;
-      margin-bottom: 50px;
-    }
-
-    /* STATS */
-
-    .stats {
-      display: grid;
-      grid-template-columns: repeat(4, 1fr);
-      gap: 12px;
-      margin-bottom: 50px;
-    }
-
-    .stat {
-      border: 1px solid #292929;
-      background: #0d0d0d;
-      padding: 25px 20px;
+    .hero {
+      border: 1px solid rgba(255,255,255,.1);
+      padding: 42px;
+      background: rgba(14,14,14,.9);
+      margin-bottom: 35px;
       position: relative;
       overflow: hidden;
     }
 
-    .stat::after {
-      content: "";
+    .hero::after {
+      content: "SK8";
       position: absolute;
-      width: 45px;
-      height: 4px;
-      background: #ff2020;
-      top: 0;
-      left: 0;
+      right: -10px;
+      bottom: -45px;
+      font-family: Georgia, "Times New Roman", serif;
+      font-size: 170px;
+      font-style: italic;
+      font-weight: 900;
+      color: rgba(255,0,0,.035);
+      pointer-events: none;
+    }
+
+    .category {
+      color: #ff1a1a;
+      font-size: 10px;
+      font-weight: 900;
+      letter-spacing: 2px;
+      text-transform: uppercase;
+      margin-bottom: 10px;
+    }
+
+    h1 {
+      font-family: Georgia, "Times New Roman", serif;
+      font-size: clamp(45px, 8vw, 85px);
+      line-height: .9;
+      text-transform: uppercase;
+      font-style: italic;
+      letter-spacing: -4px;
+      position: relative;
+      z-index: 2;
+    }
+
+    .notes {
+      color: #999;
+      max-width: 700px;
+      margin-top: 25px;
+      line-height: 1.6;
+      font-size: 13px;
+      position: relative;
+      z-index: 2;
+    }
+
+    .progress-section {
+      border: 1px solid rgba(255,255,255,.1);
+      background: #0e0e0e;
+      padding: 30px;
+      margin-bottom: 35px;
+    }
+
+    .section-heading {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      gap: 15px;
+      margin-bottom: 22px;
+    }
+
+    .section-heading h2 {
+      font-family: Georgia, "Times New Roman", serif;
+      font-style: italic;
+      text-transform: uppercase;
+      font-size: 28px;
+    }
+
+    .section-heading span {
+      color: #666;
+      font-size: 9px;
+      font-weight: 900;
+      letter-spacing: 1.5px;
+    }
+
+    .stats {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 1px;
+      background: rgba(255,255,255,.08);
+    }
+
+    .stat {
+      background: #101010;
+      padding: 22px;
     }
 
     .stat-number {
-      font-family: "Archivo Black", sans-serif;
-      font-size: 38px;
-      color: #fff;
-      margin-bottom: 8px;
+      font-family: Georgia, "Times New Roman", serif;
+      font-size: 34px;
+      font-weight: 900;
     }
 
     .stat-label {
-      color: #777;
-      font-size: 10px;
-      letter-spacing: 1px;
+      color: #666;
+      font-size: 9px;
+      font-weight: 900;
+      letter-spacing: 1.2px;
+      margin-top: 6px;
       text-transform: uppercase;
     }
 
-    /* PROGRESS */
-
-    .progress-section {
-      border: 1px solid #292929;
-      background: #0d0d0d;
-      padding: 28px;
-      margin-bottom: 60px;
+    .big-progress {
+      margin-top: 25px;
     }
 
-    .section-title {
-      font-family: "Archivo Black", sans-serif;
-      font-size: 18px;
-      margin-bottom: 25px;
-      text-transform: uppercase;
-    }
-
-    .confidence-row {
+    .progress-label {
       display: flex;
-      align-items: center;
-      gap: 15px;
+      justify-content: space-between;
+      color: #777;
+      font-size: 9px;
+      font-weight: 900;
+      letter-spacing: 1px;
+      margin-bottom: 8px;
     }
 
-    .confidence-label {
-      min-width: 115px;
-      font-size: 11px;
-      color: #888;
+    .progress-bar {
+      height: 10px;
+      background: #252525;
     }
 
-    .bar {
-      height: 12px;
-      background: #222;
-      flex: 1;
-      overflow: hidden;
-    }
-
-    .bar-fill {
+    .progress-fill {
       height: 100%;
-      background: #ff2020;
-      width: 0%;
-      transition: width 0.5s ease;
+      background: #ff1a1a;
+      transition: width .4s ease;
     }
-
-    .confidence-value {
-      min-width: 30px;
-      text-align: right;
-      color: #ff2020;
-      font-weight: bold;
-    }
-
-    /* SESSION FORM */
 
     .form-section {
-      border: 1px solid #292929;
-      background: #0d0d0d;
+      border: 1px solid rgba(255,255,255,.1);
+      background: #0e0e0e;
       padding: 30px;
-      margin-bottom: 60px;
+      margin-bottom: 45px;
+    }
+
+    .form-section h2 {
+      font-family: Georgia, "Times New Roman", serif;
+      font-style: italic;
+      text-transform: uppercase;
+      font-size: 30px;
+      margin-bottom: 25px;
     }
 
     .form-grid {
@@ -209,7 +270,9 @@
     }
 
     .field {
-      margin-bottom: 20px;
+      display: flex;
+      flex-direction: column;
+      gap: 8px;
     }
 
     .field.full {
@@ -217,35 +280,38 @@
     }
 
     label {
-      display: block;
       color: #777;
-      font-size: 10px;
-      letter-spacing: 1px;
+      font-size: 9px;
+      font-weight: 900;
+      letter-spacing: 1.5px;
       text-transform: uppercase;
-      margin-bottom: 8px;
     }
 
     input,
     textarea,
     select {
       width: 100%;
+      border: 1px solid #292929;
       background: #080808;
-      color: white;
-      border: 1px solid #333;
+      color: #fff;
       padding: 13px;
-      font-family: inherit;
       outline: none;
+      font: inherit;
+    }
+
+    textarea {
+      min-height: 110px;
+      resize: vertical;
     }
 
     input:focus,
     textarea:focus,
     select:focus {
-      border-color: #ff2020;
+      border-color: #ff1a1a;
     }
 
-    textarea {
-      min-height: 120px;
-      resize: vertical;
+    select {
+      cursor: pointer;
     }
 
     .confidence-options {
@@ -253,104 +319,83 @@
       gap: 8px;
     }
 
+    .confidence-options label {
+      cursor: pointer;
+      position: relative;
+    }
+
     .confidence-options input {
       display: none;
     }
 
-    .confidence-options label {
-      border: 1px solid #333;
-      width: 45px;
-      height: 45px;
+    .confidence-options span {
       display: flex;
+      width: 45px;
+      height: 42px;
       align-items: center;
       justify-content: center;
-      cursor: pointer;
-      color: #777;
-      margin: 0;
-      transition: 0.2s;
+      border: 1px solid #292929;
+      background: #080808;
+      font-family: Georgia, "Times New Roman", serif;
+      font-size: 17px;
+      font-weight: 900;
     }
 
-    .confidence-options label:hover {
-      border-color: #ff2020;
-      color: white;
-    }
-
-    .confidence-options input:checked + label {
-      background: #ff2020;
-      border-color: #ff2020;
-      color: white;
-    }
-
-    .submit-btn {
-      width: 100%;
-      border: none;
-      background: #ff2020;
-      color: white;
-      padding: 16px;
-      font-family: "Archivo Black", sans-serif;
-      text-transform: uppercase;
-      cursor: pointer;
-      transition: 0.2s;
-    }
-
-    .submit-btn:hover {
-      background: #fff;
+    .confidence-options input:checked + span {
+      background: #ff1a1a;
       color: #000;
+      border-color: #ff1a1a;
     }
 
-    .submit-btn:disabled {
-      opacity: 0.5;
-      cursor: not-allowed;
+    .submit-button {
+      width: 100%;
+      margin-top: 22px;
+      padding: 16px;
+      border: 1px solid #ff1a1a;
+      background: #ff1a1a;
+      color: #000;
+      font-weight: 900;
+      letter-spacing: 1.5px;
+      cursor: pointer;
+    }
+
+    .submit-button:hover {
+      background: #fff;
+      border-color: #fff;
     }
 
     .message {
       margin-top: 15px;
-      font-size: 12px;
-      display: none;
+      font-size: 11px;
+      font-weight: 700;
     }
 
-    .message.show {
-      display: block;
+    .success {
+      color: #6cff8b;
     }
 
-    .message.error {
+    .error {
       color: #ff4444;
     }
 
-    .message.success {
-      color: #5cff8d;
+    .history-title {
+      font-family: Georgia, "Times New Roman", serif;
+      font-size: 38px;
+      font-style: italic;
+      text-transform: uppercase;
+      margin-bottom: 20px;
     }
 
-    /* HISTORY */
-
-    .history-header {
+    .sessions {
       display: flex;
-      justify-content: space-between;
-      align-items: center;
-      margin-bottom: 25px;
-    }
-
-    .history-count {
-      color: #666;
-      font-size: 11px;
+      flex-direction: column;
+      gap: 15px;
     }
 
     .session {
-      border: 1px solid #292929;
-      background: #0d0d0d;
+      border: 1px solid rgba(255,255,255,.1);
+      background: #0e0e0e;
       padding: 25px;
-      margin-bottom: 15px;
-      position: relative;
-    }
-
-    .session::before {
-      content: "";
-      position: absolute;
-      left: 0;
-      top: 0;
-      bottom: 0;
-      width: 3px;
-      background: #ff2020;
     }
 
     .session-top {
@@ -360,63 +405,102 @@
       margin-bottom: 15px;
     }
 
-    .session-number {
-      color: #ff2020;
-      font-family: "Archivo Black", sans-serif;
-      font-size: 20px;
+    .session-confidence {
+      font-family: Georgia, "Times New Roman", serif;
+      color: #ff1a1a;
+      font-size: 25px;
+      font-weight: 900;
     }
 
     .session-date {
       color: #666;
-      font-size: 10px;
-    }
-
-    .session-confidence {
-      display: inline-block;
-      border: 1px solid #333;
-      padding: 7px 10px;
-      font-size: 11px;
-      margin-bottom: 15px;
+      font-size: 9px;
+      font-weight: 900;
+      letter-spacing: 1px;
     }
 
     .session-notes {
-      color: #aaa;
-      line-height: 1.6;
-      font-size: 13px;
-      white-space: pre-wrap;
-      margin-bottom: 20px;
+      color: #999;
+      font-size: 12px;
+      line-height: 1.5;
     }
 
     video {
       width: 100%;
-      max-height: 600px;
+      max-height: 500px;
+      margin-top: 18px;
       background: #000;
       display: block;
     }
 
-    .video-tag {
-      margin-bottom: 8px;
+    .visibility {
+      display: inline-block;
+      margin-top: 15px;
+      padding: 5px 8px;
+      border: 1px solid #292929;
       color: #777;
-      font-size: 10px;
-      text-transform: uppercase;
+      font-size: 8px;
+      font-weight: 900;
       letter-spacing: 1px;
     }
 
     .empty {
-      border: 1px dashed #333;
-      padding: 50px;
+      border: 1px solid rgba(255,255,255,.1);
+      padding: 45px;
       text-align: center;
       color: #666;
+      font-size: 11px;
+      letter-spacing: 1px;
     }
 
-    .loading {
-      color: #666;
-      padding: 30px 0;
+    footer {
+      border-top: 1px solid rgba(255,255,255,.08);
+      padding: 30px 6%;
+      display: flex;
+      justify-content: space-between;
+      color: #555;
+      font-size: 9px;
+      font-weight: 900;
+      letter-spacing: 1.5px;
     }
 
-    @media (max-width: 750px) {
+    footer span {
+      color: #ff1a1a;
+    }
+
+    @media (max-width: 700px) {
+      nav {
+        padding: 0 5%;
+      }
+
+      .logo {
+        font-size: 19px;
+      }
+
+      .nav-links {
+        gap: 12px;
+      }
+
+      .nav-links a {
+        font-size: 9px;
+      }
+
+      main {
+        width: 92%;
+        padding-top: 45px;
+      }
+
+      .hero {
+        padding: 28px 22px;
+      }
+
+      .progress-section,
+      .form-section {
+        padding: 22px;
+      }
+
       .stats {
-        grid-template-columns: repeat(2, 1fr);
+        grid-template-columns: 1fr 1fr;
       }
 
       .form-grid {
@@ -427,32 +511,14 @@
         grid-column: auto;
       }
 
-      h1 {
-        letter-spacing: -2px;
-      }
-    }
-
-    @media (max-width: 500px) {
-      main {
-        width: 92%;
-        padding-top: 45px;
+      .confidence-options span {
+        width: 40px;
       }
 
-      .stats {
-        grid-template-columns: 1fr 1fr;
-      }
-
-      .stat {
-        padding: 18px 15px;
-      }
-
-      .stat-number {
-        font-size: 28px;
-      }
-
-      .form-section,
-      .progress-section {
-        padding: 20px;
+      footer {
+        flex-direction: column;
+        gap: 10px;
+        text-align: center;
       }
     }
   </style>
@@ -460,226 +526,273 @@
 
 <body>
 
-<header>
-  <a href="dashboard.html" class="logo">Y2KSK8DOCU</a>
-  <a href="dashboard.html" class="back">← BACK TO ARCHIVE</a>
-</header>
+<div class="page">
 
-<main>
+  <nav>
+    <a href="./index.html" class="logo">
+      Y2K<span>SK8</span>DOCU
+    </a>
 
-  <div id="loading" class="loading">
-    LOADING TRICK...
-  </div>
+    <div class="nav-links">
+      <a href="./explore.html">EXPLORE</a>
+      <a href="./dashboard.html">ARCHIVE</a>
+    </div>
+  </nav>
 
-  <div id="content" style="display:none;">
+  <main>
 
-    <div class="eyebrow">TRICK ARCHIVE //</div>
+    <a href="./dashboard.html" class="back">
+      ← BACK TO ARCHIVE
+    </a>
 
-    <h1 id="trickName">TRICK</h1>
+    <section id="pageContent" style="display:none;">
 
-    <div id="trickNotes" class="notes"></div>
-
-    <!-- STATS -->
-
-    <section class="stats">
-
-      <div class="stat">
-        <div class="stat-number" id="sessionCount">0</div>
-        <div class="stat-label">Sessions Logged</div>
-      </div>
-
-      <div class="stat">
-        <div class="stat-number" id="startingConfidence">—</div>
-        <div class="stat-label">Starting Confidence</div>
-      </div>
-
-      <div class="stat">
-        <div class="stat-number" id="currentConfidence">—</div>
-        <div class="stat-label">Current Confidence</div>
-      </div>
-
-      <div class="stat">
-        <div class="stat-number" id="bestConfidence">—</div>
-        <div class="stat-label">Personal Best</div>
-      </div>
-
-    </section>
-
-    <!-- PROGRESS -->
-
-    <section class="progress-section">
-
-      <div class="section-title">
-        CONFIDENCE PROGRESSION
-      </div>
-
-      <div class="confidence-row">
-
-        <div class="confidence-label">
-          CURRENT LEVEL
+      <div class="hero">
+        <div class="category" id="trickCategory">
+          SKATE
         </div>
 
-        <div class="bar">
-          <div id="confidenceBar" class="bar-fill"></div>
-        </div>
+        <h1 id="trickName">
+          TRICK
+        </h1>
 
-        <div id="confidenceValue" class="confidence-value">
-          —
-        </div>
-
+        <div class="notes" id="trickNotes"></div>
       </div>
 
-    </section>
+      <section class="progress-section">
 
-    <!-- NEW SESSION -->
+        <div class="section-heading">
+          <h2>Progression.</h2>
+          <span>TRICK DATA</span>
+        </div>
 
-    <section class="form-section">
+        <div class="stats">
 
-      <div class="section-title">
-        LOG NEW SESSION
-      </div>
+          <div class="stat">
+            <div class="stat-number" id="sessionsLogged">
+              0
+            </div>
+            <div class="stat-label">
+              Sessions Logged
+            </div>
+          </div>
 
-      <form id="sessionForm">
+          <div class="stat">
+            <div class="stat-number" id="startingConfidence">
+              —
+            </div>
+            <div class="stat-label">
+              Starting Confidence
+            </div>
+          </div>
 
-        <div class="form-grid">
+          <div class="stat">
+            <div class="stat-number" id="currentConfidence">
+              —
+            </div>
+            <div class="stat-label">
+              Current Confidence
+            </div>
+          </div>
 
-          <div class="field">
+          <div class="stat">
+            <div class="stat-number" id="personalBest">
+              —
+            </div>
+            <div class="stat-label">
+              Personal Best
+            </div>
+          </div>
 
-            <label>Confidence</label>
+        </div>
 
-            <div class="confidence-options">
+        <div class="big-progress">
 
-              <input type="radio" name="confidence" id="c1" value="1" checked>
-              <label for="c1">1</label>
+          <div class="progress-label">
+            <span>CONFIDENCE</span>
+            <span id="progressText">0 / 5</span>
+          </div>
 
-              <input type="radio" name="confidence" id="c2" value="2">
-              <label for="c2">2</label>
+          <div class="progress-bar">
+            <div
+              class="progress-fill"
+              id="progressFill"
+              style="width:0%"
+            ></div>
+          </div>
 
-              <input type="radio" name="confidence" id="c3" value="3">
-              <label for="c3">3</label>
+        </div>
 
-              <input type="radio" name="confidence" id="c4" value="4">
-              <label for="c4">4</label>
+      </section>
 
-              <input type="radio" name="confidence" id="c5" value="5">
-              <label for="c5">5</label>
+      <section class="form-section">
+
+        <h2>Log A Session.</h2>
+
+        <form id="sessionForm">
+
+          <div class="form-grid">
+
+            <div class="field">
+
+              <label>
+                Confidence
+              </label>
+
+              <div class="confidence-options">
+
+                <label>
+                  <input type="radio" name="confidence" value="1">
+                  <span>1</span>
+                </label>
+
+                <label>
+                  <input type="radio" name="confidence" value="2">
+                  <span>2</span>
+                </label>
+
+                <label>
+                  <input type="radio" name="confidence" value="3">
+                  <span>3</span>
+                </label>
+
+                <label>
+                  <input type="radio" name="confidence" value="4">
+                  <span>4</span>
+                </label>
+
+                <label>
+                  <input type="radio" name="confidence" value="5">
+                  <span>5</span>
+                </label>
+
+              </div>
+
+            </div>
+
+            <div class="field">
+
+              <label for="visibility">
+                Video Visibility
+              </label>
+
+              <select id="visibility">
+                <option value="private">
+                  PRIVATE — ONLY ME
+                </option>
+
+                <option value="public">
+                  PUBLIC — EVERYONE
+                </option>
+              </select>
+
+            </div>
+
+            <div class="field full">
+
+              <label for="sessionNotes">
+                Session Notes
+              </label>
+
+              <textarea
+                id="sessionNotes"
+                placeholder="What happened during this session?"
+              ></textarea>
+
+            </div>
+
+            <div class="field full">
+
+              <label for="videoFile">
+                Video Clip
+              </label>
+
+              <input
+                type="file"
+                id="videoFile"
+                accept="video/*"
+              />
 
             </div>
 
           </div>
 
-          <div class="field">
+          <button
+            class="submit-button"
+            type="submit"
+            id="submitButton"
+          >
+            LOG SESSION
+          </button>
 
-            <label>Video</label>
+          <div id="formMessage" class="message"></div>
 
-            <input
-              type="file"
-              id="videoFile"
-              accept="video/*"
-            >
+        </form>
 
-          </div>
+      </section>
 
-          <div class="field full">
+      <section>
 
-            <label>Session Notes</label>
+        <h2 class="history-title">
+          Session History.
+        </h2>
 
-            <textarea
-              id="sessionNotes"
-              placeholder="What happened? What felt better? What needs work?"
-            ></textarea>
+        <div id="sessionsContainer" class="sessions"></div>
 
-          </div>
-
-          <div class="field">
-
-            <label>Video Visibility</label>
-
-            <select id="videoVisibility">
-
-              <option value="private">
-                PRIVATE
-              </option>
-
-              <option value="public">
-                PUBLIC
-              </option>
-
-            </select>
-
-          </div>
-
-        </div>
-
-        <button
-          type="submit"
-          class="submit-btn"
-          id="submitBtn"
-        >
-          LOG SESSION
-        </button>
-
-        <div id="formMessage" class="message"></div>
-
-      </form>
+      </section>
 
     </section>
 
-    <!-- HISTORY -->
+    <div id="loading" class="empty">
+      LOADING TRICK...
+    </div>
 
-    <section>
+  </main>
 
-      <div class="history-header">
+  <footer>
+    <div>
+      Y2KSK8DOCU <span>●</span> SKATE. DOCUMENT. PROGRESS.
+    </div>
 
-        <div class="section-title">
-          SESSION HISTORY
-        </div>
+    <div>
+      PRIVATE / PUBLIC ARCHIVE
+    </div>
+  </footer>
 
-        <div id="historyCount" class="history-count">
-          0 SESSIONS
-        </div>
-
-      </div>
-
-      <div id="history"></div>
-
-    </section>
-
-  </div>
-
-</main>
-
-<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
-<script src="./supabase.js"></script>
+</div>
 
 <script>
 
   const client = window.supabaseClient;
+
+  const params = new URLSearchParams(window.location.search);
+  const trickId = params.get("id");
 
   let currentUser = null;
   let currentTrick = null;
   let sessions = [];
 
   const loading = document.getElementById("loading");
-  const content = document.getElementById("content");
+  const pageContent = document.getElementById("pageContent");
 
   const trickName = document.getElementById("trickName");
+  const trickCategory = document.getElementById("trickCategory");
   const trickNotes = document.getElementById("trickNotes");
 
-  const sessionCount = document.getElementById("sessionCount");
+  const sessionsLogged = document.getElementById("sessionsLogged");
   const startingConfidence = document.getElementById("startingConfidence");
   const currentConfidence = document.getElementById("currentConfidence");
-  const bestConfidence = document.getElementById("bestConfidence");
+  const personalBest = document.getElementById("personalBest");
 
-  const confidenceBar = document.getElementById("confidenceBar");
-  const confidenceValue = document.getElementById("confidenceValue");
-
-  const history = document.getElementById("history");
-  const historyCount = document.getElementById("historyCount");
+  const progressFill = document.getElementById("progressFill");
+  const progressText = document.getElementById("progressText");
 
   const sessionForm = document.getElementById("sessionForm");
-  const submitBtn = document.getElementById("submitBtn");
+  const submitButton = document.getElementById("submitButton");
   const formMessage = document.getElementById("formMessage");
+
+  const sessionsContainer =
+    document.getElementById("sessionsContainer");
 
   function escapeHTML(value) {
 
@@ -693,79 +806,68 @@
       .replace(/>/g, "&gt;")
       .replace(/"/g, "&quot;")
       .replace(/'/g, "&#039;");
-  }
 
-  function formatDate(dateString) {
-
-    return new Date(dateString).toLocaleDateString(
-      undefined,
-      {
-        year: "numeric",
-        month: "short",
-        day: "numeric"
-      }
-    );
   }
 
   function showMessage(message, type) {
 
     formMessage.textContent = message;
-
-    formMessage.className = "message show " + type;
+    formMessage.className = "message " + type;
 
   }
 
-  function getTrickId() {
+  async function getUser() {
 
-    const params = new URLSearchParams(
-      window.location.search
-    );
+    const {
+      data,
+      error
+    } = await client.auth.getSession();
 
-    return params.get("id");
+    if (error || !data.session) {
+      window.location.href = "./auth.html";
+      return null;
+    }
+
+    return data.session.user;
 
   }
 
   async function loadTrick() {
-
-    const trickId = getTrickId();
-
-    if (!trickId) {
-
-      loading.textContent = "NO TRICK ID FOUND.";
-
-      return;
-    }
 
     const {
       data,
       error
     } = await client
       .from("tricks")
-      .select("*")
+      .select(`
+        id,
+        name,
+        category,
+        confidence,
+        notes,
+        visibility,
+        created_at,
+        updated_at
+      `)
       .eq("id", trickId)
       .eq("user_id", currentUser.id)
       .single();
 
-    if (error) {
-
-      console.error(error);
-
-      loading.textContent = "COULD NOT LOAD THIS TRICK.";
-
-      return;
+    if (error || !data) {
+      throw new Error("Trick not found.");
     }
 
     currentTrick = data;
 
-    trickName.textContent = currentTrick.name;
+    trickName.textContent = data.name;
+    trickCategory.textContent =
+      data.category || "SKATE";
 
-    trickNotes.textContent =
-      currentTrick.notes || "No notes added yet.";
-
-    await loadSessions();
-
-    loading.style.display = "none";
-    content.style.display = "block";
+    if (data.notes) {
+      trickNotes.textContent = data.notes;
+    } else {
+      trickNotes.style.display = "none";
+    }
 
   }
 
@@ -778,6 +880,7 @@
       .from("sessions")
       .select(`
         id,
+        trick_id,
         confidence,
         notes,
         created_at,
@@ -788,172 +891,164 @@
           created_at
         )
       `)
-      .eq("trick_id", currentTrick.id)
+      .eq("trick_id", trickId)
       .eq("user_id", currentUser.id)
       .order("created_at", {
-        ascending: false
+        ascending: true
       });
 
     if (error) {
-
-      console.error(error);
-
-      history.innerHTML =
-        `<div class="empty">
-          COULD NOT LOAD SESSION HISTORY.
-        </div>`;
-
-      return;
+      throw error;
     }
 
     sessions = data || [];
 
-    updateStats();
-
-    await renderHistory();
+    renderStats();
+    await renderSessions();
 
   }
 
-  function updateStats() {
+  function renderStats() {
 
-    const count = sessions.length;
+    sessionsLogged.textContent = sessions.length;
 
-    sessionCount.textContent = count;
+    if (sessions.length === 0) {
 
-    historyCount.textContent =
-      count === 1
-        ? "1 SESSION"
-        : `${count} SESSIONS`;
+      startingConfidence.textContent =
+        currentTrick.confidence + "/5";
 
-    if (count === 0) {
+      currentConfidence.textContent =
+        currentTrick.confidence + "/5";
 
-      startingConfidence.textContent = "—";
-      currentConfidence.textContent = "—";
-      bestConfidence.textContent = "—";
-      confidenceValue.textContent = "—";
-      confidenceBar.style.width = "0%";
+      personalBest.textContent =
+        currentTrick.confidence + "/5";
+
+      updateProgress(currentTrick.confidence);
 
       return;
     }
 
-    /*
-      Sessions are loaded newest first.
+    const values = sessions
+      .map(session => Number(session.confidence))
+      .filter(value => !isNaN(value));
 
-      The last item is therefore
-      the user's earliest session.
-    */
+    const first = values[0];
+    const current = values[values.length - 1];
 
-    const earliest =
-      sessions[sessions.length - 1];
-
-    const latest =
-      sessions[0];
-
-    const best =
-      Math.max(
-        ...sessions.map(
-          session => Number(session.confidence)
-        )
-      );
+    const best = Math.max(...values);
 
     startingConfidence.textContent =
-      earliest.confidence;
+      first + "/5";
 
     currentConfidence.textContent =
-      latest.confidence;
+      current + "/5";
 
-    bestConfidence.textContent =
-      best;
+    personalBest.textContent =
+      best + "/5";
 
-    confidenceValue.textContent =
-      `${latest.confidence}/5`;
-
-    confidenceBar.style.width =
-      `${(latest.confidence / 5) * 100}%`;
+    updateProgress(current);
 
   }
 
-  async function renderHistory() {
+  function updateProgress(confidence) {
+
+    const value =
+      Math.max(1, Math.min(5, Number(confidence) || 1));
+
+    progressFill.style.width =
+      (value * 20) + "%";
+
+    progressText.textContent =
+      value + " / 5";
+
+  }
+
+  async function getVideoUrl(video) {
+
+    if (!video || !video.storage_path) {
+      return null;
+    }
+
+    /*
+      PUBLIC VIDEOS
+      are stored in public-videos.
+    */
+
+    if (video.visibility === "public") {
+
+      const {
+        data
+      } = client
+        .storage
+        .from("public-videos")
+        .getPublicUrl(video.storage_path);
+
+      return data.publicUrl;
+
+    }
+
+    /*
+      PRIVATE VIDEOS
+      remain in the private videos bucket.
+    */
+
+    const {
+      data,
+      error
+    } = await client
+      .storage
+      .from("videos")
+      .createSignedUrl(
+        video.storage_path,
+        3600
+      );
+
+    if (error || !data) {
+      return null;
+    }
+
+    return data.signedUrl;
+
+  }
+
+  async function renderSessions() {
 
     if (sessions.length === 0) {
 
-      history.innerHTML = `
+      sessionsContainer.innerHTML = `
         <div class="empty">
-          NO SESSIONS YET.<br><br>
-          LOG YOUR FIRST SESSION ABOVE.
+          NO SESSIONS LOGGED YET.
         </div>
       `;
 
       return;
     }
 
-    history.innerHTML = "";
+    sessionsContainer.innerHTML = "";
 
-    for (let index = 0; index < sessions.length; index++) {
+    for (const session of sessions) {
 
-      const session = sessions[index];
+      const date =
+        new Date(session.created_at)
+          .toLocaleDateString();
 
       const sessionElement =
-        document.createElement("div");
+        document.createElement("article");
 
       sessionElement.className = "session";
-
-      const video =
-        session.videos &&
-        session.videos.length
-          ? session.videos[0]
-          : null;
-
-      let videoHTML = "";
-
-      if (video) {
-
-        const {
-          data,
-          error
-        } = await client.storage
-          .from("videos")
-          .createSignedUrl(
-            video.storage_path,
-            3600
-          );
-
-        if (!error && data?.signedUrl) {
-
-          videoHTML = `
-            <div class="video-tag">
-              VIDEO // ${escapeHTML(video.visibility)}
-            </div>
-
-            <video
-              controls
-              preload="metadata"
-              src="${escapeHTML(data.signedUrl)}"
-            ></video>
-          `;
-
-        }
-
-      }
 
       sessionElement.innerHTML = `
 
         <div class="session-top">
 
           <div>
-
-            <div class="session-number">
-              SESSION #${sessions.length - index}
+            <div class="session-confidence">
+              ${escapeHTML(session.confidence)}/5
             </div>
 
             <div class="session-date">
-              ${formatDate(session.created_at)}
+              ${escapeHTML(date)}
             </div>
-
-          </div>
-
-          <div class="session-confidence">
-            CONFIDENCE ${session.confidence}/5
           </div>
 
         </div>
@@ -968,11 +1063,294 @@
             : ""
         }
 
-        ${videoHTML}
-
       `;
 
-      history.appendChild(sessionElement);
+      const videos =
+        session.videos || [];
+
+      for (const video of videos) {
+
+        const videoUrl =
+          await getVideoUrl(video);
+
+        if (videoUrl) {
+
+          const player =
+            document.createElement("video");
+
+          player.controls = true;
+          player.playsInline = true;
+          player.preload = "metadata";
+          player.src = videoUrl;
+
+          sessionElement.appendChild(player);
+
+          const badge =
+            document.createElement("div");
+
+          badge.className = "visibility";
+
+          badge.textContent =
+            video.visibility === "public"
+              ? "PUBLIC CLIP"
+              : "PRIVATE CLIP";
+
+          sessionElement.appendChild(badge);
+
+        }
+
+      }
+
+      sessionsContainer.appendChild(sessionElement);
+
+    }
+
+  }
+
+  async function handleSubmit(event) {
+
+    event.preventDefault();
+
+    const selectedConfidence =
+      document.querySelector(
+        'input[name="confidence"]:checked'
+      );
+
+    if (!selectedConfidence) {
+
+      showMessage(
+        "SELECT A CONFIDENCE LEVEL.",
+        "error"
+      );
+
+      return;
+
+    }
+
+    const confidence =
+      Number(selectedConfidence.value);
+
+    const notes =
+      document
+        .getElementById("sessionNotes")
+        .value
+        .trim();
+
+    const visibility =
+      document
+        .getElementById("visibility")
+        .value;
+
+    const videoFile =
+      document
+        .getElementById("videoFile")
+        .files[0];
+
+    submitButton.disabled = true;
+    submitButton.textContent = "SAVING...";
+
+    showMessage("", "");
+
+    let uploadedPath = null;
+
+    try {
+
+      /*
+        1. CREATE SESSION
+      */
+
+      const {
+        data: session,
+        error: sessionError
+      } = await client
+        .from("sessions")
+        .insert({
+          trick_id: trickId,
+          user_id: currentUser.id,
+          confidence: confidence,
+          notes: notes || null
+        })
+        .select()
+        .single();
+
+      if (sessionError) {
+        throw sessionError;
+      }
+
+      /*
+        2. UPLOAD VIDEO IF PROVIDED
+      */
+
+      if (videoFile) {
+
+        const originalName =
+          videoFile.name || "clip.mp4";
+
+        const safeName =
+          originalName
+            .replace(/[^a-zA-Z0-9._-]/g, "-")
+            .replace(/-+/g, "-")
+            .substring(0, 120);
+
+        const uniqueName =
+          crypto.randomUUID() + "-" + safeName;
+
+        /*
+          PUBLIC → public-videos
+          PRIVATE → videos
+        */
+
+        const bucket =
+          visibility === "public"
+            ? "public-videos"
+            : "videos";
+
+        uploadedPath =
+          currentUser.id +
+          "/" +
+          uniqueName;
+
+        const {
+          error: uploadError
+        } = await client
+          .storage
+          .from(bucket)
+          .upload(
+            uploadedPath,
+            videoFile,
+            {
+              cacheControl: "3600",
+              upsert: false,
+              contentType:
+                videoFile.type || "video/mp4"
+            }
+          );
+
+        if (uploadError) {
+          throw uploadError;
+        }
+
+        /*
+          3. SAVE VIDEO DATABASE RECORD
+        */
+
+        const {
+          error: videoError
+        } = await client
+          .from("videos")
+          .insert({
+            session_id: session.id,
+            user_id: currentUser.id,
+            storage_path: uploadedPath,
+            visibility: visibility
+          });
+
+        if (videoError) {
+
+          /*
+            Clean up uploaded file
+            if database insert fails.
+          */
+
+          await client
+            .storage
+            .from(bucket)
+            .remove([uploadedPath]);
+
+          uploadedPath = null;
+
+          throw videoError;
+        }
+
+      }
+
+      /*
+        4. UPDATE TRICK CURRENT CONFIDENCE
+      */
+
+      const {
+        error: updateError
+      } = await client
+        .from("tricks")
+        .update({
+          confidence: confidence,
+          updated_at: new Date().toISOString()
+        })
+        .eq("id", trickId)
+        .eq("user_id", currentUser.id);
+
+      if (updateError) {
+        console.warn(
+          "Could not update trick confidence:",
+          updateError
+        );
+      }
+
+      /*
+        5. RESET FORM
+      */
+
+      sessionForm.reset();
+
+      showMessage(
+        "SESSION LOGGED SUCCESSFULLY.",
+        "success"
+      );
+
+      /*
+        6. RELOAD EVERYTHING
+      */
+
+      await loadTrick();
+      await loadSessions();
+
+    } catch (error) {
+
+      console.error(error);
+
+      showMessage(
+        error.message ||
+        "Something went wrong.",
+        "error"
+      );
+
+    } finally {
+
+      submitButton.disabled = false;
+      submitButton.textContent = "LOG SESSION";
+
+    }
+
+  }
+
+  async function init() {
+
+    try {
+
+      if (!trickId) {
+        throw new Error("Missing trick ID.");
+      }
+
+      currentUser = await getUser();
+
+      if (!currentUser) {
+        return;
+      }
+
+      await loadTrick();
+      await loadSessions();
+
+      loading.style.display = "none";
+      pageContent.style.display = "block";
+
+    } catch (error) {
+
+      console.error(error);
+
+      loading.textContent =
+        "TRICK COULD NOT BE LOADED.";
+
+      loading.style.color = "#ff4444";
 
     }
 
@@ -980,203 +1358,10 @@
 
   sessionForm.addEventListener(
     "submit",
-    async function(event) {
-
-      event.preventDefault();
-
-      submitBtn.disabled = true;
-
-      showMessage(
-        "SAVING SESSION...",
-        "success"
-      );
-
-      try {
-
-        const confidence =
-          Number(
-            document.querySelector(
-              'input[name="confidence"]:checked'
-            ).value
-          );
-
-        const notes =
-          document.getElementById(
-            "sessionNotes"
-          ).value.trim();
-
-        const videoFile =
-          document.getElementById(
-            "videoFile"
-          ).files[0];
-
-        const videoVisibility =
-          document.getElementById(
-            "videoVisibility"
-          ).value;
-
-        /*
-          1. Create session
-        */
-
-        const {
-          data: sessionData,
-          error: sessionError
-        } = await client
-          .from("sessions")
-          .insert({
-            trick_id: currentTrick.id,
-            user_id: currentUser.id,
-            confidence,
-            notes: notes || null
-          })
-          .select()
-          .single();
-
-        if (sessionError) {
-          throw sessionError;
-        }
-
-        /*
-          2. Upload video if selected
-        */
-
-        if (videoFile) {
-
-          const originalName =
-            videoFile.name || "clip";
-
-          const safeName =
-            originalName
-              .replace(/[^a-zA-Z0-9._-]/g, "_")
-              .slice(0, 120);
-
-          const storagePath =
-            `${currentUser.id}/${crypto.randomUUID()}-${safeName}`;
-
-          const {
-            error: uploadError
-          } = await client.storage
-            .from("videos")
-            .upload(
-              storagePath,
-              videoFile,
-              {
-                contentType:
-                  videoFile.type || "video/mp4",
-                upsert: false
-              }
-            );
-
-          if (uploadError) {
-
-            await client
-              .from("sessions")
-              .delete()
-              .eq("id", sessionData.id)
-              .eq("user_id", currentUser.id);
-
-            throw uploadError;
-          }
-
-          /*
-            3. Connect video to session
-          */
-
-          const {
-            error: videoError
-          } = await client
-            .from("videos")
-            .insert({
-              session_id: sessionData.id,
-              user_id: currentUser.id,
-              storage_path: storagePath,
-              visibility: videoVisibility
-            });
-
-          if (videoError) {
-
-            await client.storage
-              .from("videos")
-              .remove([
-                storagePath
-              ]);
-
-            await client
-              .from("sessions")
-              .delete()
-              .eq("id", sessionData.id)
-              .eq("user_id", currentUser.id);
-
-            throw videoError;
-          }
-
-        }
-
-        /*
-          4. Refresh trick history
-        */
-
-        sessionForm.reset();
-
-        document.getElementById("c1").checked = true;
-
-        showMessage(
-          "SESSION LOGGED.",
-          "success"
-        );
-
-        await loadSessions();
-
-      } catch (error) {
-
-        console.error(error);
-
-        showMessage(
-          error.message ||
-          "Something went wrong.",
-          "error"
-        );
-
-      } finally {
-
-        submitBtn.disabled = false;
-
-      }
-
-    }
+    handleSubmit
   );
 
-  async function start() {
-
-    if (!client) {
-
-      loading.textContent =
-        "SUPABASE IS NOT CONNECTED.";
-
-      return;
-    }
-
-    const {
-      data,
-      error
-    } = await client.auth.getSession();
-
-    if (error || !data.session) {
-
-      window.location.href = "auth.html";
-
-      return;
-    }
-
-    currentUser =
-      data.session.user;
-
-    await loadTrick();
-
-  }
-
-  start();
+  init();
 
 </script>
 
