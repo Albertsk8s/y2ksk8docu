@@ -1,3 +1,4 @@
+```html
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -68,6 +69,11 @@
       font-size: 22px;
       letter-spacing: -1px;
       text-decoration: none;
+      transition: 0.2s;
+    }
+
+    .logo:hover {
+      color: white;
     }
 
     nav {
@@ -136,6 +142,10 @@
       outline: none;
     }
 
+    .search-area input::placeholder {
+      color: #555;
+    }
+
     .search-area input:focus {
       border-color: #ff2020;
     }
@@ -147,6 +157,7 @@
       padding: 0 25px;
       font-family: "Archivo Black", sans-serif;
       cursor: pointer;
+      transition: 0.2s;
     }
 
     .search-area button:hover {
@@ -321,6 +332,10 @@
         font-size: 9px;
       }
 
+      .logo {
+        font-size: 17px;
+      }
+
       main {
         width: 92%;
         padding-top: 45px;
@@ -352,13 +367,21 @@
 
 <header>
 
-  <a href="./index.html" class="logo">
+  <!-- EXPLORE IS PUBLIC, SO LOGO GOES TO PUBLIC HOMEPAGE -->
+  <a
+    href="./index.html"
+    class="logo"
+    aria-label="Y2KSK8DOCU Homepage"
+  >
     Y2KSK8DOCU
   </a>
 
   <nav>
 
-    <a href="./explore.html" class="active">
+    <a
+      href="./explore.html"
+      class="active"
+    >
       EXPLORE
     </a>
 
@@ -366,7 +389,6 @@
       MY ARCHIVE
     </a>
 
-    <!-- FIXED: ACCOUNT NOW GOES TO ACCOUNT PAGE -->
     <a href="./account.html">
       ACCOUNT
     </a>
@@ -602,6 +624,7 @@
             <div class="profile-name">
 
               BY
+
               <span>
                 ${escapeHTML(
                   displayName
@@ -716,6 +739,18 @@
   );
 
 
+  /*
+    EXPLORE IS A PUBLIC PAGE.
+
+    If a user arrives here while signed in,
+    end their Supabase session.
+
+    This means Explore is treated as a
+    public section of the website.
+
+    The logo then takes them to index.html.
+  */
+
   async function start() {
 
     if (!client) {
@@ -731,6 +766,29 @@
     }
 
 
+    try {
+
+      const {
+        error
+      } = await client.auth.signOut();
+
+      if (error) {
+        console.error(
+          "Explore sign-out error:",
+          error
+        );
+      }
+
+    } catch (error) {
+
+      console.error(
+        "Unexpected Explore auth error:",
+        error
+      );
+
+    }
+
+
     await loadPublicTricks();
 
   }
@@ -742,3 +800,4 @@
 
 </body>
 </html>
+```
