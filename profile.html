@@ -1,15 +1,16 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-  <title>Skater Profile — Y2KSK8DOCU</title>
+  <title>SKATER // Y2K SK8 DOCU</title>
 
   <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
   <script src="./supabase.js"></script>
 
   <style>
+
     * {
       box-sizing: border-box;
       margin: 0;
@@ -18,148 +19,92 @@
 
     body {
       background:
-        radial-gradient(circle at 15% 10%, rgba(255,0,0,.12), transparent 30%),
-        radial-gradient(circle at 85% 80%, rgba(255,0,0,.08), transparent 30%),
-        #080808;
-      color: #f4f4f4;
+        radial-gradient(circle at top right, rgba(255,0,0,.14), transparent 30%),
+        #050505;
+      color: white;
       font-family: Arial, Helvetica, sans-serif;
       min-height: 100vh;
     }
 
-    body::before {
-      content: "";
-      position: fixed;
-      inset: 0;
-      pointer-events: none;
-      opacity: .035;
-      background-image:
-        linear-gradient(rgba(255,255,255,.3) 1px, transparent 1px),
-        linear-gradient(90deg, rgba(255,255,255,.3) 1px, transparent 1px);
-      background-size: 5px 5px;
-      z-index: 0;
+    header {
+      border-bottom: 1px solid rgba(255,0,0,.3);
+      background: rgba(5,5,5,.92);
+      backdrop-filter: blur(14px);
     }
 
-    a {
-      color: inherit;
-      text-decoration: none;
-    }
-
-    .page {
-      position: relative;
-      z-index: 1;
-      min-height: 100vh;
-    }
-
-    nav {
-      height: 82px;
-      padding: 0 6%;
+    .nav {
+      max-width: 1200px;
+      min-height: 76px;
+      margin: auto;
+      padding: 0 24px;
       display: flex;
       align-items: center;
       justify-content: space-between;
-      border-bottom: 1px solid rgba(255,255,255,.08);
-      background: rgba(8,8,8,.92);
-      backdrop-filter: blur(12px);
-      position: sticky;
-      top: 0;
-      z-index: 20;
     }
 
     .logo {
-      font-family: Georgia, "Times New Roman", serif;
+      color: white;
+      text-decoration: none;
+      font-family: Georgia, serif;
+      font-size: 24px;
       font-weight: 900;
-      font-size: 25px;
-      letter-spacing: -1.5px;
-      transition: .2s;
-    }
-
-    .logo:hover {
-      color: #ff1a1a;
-      transform: rotate(-1deg);
+      letter-spacing: -1px;
+      text-shadow: 2px 2px 0 #a00000;
     }
 
     .logo span {
-      color: #ff1a1a;
+      color: #ff1717;
     }
 
     .nav-links {
       display: flex;
-      align-items: center;
-      gap: 28px;
+      gap: 10px;
     }
 
     .nav-links a {
+      color: #ccc;
+      text-decoration: none;
+      padding: 10px;
       font-size: 11px;
       font-weight: 900;
       letter-spacing: 1.5px;
     }
 
     .nav-links a:hover {
-      color: #ff1a1a;
+      color: #ff1717;
     }
 
     main {
-      width: min(1150px, 90%);
-      margin: auto;
-      padding: 65px 0 100px;
+      width: min(1100px, calc(100% - 32px));
+      margin: 60px auto 100px;
     }
 
-    .back {
-      display: inline-block;
-      color: #777;
-      font-size: 10px;
-      font-weight: 900;
-      letter-spacing: 1.5px;
-      margin-bottom: 35px;
-    }
-
-    .back:hover {
-      color: #ff1a1a;
-    }
-
-    /* PROFILE */
-
-    .profile-hero {
-      border: 1px solid rgba(255,255,255,.1);
-      padding: 45px;
-      background:
-        linear-gradient(135deg, rgba(255,0,0,.08), transparent 45%),
-        rgba(15,15,15,.9);
-      margin-bottom: 45px;
-      position: relative;
-      overflow: hidden;
-    }
-
-    .profile-hero::after {
-      content: "SK8";
-      position: absolute;
-      right: -15px;
-      bottom: -45px;
-      font-family: Georgia, "Times New Roman", serif;
-      font-size: 170px;
-      font-style: italic;
-      font-weight: 900;
-      color: rgba(255,0,0,.035);
-      pointer-events: none;
-    }
-
-    .profile-top {
+    .profile-header {
+      border: 1px solid rgba(255,0,0,.35);
+      background: linear-gradient(
+        145deg,
+        rgba(255,0,0,.08),
+        rgba(255,255,255,.025)
+      );
+      padding: 35px;
       display: flex;
       align-items: center;
-      gap: 28px;
-      position: relative;
-      z-index: 2;
+      gap: 30px;
+      margin-bottom: 50px;
     }
 
     .avatar {
-      width: 110px;
-      height: 110px;
-      border: 2px solid #ff1a1a;
+      width: 145px;
+      height: 145px;
+      flex-shrink: 0;
+      border-radius: 50%;
+      overflow: hidden;
+      border: 3px solid #ff1717;
       background: #111;
       display: flex;
       align-items: center;
       justify-content: center;
-      overflow: hidden;
-      flex-shrink: 0;
+      box-shadow: 0 0 40px rgba(255,0,0,.15);
     }
 
     .avatar img {
@@ -168,375 +113,214 @@
       object-fit: cover;
     }
 
-    .avatar-placeholder {
-      font-family: Georgia, "Times New Roman", serif;
-      font-size: 42px;
+    .avatar-letter {
+      color: #ff1717;
+      font-family: Georgia, serif;
+      font-size: 55px;
       font-weight: 900;
-      color: #ff1a1a;
+    }
+
+    .profile-info {
+      flex: 1;
     }
 
     .profile-label {
-      color: #ff1a1a;
+      color: #ff1717;
       font-size: 10px;
       font-weight: 900;
-      letter-spacing: 2px;
+      letter-spacing: 4px;
       margin-bottom: 8px;
     }
 
-    .profile-info h1 {
-      font-family: Georgia, "Times New Roman", serif;
-      font-size: clamp(42px, 7vw, 78px);
+    h1 {
+      font-family: Georgia, serif;
+      font-size: clamp(42px, 7vw, 72px);
       line-height: .9;
+      letter-spacing: -4px;
+      margin-bottom: 8px;
       text-transform: uppercase;
-      font-style: italic;
-      letter-spacing: -3px;
-      word-break: break-word;
+      text-shadow: 4px 4px 0 rgba(255,0,0,.3);
     }
 
     .username {
-      margin-top: 12px;
-      color: #999;
-      font-size: 14px;
-      font-weight: 700;
+      color: #888;
+      font-size: 13px;
+      margin-bottom: 18px;
     }
 
     .bio {
-      margin-top: 22px;
       color: #bbb;
       line-height: 1.6;
       max-width: 650px;
-      font-size: 14px;
+      white-space: pre-wrap;
     }
 
-    /* STATS */
+    .edit-profile {
+      display: inline-block;
+      margin-top: 20px;
+      background: #ff1717;
+      color: white;
+      text-decoration: none;
+      padding: 13px 17px;
+      font-size: 10px;
+      font-weight: 900;
+      letter-spacing: 1.5px;
+    }
 
     .stats {
       display: grid;
       grid-template-columns: repeat(3, 1fr);
-      border-top: 1px solid rgba(255,255,255,.1);
-      margin-top: 38px;
-      padding-top: 28px;
-      position: relative;
-      z-index: 2;
+      gap: 12px;
+      margin-bottom: 50px;
     }
 
     .stat {
-      padding-right: 25px;
-      border-right: 1px solid rgba(255,255,255,.1);
-    }
-
-    .stat:not(:first-child) {
-      padding-left: 25px;
-    }
-
-    .stat:last-child {
-      border-right: none;
+      border: 1px solid #292929;
+      background: #090909;
+      padding: 24px;
     }
 
     .stat-number {
-      font-family: Georgia, "Times New Roman", serif;
-      font-size: 38px;
+      font-family: Georgia, serif;
+      font-size: 40px;
       font-weight: 900;
+      color: #ff1717;
     }
 
     .stat-label {
-      margin-top: 5px;
+      margin-top: 6px;
       color: #777;
       font-size: 10px;
       font-weight: 900;
-      letter-spacing: 1.5px;
-      text-transform: uppercase;
+      letter-spacing: 2px;
     }
 
-    /* SECTION */
-
-    .section {
-      margin-top: 45px;
+    section {
+      margin-bottom: 55px;
     }
 
     .section-title {
-      display: flex;
-      align-items: baseline;
-      justify-content: space-between;
-      gap: 20px;
-      margin-bottom: 20px;
-    }
-
-    .section-title h2 {
-      font-family: Georgia, "Times New Roman", serif;
+      font-family: Georgia, serif;
       font-size: 38px;
-      font-style: italic;
+      letter-spacing: -2px;
+      margin-bottom: 20px;
       text-transform: uppercase;
-      letter-spacing: -1px;
     }
-
-    .section-title span {
-      color: #666;
-      font-size: 10px;
-      font-weight: 900;
-      letter-spacing: 1.5px;
-    }
-
-    /* TRICKS */
 
     .tricks {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 15px;
+    }
+
+    .trick {
+      border: 1px solid #292929;
+      background: #090909;
+      padding: 23px;
+    }
+
+    .trick-category {
+      color: #ff1717;
+      font-size: 9px;
+      font-weight: 900;
+      letter-spacing: 2px;
+      text-transform: uppercase;
+      margin-bottom: 8px;
+    }
+
+    .trick-name {
+      font-family: Georgia, serif;
+      font-size: 28px;
+      margin-bottom: 15px;
+    }
+
+    .confidence-label {
+      display: flex;
+      justify-content: space-between;
+      color: #888;
+      font-size: 10px;
+      font-weight: 900;
+      letter-spacing: 1px;
+      margin-bottom: 7px;
+    }
+
+    .bar {
+      height: 8px;
+      background: #222;
+      overflow: hidden;
+    }
+
+    .bar-fill {
+      height: 100%;
+      background: #ff1717;
+    }
+
+    .notes {
+      color: #888;
+      margin-top: 14px;
+      font-size: 12px;
+      line-height: 1.5;
+    }
+
+    .clips {
       display: grid;
       grid-template-columns: repeat(2, 1fr);
       gap: 18px;
     }
 
-    .trick-card {
-      border: 1px solid rgba(255,255,255,.1);
-      background: rgba(15,15,15,.85);
-      padding: 25px;
-      transition: .25s;
-      position: relative;
-      overflow: hidden;
-    }
-
-    .trick-card:hover {
-      border-color: rgba(255,0,0,.55);
-      transform: translateY(-3px);
-    }
-
-    .trick-card::before {
-      content: "";
-      position: absolute;
-      left: 0;
-      top: 0;
-      width: 3px;
-      height: 100%;
-      background: #ff1a1a;
-    }
-
-    .trick-category {
-      color: #ff1a1a;
-      font-size: 9px;
-      font-weight: 900;
-      letter-spacing: 2px;
-      text-transform: uppercase;
-      margin-bottom: 10px;
-    }
-
-    .trick-name {
-      font-family: Georgia, "Times New Roman", serif;
-      font-size: 28px;
-      font-weight: 900;
-      text-transform: uppercase;
-      font-style: italic;
-      margin-bottom: 18px;
-    }
-
-    .confidence-row {
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      margin-bottom: 8px;
-    }
-
-    .confidence-label {
-      color: #777;
-      font-size: 9px;
-      font-weight: 900;
-      letter-spacing: 1.5px;
-      text-transform: uppercase;
-    }
-
-    .confidence-number {
-      font-family: Georgia, "Times New Roman", serif;
-      color: #ff1a1a;
-      font-size: 20px;
-      font-weight: 900;
-    }
-
-    .confidence-bar {
-      width: 100%;
-      height: 7px;
-      background: #242424;
-      overflow: hidden;
-    }
-
-    .confidence-fill {
-      height: 100%;
-      background: #ff1a1a;
-    }
-
-    .trick-notes {
-      color: #888;
-      font-size: 12px;
-      line-height: 1.5;
-      margin-top: 18px;
-    }
-
-    .session-count {
-      margin-top: 18px;
-      padding-top: 14px;
-      border-top: 1px solid rgba(255,255,255,.07);
-      color: #666;
-      font-size: 9px;
-      font-weight: 900;
-      letter-spacing: 1.5px;
-      text-transform: uppercase;
-    }
-
-    /* VIDEOS */
-
-    .clips {
-      display: grid;
-      grid-template-columns: repeat(2, 1fr);
-      gap: 20px;
-    }
-
     .clip {
-      border: 1px solid rgba(255,255,255,.1);
-      background: #0e0e0e;
+      border: 1px solid #292929;
+      background: #090909;
       overflow: hidden;
     }
 
-    .clip video {
-      width: 100%;
-      aspect-ratio: 16 / 10;
-      object-fit: cover;
+    video {
       display: block;
-      background: #000;
+      width: 100%;
+      aspect-ratio: 16 / 9;
+      background: black;
     }
 
     .clip-info {
-      padding: 18px;
+      padding: 15px;
     }
 
     .clip-trick {
-      color: #ff1a1a;
-      font-size: 9px;
-      font-weight: 900;
-      letter-spacing: 1.5px;
-      text-transform: uppercase;
+      font-family: Georgia, serif;
+      font-size: 20px;
       margin-bottom: 6px;
     }
 
-    .clip-confidence {
-      font-family: Georgia, "Times New Roman", serif;
-      font-size: 24px;
-      font-weight: 900;
-      font-style: italic;
-    }
-
-    .clip-date {
-      color: #666;
-      font-size: 9px;
+    .clip-meta {
+      color: #777;
+      font-size: 10px;
       font-weight: 900;
       letter-spacing: 1px;
-      margin-top: 8px;
     }
 
-    /* EMPTY */
-
-    .message {
-      border: 1px solid rgba(255,255,255,.1);
-      padding: 50px 25px;
+    .empty {
+      border: 1px dashed #333;
+      color: #666;
+      padding: 35px;
       text-align: center;
-      color: #777;
-      background: rgba(15,15,15,.8);
-      grid-column: 1 / -1;
-    }
-
-    .message strong {
-      display: block;
-      font-family: Georgia, "Times New Roman", serif;
-      color: #fff;
-      font-size: 28px;
-      font-style: italic;
-      margin-bottom: 10px;
-    }
-
-    .message p {
       font-size: 12px;
-    }
-
-    .loading {
-      text-align: center;
-      padding: 80px 20px;
-      color: #777;
-      font-size: 11px;
-      font-weight: 900;
-      letter-spacing: 2px;
-    }
-
-    /* FOOTER */
-
-    footer {
-      border-top: 1px solid rgba(255,255,255,.08);
-      padding: 30px 6%;
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      color: #555;
-      font-size: 9px;
-      font-weight: 900;
-      letter-spacing: 1.5px;
-      text-transform: uppercase;
-    }
-
-    footer span {
-      color: #ff1a1a;
+      letter-spacing: 1px;
     }
 
     @media (max-width: 700px) {
 
-      nav {
-        height: 72px;
-        padding: 0 5%;
+      .nav {
+        padding: 0 15px;
       }
 
-      .logo {
-        font-size: 19px;
-      }
-
-      .nav-links {
-        gap: 12px;
-      }
-
-      .nav-links a {
-        font-size: 9px;
-      }
-
-      main {
-        width: 92%;
-        padding: 45px 0 70px;
-      }
-
-      .profile-hero {
-        padding: 28px 22px;
-      }
-
-      .profile-top {
-        align-items: flex-start;
+      .profile-header {
         flex-direction: column;
-      }
-
-      .avatar {
-        width: 85px;
-        height: 85px;
-      }
-
-      .profile-info h1 {
-        font-size: 48px;
+        align-items: flex-start;
+        padding: 25px;
       }
 
       .stats {
         grid-template-columns: 1fr;
-        gap: 20px;
-      }
-
-      .stat,
-      .stat:not(:first-child) {
-        padding: 0 0 20px;
-        border-right: none;
-        border-bottom: 1px solid rgba(255,255,255,.1);
-      }
-
-      .stat:last-child {
-        border-bottom: none;
       }
 
       .tricks,
@@ -544,935 +328,529 @@
         grid-template-columns: 1fr;
       }
 
-      .section-title {
-        align-items: flex-start;
-        flex-direction: column;
-        gap: 5px;
-      }
-
-      footer {
-        flex-direction: column;
-        gap: 10px;
-        text-align: center;
+      .avatar {
+        width: 115px;
+        height: 115px;
       }
     }
+
   </style>
 </head>
 
 <body>
 
-<div class="page">
+<header>
 
-  <nav>
+  <nav class="nav">
 
-    <!-- CURRENT HOMEPAGE -->
     <a href="./index.html" class="logo">
       Y2K<span>SK8</span>DOCU
     </a>
 
     <div class="nav-links">
       <a href="./explore.html">EXPLORE</a>
-      <a href="./auth.html">ACCOUNT</a>
+      <a href="./dashboard.html">ARCHIVE</a>
+      <a href="./account.html">ACCOUNT</a>
     </div>
 
   </nav>
 
-  <main>
+</header>
 
-    <a href="./explore.html" class="back">
-      ← BACK TO EXPLORE
-    </a>
+<main>
 
-    <div id="loading" class="loading">
-      LOADING SKATER...
-    </div>
+  <div id="profileHeader" class="profile-header">
+    Loading profile...
+  </div>
 
-    <section id="profileContent" style="display:none;">
+  <div id="stats" class="stats"></div>
 
-      <!-- PROFILE HERO -->
+  <section>
 
-      <div class="profile-hero">
+    <h2 class="section-title">
+      PUBLIC TRICKS.
+    </h2>
 
-        <div class="profile-top">
+    <div id="tricks" class="tricks"></div>
 
-          <div class="avatar" id="avatar">
+  </section>
 
-            <div
-              class="avatar-placeholder"
-              id="avatarPlaceholder"
-            >
-              SK8
-            </div>
+  <section>
 
-          </div>
+    <h2 class="section-title">
+      PUBLIC CLIPS.
+    </h2>
 
-          <div class="profile-info">
+    <div id="clips" class="clips"></div>
 
-            <div class="profile-label">
-              SKATER PROFILE
-            </div>
+  </section>
 
-            <h1 id="displayName">
-              SKATER
-            </h1>
-
-            <div
-              class="username"
-              id="username"
-            >
-              @username
-            </div>
-
-            <div
-              class="bio"
-              id="bio"
-            ></div>
-
-          </div>
-
-        </div>
-
-        <div class="stats">
-
-          <div class="stat">
-
-            <div
-              class="stat-number"
-              id="trickCount"
-            >
-              0
-            </div>
-
-            <div class="stat-label">
-              Public Tricks
-            </div>
-
-          </div>
-
-          <div class="stat">
-
-            <div
-              class="stat-number"
-              id="sessionCount"
-            >
-              0
-            </div>
-
-            <div class="stat-label">
-              Sessions Logged
-            </div>
-
-          </div>
-
-          <div class="stat">
-
-            <div
-              class="stat-number"
-              id="averageConfidence"
-            >
-              —
-            </div>
-
-            <div class="stat-label">
-              Average Confidence
-            </div>
-
-          </div>
-
-        </div>
-
-      </div>
-
-      <!-- PUBLIC TRICKS -->
-
-      <section class="section">
-
-        <div class="section-title">
-
-          <h2>
-            Public Tricks.
-          </h2>
-
-          <span>
-            PROGRESSION ARCHIVE
-          </span>
-
-        </div>
-
-        <div
-          id="tricksContainer"
-          class="tricks"
-        ></div>
-
-      </section>
-
-      <!-- PUBLIC CLIPS -->
-
-      <section class="section">
-
-        <div class="section-title">
-
-          <h2>
-            Public Clips.
-          </h2>
-
-          <span>
-            SKATE FOOTAGE
-          </span>
-
-        </div>
-
-        <div
-          id="clipsContainer"
-          class="clips"
-        ></div>
-
-      </section>
-
-    </section>
-
-    <div
-      id="errorMessage"
-      class="message"
-      style="display:none;"
-    >
-
-      <strong>
-        SKATER NOT FOUND.
-      </strong>
-
-      <p>
-        This profile doesn't exist or isn't available.
-      </p>
-
-    </div>
-
-  </main>
-
-  <footer>
-
-    <div>
-      Y2KSK8DOCU
-      <span>●</span>
-      SKATE. DOCUMENT. PROGRESS.
-    </div>
-
-    <div>
-      PUBLIC ARCHIVE
-    </div>
-
-  </footer>
-
-</div>
+</main>
 
 <script>
 
   const client = window.supabaseClient;
 
-  const loading =
-    document.getElementById("loading");
+  const params =
+    new URLSearchParams(window.location.search);
 
-  const profileContent =
-    document.getElementById("profileContent");
+  const username =
+    params.get("username");
 
-  const errorMessage =
-    document.getElementById("errorMessage");
+  const profileHeader =
+    document.getElementById("profileHeader");
 
-  const displayName =
-    document.getElementById("displayName");
+  const statsBox =
+    document.getElementById("stats");
 
-  const usernameElement =
-    document.getElementById("username");
+  const tricksBox =
+    document.getElementById("tricks");
 
-  const bio =
-    document.getElementById("bio");
+  const clipsBox =
+    document.getElementById("clips");
 
-  const avatar =
-    document.getElementById("avatar");
+  function escapeHtml(value) {
 
-  const avatarPlaceholder =
-    document.getElementById("avatarPlaceholder");
-
-  const trickCount =
-    document.getElementById("trickCount");
-
-  const sessionCount =
-    document.getElementById("sessionCount");
-
-  const averageConfidence =
-    document.getElementById("averageConfidence");
-
-  const tricksContainer =
-    document.getElementById("tricksContainer");
-
-  const clipsContainer =
-    document.getElementById("clipsContainer");
-
-
-  function escapeHTML(value) {
-
-    if (
-      value === null ||
-      value === undefined
-    ) {
-      return "";
-    }
-
-    return String(value)
+    return String(value || "")
       .replace(/&/g, "&amp;")
       .replace(/</g, "&lt;")
       .replace(/>/g, "&gt;")
       .replace(/"/g, "&quot;")
       .replace(/'/g, "&#039;");
-
   }
 
+  function formatDate(date) {
+
+    return new Date(date).toLocaleDateString(
+      undefined,
+      {
+        year: "numeric",
+        month: "short",
+        day: "numeric"
+      }
+    );
+  }
 
   async function loadProfile() {
 
-    try {
+    if (!username) {
 
-      const params =
-        new URLSearchParams(
-          window.location.search
-        );
+      profileHeader.innerHTML =
+        "<strong>PROFILE NOT FOUND.</strong>";
 
-      const username =
-        params.get("username");
+      return;
+    }
 
-      if (!username) {
-        throw new Error(
-          "No username provided."
-        );
-      }
+    const {
+      data: profile,
+      error: profileError
+    } = await client
+      .from("profiles")
+      .select(`
+        id,
+        username,
+        display_name,
+        bio,
+        avatar_url
+      `)
+      .eq("username", username)
+      .single();
 
+    if (profileError || !profile) {
 
-      /*
-        PROFILE
-      */
+      profileHeader.innerHTML =
+        "<strong>SKATER NOT FOUND.</strong>";
 
-      const {
-        data: profile,
-        error: profileError
-      } = await client
-        .from("profiles")
-        .select(`
-          id,
-          username,
-          display_name,
-          bio,
-          avatar_url
-        `)
-        .eq("username", username)
-        .single();
+      return;
+    }
 
+    /*
+     * Current logged-in user
+     */
+    const {
+      data: { user }
+    } = await client.auth.getUser();
 
-      if (
-        profileError ||
-        !profile
-      ) {
-        throw new Error(
-          "Profile not found."
-        );
-      }
+    const isOwner =
+      user && user.id === profile.id;
 
+    const displayName =
+      profile.display_name ||
+      profile.username;
 
-      /*
-        PROFILE INFO
-      */
+    const initial =
+      profile.username
+        ? profile.username.charAt(0).toUpperCase()
+        : "?";
 
-      displayName.textContent =
-        profile.display_name ||
-        profile.username;
+    const avatar =
+      profile.avatar_url
+        ? `
+          <div class="avatar">
+            <img
+              src="${escapeHtml(profile.avatar_url)}"
+              alt="${escapeHtml(displayName)}"
+            >
+          </div>
+        `
+        : `
+          <div class="avatar">
+            <div class="avatar-letter">
+              ${escapeHtml(initial)}
+            </div>
+          </div>
+        `;
 
-      usernameElement.textContent =
-        "@" + profile.username;
+    profileHeader.innerHTML = `
 
+      ${avatar}
 
-      if (profile.bio) {
+      <div class="profile-info">
 
-        bio.textContent =
-          profile.bio;
+        <div class="profile-label">
+          SKATER PROFILE
+        </div>
 
-      } else {
+        <h1>
+          ${escapeHtml(displayName)}
+        </h1>
 
-        bio.style.display =
-          "none";
+        <div class="username">
+          @${escapeHtml(profile.username)}
+        </div>
 
-      }
+        ${
+          profile.bio
+            ? `
+              <div class="bio">
+                ${escapeHtml(profile.bio)}
+              </div>
+            `
+            : ""
+        }
 
+        ${
+          isOwner
+            ? `
+              <a
+                href="./account.html"
+                class="edit-profile"
+              >
+                EDIT PROFILE
+              </a>
+            `
+            : ""
+        }
 
-      /*
-        AVATAR
-      */
+      </div>
+    `;
 
-      if (profile.avatar_url) {
+    /*
+     * Public tricks
+     */
+    const {
+      data: tricks,
+      error: tricksError
+    } = await client
+      .from("tricks")
+      .select(`
+        id,
+        name,
+        category,
+        confidence,
+        notes,
+        created_at
+      `)
+      .eq("user_id", profile.id)
+      .eq("visibility", "public")
+      .order("created_at", {
+        ascending: false
+      });
 
-        const img =
-          document.createElement("img");
+    if (tricksError) {
+      console.error(tricksError);
+    }
 
-        img.src =
-          profile.avatar_url;
+    const publicTricks =
+      tricks || [];
 
-        img.alt =
-          profile.display_name ||
-          profile.username;
+    /*
+     * Sessions
+     */
+    let sessions = [];
 
-        img.onerror = function() {
-
-          img.remove();
-
-          avatarPlaceholder.style.display =
-            "flex";
-
-        };
-
-        avatarPlaceholder.style.display =
-          "none";
-
-        avatar.appendChild(img);
-
-      } else {
-
-        avatarPlaceholder.textContent =
-          (
-            profile.display_name ||
-            profile.username
-          )
-          .substring(0, 2)
-          .toUpperCase();
-
-      }
-
-
-      /*
-        PUBLIC TRICKS
-      */
-
-      const {
-        data: tricks,
-        error: tricksError
-      } = await client
-        .from("tricks")
-        .select(`
-          id,
-          name,
-          category,
-          confidence,
-          notes,
-          created_at
-        `)
-        .eq("user_id", profile.id)
-        .eq("visibility", "public")
-        .order("created_at", {
-          ascending: false
-        });
-
-
-      if (tricksError) {
-        throw tricksError;
-      }
-
-
-      const publicTricks =
-        tricks || [];
-
+    if (publicTricks.length) {
 
       const trickIds =
         publicTricks.map(
           trick => trick.id
         );
 
+      const {
+        data: sessionData
+      } = await client
+        .from("sessions")
+        .select(`
+          id,
+          trick_id,
+          confidence,
+          created_at
+        `)
+        .in("trick_id", trickIds)
+        .order("created_at", {
+          ascending: true
+        });
 
-      /*
-        SESSIONS
-      */
+      sessions =
+        sessionData || [];
+    }
 
-      let sessions = [];
+    /*
+     * Stats
+     */
+    const totalSessions =
+      sessions.length;
 
-      if (trickIds.length > 0) {
-
-        const {
-          data: sessionData,
-          error: sessionError
-        } = await client
-          .from("sessions")
-          .select(`
-            id,
-            trick_id,
-            confidence,
-            created_at
-          `)
-          .in(
-            "trick_id",
-            trickIds
-          )
-          .order("created_at", {
-            ascending: true
-          });
-
-
-        if (sessionError) {
-          throw sessionError;
-        }
-
-        sessions =
-          sessionData || [];
-
-      }
-
-
-      /*
-        STATS
-      */
-
-      trickCount.textContent =
-        publicTricks.length;
-
-      sessionCount.textContent =
-        sessions.length;
-
-
-      if (
-        publicTricks.length > 0
-      ) {
-
-        const values =
-          publicTricks
-            .map(
-              trick =>
-                Number(trick.confidence)
-            )
-            .filter(
-              value =>
-                !isNaN(value)
-            );
-
-        if (values.length > 0) {
-
-          const average =
-            values.reduce(
-              (total, value) =>
-                total + value,
+    const averageConfidence =
+      publicTricks.length
+        ? (
+            publicTricks.reduce(
+              (sum, trick) =>
+                sum + Number(trick.confidence || 0),
               0
-            ) / values.length;
+            ) / publicTricks.length
+          ).toFixed(1)
+        : "0.0";
 
-          averageConfidence.textContent =
-            average.toFixed(1) +
-            "/5";
+    statsBox.innerHTML = `
 
-        }
+      <div class="stat">
 
-      }
+        <div class="stat-number">
+          ${publicTricks.length}
+        </div>
 
+        <div class="stat-label">
+          PUBLIC TRICKS
+        </div>
 
-      /*
-        SESSION COUNTS
-      */
+      </div>
 
-      const sessionsByTrick = {};
+      <div class="stat">
 
-      sessions.forEach(session => {
+        <div class="stat-number">
+          ${totalSessions}
+        </div>
 
-        if (
-          !sessionsByTrick[
-            session.trick_id
-          ]
-        ) {
+        <div class="stat-label">
+          SESSIONS
+        </div>
 
-          sessionsByTrick[
-            session.trick_id
-          ] = [];
+      </div>
 
-        }
+      <div class="stat">
 
-        sessionsByTrick[
-          session.trick_id
-        ].push(session);
+        <div class="stat-number">
+          ${averageConfidence}
+        </div>
 
-      });
+        <div class="stat-label">
+          AVG CONFIDENCE
+        </div>
 
+      </div>
+    `;
 
-      /*
-        TRICK CARDS
-      */
+    /*
+     * Trick cards
+     */
+    if (!publicTricks.length) {
 
-      if (
-        publicTricks.length === 0
-      ) {
+      tricksBox.innerHTML = `
+        <div class="empty">
+          NO PUBLIC TRICKS YET.
+        </div>
+      `;
 
-        tricksContainer.innerHTML = `
+    } else {
 
-          <div class="message">
+      tricksBox.innerHTML =
+        publicTricks.map(trick => {
 
-            <strong>
-              NO PUBLIC TRICKS YET.
-            </strong>
+          const confidence =
+            Number(trick.confidence || 1);
 
-            <p>
-              This skater hasn't made
-              any tricks public.
-            </p>
+          return `
 
-          </div>
+            <article class="trick">
 
-        `;
-
-      } else {
-
-        tricksContainer.innerHTML =
-          publicTricks.map(
-            trick => {
-
-              const confidence =
-                Number(
-                  trick.confidence
-                ) || 1;
-
-              const percent =
-                Math.max(
-                  0,
-                  Math.min(
-                    5,
-                    confidence
-                  )
-                ) * 20;
-
-              const trickSessions =
-                sessionsByTrick[
-                  trick.id
-                ] || [];
-
-              return `
-
-                <article
-                  class="trick-card"
-                >
-
-                  <div
-                    class="trick-category"
-                  >
-                    ${escapeHTML(
-                      trick.category ||
-                      "SKATE"
-                    )}
-                  </div>
-
-                  <div
-                    class="trick-name"
-                  >
-                    ${escapeHTML(
-                      trick.name
-                    )}
-                  </div>
-
-                  <div
-                    class="confidence-row"
-                  >
-
-                    <div
-                      class="confidence-label"
-                    >
-                      Confidence
+              ${
+                trick.category
+                  ? `
+                    <div class="trick-category">
+                      ${escapeHtml(trick.category)}
                     </div>
+                  `
+                  : ""
+              }
 
-                    <div
-                      class="confidence-number"
-                    >
-                      ${confidence}/5
+              <div class="trick-name">
+                ${escapeHtml(trick.name)}
+              </div>
+
+              <div class="confidence-label">
+
+                <span>
+                  CONFIDENCE
+                </span>
+
+                <span>
+                  ${confidence}/5
+                </span>
+
+              </div>
+
+              <div class="bar">
+                <div
+                  class="bar-fill"
+                  style="width:${confidence * 20}%"
+                ></div>
+              </div>
+
+              ${
+                trick.notes
+                  ? `
+                    <div class="notes">
+                      ${escapeHtml(trick.notes)}
                     </div>
+                  `
+                  : ""
+              }
 
-                  </div>
+            </article>
+          `;
 
-                  <div
-                    class="confidence-bar"
-                  >
+        }).join("");
+    }
 
-                    <div
-                      class="confidence-fill"
-                      style="width:${percent}%"
-                    ></div>
+    /*
+     * Public videos
+     */
+    const sessionIds =
+      sessions.map(
+        session => session.id
+      );
 
-                  </div>
+    let videos = [];
 
-                  ${
-                    trick.notes
-                      ? `
-                        <div
-                          class="trick-notes"
-                        >
-                          ${escapeHTML(
-                            trick.notes
-                          )}
-                        </div>
-                      `
-                      : ""
-                  }
+    if (sessionIds.length) {
 
-                  <div
-                    class="session-count"
-                  >
-                    ${trickSessions.length}
-                    ${
-                      trickSessions.length === 1
-                        ? "SESSION"
-                        : "SESSIONS"
-                    }
-                    LOGGED
-                  </div>
+      const {
+        data: videoData,
+        error: videoError
+      } = await client
+        .from("videos")
+        .select(`
+          id,
+          session_id,
+          storage_path,
+          visibility,
+          created_at
+        `)
+        .eq("user_id", profile.id)
+        .eq("visibility", "public")
+        .in("session_id", sessionIds)
+        .order("created_at", {
+          ascending: false
+        });
 
-                </article>
-
-              `;
-
-            }
-          ).join("");
-
+      if (videoError) {
+        console.error(videoError);
       }
 
+      videos =
+        videoData || [];
+    }
 
-      /*
-        PUBLIC VIDEOS
+    /*
+     * Clip cards
+     */
+    if (!videos.length) {
 
-        Get public video records
-        belonging to sessions for
-        this skater's public tricks.
-      */
+      clipsBox.innerHTML = `
+        <div class="empty">
+          NO PUBLIC CLIPS YET.
+        </div>
+      `;
 
-      let publicVideos = [];
+    } else {
 
-      if (trickIds.length > 0) {
-
-        const {
-          data: videoData,
-          error: videoError
-        } = await client
-          .from("videos")
-          .select(`
-            id,
-            session_id,
-            storage_path,
-            visibility,
-            created_at
-          `)
-          .eq(
-            "user_id",
-            profile.id
-          )
-          .eq(
-            "visibility",
-            "public"
-          )
-          .in(
-            "session_id",
-            sessions.map(
-              session => session.id
-            )
-          )
-          .order("created_at", {
-            ascending: false
-          });
-
-
-        if (videoError) {
-          console.error(
-            "Video loading error:",
-            videoError
-          );
-        } else {
-
-          publicVideos =
-            videoData || [];
-
-        }
-
-      }
-
-
-      /*
-        PUBLIC VIDEO CARDS
-      */
-
-      if (
-        publicVideos.length === 0
-      ) {
-
-        clipsContainer.innerHTML = `
-
-          <div class="message">
-
-            <strong>
-              NO PUBLIC CLIPS YET.
-            </strong>
-
-            <p>
-              Public skate footage will
-              appear here.
-            </p>
-
-          </div>
-
-        `;
-
-      } else {
-
-        clipsContainer.innerHTML = "";
-
-        for (
-          const video
-          of publicVideos
-        ) {
+      clipsBox.innerHTML =
+        videos.map(video => {
 
           const session =
             sessions.find(
               item =>
-                item.id ===
-                video.session_id
+                item.id === video.session_id
             );
-
-
-          if (!session) {
-            continue;
-          }
-
 
           const trick =
-            publicTricks.find(
-              item =>
-                item.id ===
-                session.trick_id
-            );
-
-
-          if (!trick) {
-            continue;
-          }
-
+            session
+              ? publicTricks.find(
+                  item =>
+                    item.id === session.trick_id
+                )
+              : null;
 
           const {
-            data
-          } = client
-            .storage
-            .from("public-videos")
-            .getPublicUrl(
-              video.storage_path
-            );
+            data: publicUrlData
+          } =
+            client.storage
+              .from("public-videos")
+              .getPublicUrl(
+                video.storage_path
+              );
 
+          const publicUrl =
+            publicUrlData.publicUrl;
 
-          if (
-            !data ||
-            !data.publicUrl
-          ) {
-            continue;
-          }
+          return `
 
+            <article class="clip">
 
-          const clip =
-            document.createElement(
-              "article"
-            );
+              <video
+                controls
+                preload="metadata"
+                src="${escapeHtml(publicUrl)}"
+              ></video>
 
-          clip.className =
-            "clip";
+              <div class="clip-info">
 
+                <div class="clip-trick">
+                  ${escapeHtml(
+                    trick?.name || "SKATE CLIP"
+                  )}
+                </div>
 
-          const player =
-            document.createElement(
-              "video"
-            );
+                <div class="clip-meta">
 
-          player.src =
-            data.publicUrl;
+                  CONFIDENCE
+                  ${session?.confidence || "—"}/5
 
-          player.controls =
-            true;
+                  &nbsp; // &nbsp;
 
-          player.playsInline =
-            true;
+                  ${formatDate(video.created_at)}
 
-          player.preload =
-            "metadata";
+                </div>
 
+              </div>
 
-          const info =
-            document.createElement(
-              "div"
-            );
-
-          info.className =
-            "clip-info";
-
-
-          info.innerHTML = `
-
-            <div class="clip-trick">
-              ${escapeHTML(
-                trick.name
-              )}
-            </div>
-
-            <div class="clip-confidence">
-              ${escapeHTML(
-                session.confidence
-              )}/5 CONFIDENCE
-            </div>
-
-            <div class="clip-date">
-              ${escapeHTML(
-                new Date(
-                  video.created_at
-                ).toLocaleDateString()
-              )}
-            </div>
-
+            </article>
           `;
 
-
-          clip.appendChild(
-            player
-          );
-
-          clip.appendChild(
-            info
-          );
-
-          clipsContainer.appendChild(
-            clip
-          );
-
-        }
-
-      }
-
-
-      /*
-        SHOW PAGE
-      */
-
-      loading.style.display =
-        "none";
-
-      profileContent.style.display =
-        "block";
-
-
-    } catch (error) {
-
-      console.error(
-        "Profile error:",
-        error
-      );
-
-      loading.style.display =
-        "none";
-
-      errorMessage.style.display =
-        "block";
-
+        }).join("");
     }
-
   }
-
 
   loadProfile();
 
