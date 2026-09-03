@@ -342,7 +342,6 @@
 <script src="supabase.js"></script>
 
 <script>
-
   const loginBox = document.getElementById("loginBox");
   const signupBox = document.getElementById("signupBox");
 
@@ -359,31 +358,47 @@
   const signupButton = document.getElementById("signupButton");
 
 
-  // CREATE BUTTON
-  createButton.addEventListener("click", function() {
+  // --------------------------------
+  // SWITCH TO CREATE ACCOUNT
+  // --------------------------------
 
+  createButton.addEventListener("click", function () {
     loginBox.classList.add("hidden");
     signupBox.classList.remove("hidden");
 
-    window.scrollTo(0, 0);
+    loginMessage.className = "message";
+    loginMessage.textContent = "";
 
+    signupMessage.className = "message";
+    signupMessage.textContent = "";
+
+    window.scrollTo(0, 0);
   });
 
 
-  // SIGN IN BUTTON
-  loginButtonSwitch.addEventListener("click", function() {
+  // --------------------------------
+  // SWITCH TO SIGN IN
+  // --------------------------------
 
+  loginButtonSwitch.addEventListener("click", function () {
     signupBox.classList.add("hidden");
     loginBox.classList.remove("hidden");
 
-    window.scrollTo(0, 0);
+    signupMessage.className = "message";
+    signupMessage.textContent = "";
 
+    loginMessage.className = "message";
+    loginMessage.textContent = "";
+
+    window.scrollTo(0, 0);
   });
 
 
+  // --------------------------------
   // LOGIN
-  loginForm.addEventListener("submit", async function(event) {
+  // --------------------------------
 
+  loginForm.addEventListener("submit", async function (event) {
     event.preventDefault();
 
     loginMessage.className = "message";
@@ -399,37 +414,97 @@
       document.getElementById("loginPassword").value;
 
 
-    const { data, error } =
-      await supabaseClient.auth.signInWithPassword({
-        email,
-        password
-      });
+    try {
+
+      if (!supabaseClient) {
+        throw new Error(
+          "Supabase is not connected. Check your supabase.js file."
+        );
+      }
 
 
-    if (error) {
+      const { data, error } =
+        await supabaseClient.auth.signInWithPassword({
+          email: email,
+          password: password
+        });
 
-      loginMessage.textContent = error.message;
+
+      if (error) {
+        throw error;
+      }
+
+
+      if (data && data.session) {
+
+        // Make sure the user's profile exists.
+        const username =
+          data.user.user_metadata?.username;
+
+
+        if (username) {
+
+          const { data: existingProfile } =
+            await supabaseClient
+              .from("profiles")
+              .select("id")
+              .eq("id", data.user.id)
+              .maybeSingle();
+
+
+          if (!existingProfile) {
+
+            const { error: profileError } =
+              await supabaseClient
+                .from("profiles")
+                .insert({
+                  id: data.user.id,
+                  username: username
+                });
+
+
+            if (profileError) {
+              console.error(
+                "Profile creation error:",
+                profileError
+              );
+            }
+          }
+        }
+
+
+        window.location.href = "dashboard.html";
+        return;
+      }
+
+
+      throw new Error(
+        "Login succeeded, but no session was created."
+      );
+
+    } catch (error) {
+
+      console.error("LOGIN ERROR:", error);
+
+      loginMessage.textContent =
+        error.message || "Something went wrong while signing in.";
+
       loginMessage.className = "message error";
+
+    } finally {
 
       loginButton.disabled = false;
       loginButton.textContent = "ENTER ARCHIVE →";
 
-      return;
     }
-
-
-    if (data.session) {
-
-      window.location.href = "dashboard.html";
-
-    }
-
   });
 
 
+  // --------------------------------
   // CREATE ACCOUNT
-  signupForm.addEventListener("submit", async function(event) {
+  // --------------------------------
 
+  signupForm.addEventListener("submit", async function (event) {
     event.preventDefault();
 
     signupMessage.className = "message";
@@ -449,35 +524,74 @@
       document.getElementById("signupPassword").value;
 
 
-    const { data, error } =
-      await supabaseClient.auth.signUp({
+    try {
 
-        email: email,
+      // Check that Supabase loaded.
+      if (!supabaseClient) {
+        throw new Error(
+          "Supabase is not connected. Check your supabase.js file."
+        );
+      }
 
-        password: password,
 
-        options: {
-          data: {
-            username: username
+      // Basic username validation.
+      if (username.length < 3) {
+        throw new Error(
+          "Username must be at least 3 characters."
+        );
+      }
+
+
+      // Create Supabase account.
+      const { data, error } =
+        await supabaseClient.auth.signUp({
+          email: email,
+          password: password,
+
+          options: {
+            data: {
+              username: username
+            }
           }
-        }
-
-      });
+        });
 
 
-    if (error) {
-
-      signupMessage.textContent = error.message;
-      signupMessage.className = "message error";
-
-      signupButton.disabled = false;
-      signupButton.textContent = "CREATE ACCOUNT →";
-
-      return;
-    }
+      console.log("SIGNUP RESPONSE:", data);
 
 
-    if (data.session && data.user) {
+      if (error) {
+        throw error;
+      }
+
+
+      if (!data || !data.user) {
+        throw new Error(
+          "Account creation did not return a user. Please try again."
+        );
+      }
+
+
+      // --------------------------------
+      // EMAIL CONFIRMATION IS ON
+      // --------------------------------
+
+      if (!data.session) {
+
+        signupMessage.textContent =
+          "ACCOUNT CREATED. Check your email to verify your account, then sign in.";
+
+        signupMessage.className =
+          "message success";
+
+        signupForm.reset();
+
+        return;
+      }
+
+
+      // --------------------------------
+      // IF EMAIL CONFIRMATION IS OFF
+      // --------------------------------
 
       const { error: profileError } =
         await supabaseClient
@@ -490,31 +604,37 @@
 
       if (profileError) {
 
-        console.error(profileError);
+        console.error(
+          "PROFILE CREATION ERROR:",
+          profileError
+        );
 
+        // Don't stop the user from entering the dashboard.
+        // The dashboard/login process can repair the profile later.
       }
 
 
       window.location.href = "dashboard.html";
 
-      return;
+
+    } catch (error) {
+
+      console.error("SIGNUP ERROR:", error);
+
+      signupMessage.textContent =
+        error.message ||
+        "Something went wrong while creating your account.";
+
+      signupMessage.className =
+        "message error";
+
+    } finally {
+
+      signupButton.disabled = false;
+      signupButton.textContent =
+        "CREATE ACCOUNT →";
+
     }
 
-
-    signupMessage.textContent =
-      "ACCOUNT CREATED. Check your email to verify your account, then sign in.";
-
-    signupMessage.className = "message success";
-
-    signupForm.reset();
-
-    signupButton.disabled = false;
-    signupButton.textContent = "CREATE ACCOUNT →";
-
   });
-
 </script>
-
-</body>
-</html>
-```
