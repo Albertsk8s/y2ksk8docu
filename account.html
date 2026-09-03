@@ -1,0 +1,974 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+  <title>ACCOUNT // Y2K SK8 DOCU</title>
+
+  <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+  <script src="./supabase.js"></script>
+
+  <style>
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    body {
+      background:
+        radial-gradient(circle at top right, rgba(255, 0, 0, 0.14), transparent 30%),
+        radial-gradient(circle at bottom left, rgba(255, 0, 0, 0.08), transparent 30%),
+        #050505;
+      color: #f2f2f2;
+      font-family: Arial, Helvetica, sans-serif;
+      min-height: 100vh;
+    }
+
+    body::before {
+      content: "";
+      position: fixed;
+      inset: 0;
+      pointer-events: none;
+      opacity: 0.07;
+      background-image:
+        linear-gradient(rgba(255,255,255,.15) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(255,255,255,.15) 1px, transparent 1px);
+      background-size: 4px 4px;
+    }
+
+    header {
+      position: sticky;
+      top: 0;
+      z-index: 20;
+      border-bottom: 1px solid rgba(255, 0, 0, 0.3);
+      background: rgba(5, 5, 5, 0.92);
+      backdrop-filter: blur(14px);
+    }
+
+    .nav {
+      max-width: 1200px;
+      margin: auto;
+      min-height: 76px;
+      padding: 0 24px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 20px;
+    }
+
+    .logo {
+      text-decoration: none;
+      color: white;
+      font-family: Georgia, "Times New Roman", serif;
+      font-weight: 900;
+      font-size: 24px;
+      letter-spacing: -1px;
+      text-shadow: 2px 2px 0 #b00000;
+    }
+
+    .logo span {
+      color: #ff1717;
+    }
+
+    .nav-links {
+      display: flex;
+      gap: 10px;
+      align-items: center;
+    }
+
+    .nav-links a,
+    .nav-links button {
+      color: #ddd;
+      text-decoration: none;
+      background: transparent;
+      border: 1px solid transparent;
+      padding: 10px 13px;
+      font-size: 12px;
+      font-weight: 800;
+      letter-spacing: 1.5px;
+      cursor: pointer;
+    }
+
+    .nav-links a:hover,
+    .nav-links button:hover {
+      color: #ff2020;
+      border-color: rgba(255, 0, 0, .35);
+    }
+
+    main {
+      width: min(900px, calc(100% - 32px));
+      margin: 60px auto 100px;
+    }
+
+    .eyebrow {
+      color: #ff2020;
+      font-size: 11px;
+      font-weight: 900;
+      letter-spacing: 4px;
+      margin-bottom: 10px;
+    }
+
+    h1 {
+      font-family: Georgia, "Times New Roman", serif;
+      font-size: clamp(42px, 8vw, 76px);
+      line-height: .9;
+      text-transform: uppercase;
+      letter-spacing: -4px;
+      margin-bottom: 40px;
+      text-shadow: 4px 4px 0 rgba(255, 0, 0, .35);
+    }
+
+    .panel {
+      border: 1px solid rgba(255, 0, 0, .35);
+      background: linear-gradient(
+        145deg,
+        rgba(255, 0, 0, .08),
+        rgba(255, 255, 255, .025)
+      );
+      padding: 32px;
+      box-shadow: 0 20px 70px rgba(0,0,0,.35);
+    }
+
+    .avatar-section {
+      display: flex;
+      align-items: center;
+      gap: 28px;
+      padding-bottom: 32px;
+      margin-bottom: 32px;
+      border-bottom: 1px solid rgba(255,255,255,.1);
+    }
+
+    .avatar {
+      width: 130px;
+      height: 130px;
+      flex-shrink: 0;
+      border-radius: 50%;
+      border: 3px solid #ff1515;
+      background:
+        radial-gradient(circle, #222 0%, #0b0b0b 70%);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      overflow: hidden;
+      box-shadow: 0 0 35px rgba(255,0,0,.15);
+    }
+
+    .avatar img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+    }
+
+    .avatar-placeholder {
+      font-family: Georgia, serif;
+      color: #ff2020;
+      font-size: 45px;
+      font-weight: 900;
+    }
+
+    .avatar-controls h2 {
+      font-family: Georgia, serif;
+      text-transform: uppercase;
+      font-size: 24px;
+      margin-bottom: 8px;
+    }
+
+    .avatar-controls p {
+      color: #999;
+      font-size: 13px;
+      line-height: 1.6;
+      margin-bottom: 15px;
+    }
+
+    .file-label {
+      display: inline-block;
+      background: #ff1717;
+      color: white;
+      padding: 12px 16px;
+      font-size: 11px;
+      font-weight: 900;
+      letter-spacing: 1px;
+      cursor: pointer;
+    }
+
+    .file-label:hover {
+      background: #d60000;
+    }
+
+    input[type="file"] {
+      display: none;
+    }
+
+    .remove-avatar {
+      margin-left: 8px;
+      padding: 11px 15px;
+      background: transparent;
+      color: #aaa;
+      border: 1px solid #444;
+      font-size: 11px;
+      font-weight: 900;
+      cursor: pointer;
+    }
+
+    .remove-avatar:hover {
+      color: white;
+      border-color: #777;
+    }
+
+    .form-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 22px;
+    }
+
+    .field {
+      display: flex;
+      flex-direction: column;
+      gap: 8px;
+    }
+
+    .field.full {
+      grid-column: 1 / -1;
+    }
+
+    label {
+      color: #ff2020;
+      font-size: 11px;
+      font-weight: 900;
+      letter-spacing: 2px;
+      text-transform: uppercase;
+    }
+
+    input,
+    textarea {
+      width: 100%;
+      border: 1px solid #333;
+      background: #090909;
+      color: white;
+      padding: 15px;
+      outline: none;
+      font-family: Arial, sans-serif;
+      font-size: 14px;
+    }
+
+    input:focus,
+    textarea:focus {
+      border-color: #ff1717;
+      box-shadow: 0 0 0 2px rgba(255,0,0,.08);
+    }
+
+    textarea {
+      min-height: 130px;
+      resize: vertical;
+      line-height: 1.6;
+    }
+
+    .username-help {
+      color: #777;
+      font-size: 11px;
+    }
+
+    .actions {
+      margin-top: 30px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      gap: 15px;
+    }
+
+    .save-button {
+      border: none;
+      background: #ff1717;
+      color: white;
+      padding: 15px 24px;
+      font-size: 12px;
+      font-weight: 900;
+      letter-spacing: 2px;
+      cursor: pointer;
+    }
+
+    .save-button:hover {
+      background: #d80000;
+    }
+
+    .view-button {
+      text-decoration: none;
+      border: 1px solid #444;
+      color: #ddd;
+      padding: 14px 20px;
+      font-size: 11px;
+      font-weight: 900;
+      letter-spacing: 1.5px;
+    }
+
+    .view-button:hover {
+      border-color: #ff1717;
+      color: #ff1717;
+    }
+
+    .status {
+      margin-top: 20px;
+      padding: 14px;
+      display: none;
+      font-size: 12px;
+      line-height: 1.5;
+    }
+
+    .status.success {
+      display: block;
+      border: 1px solid rgba(0,255,120,.25);
+      background: rgba(0,255,120,.05);
+      color: #7dffad;
+    }
+
+    .status.error {
+      display: block;
+      border: 1px solid rgba(255,0,0,.35);
+      background: rgba(255,0,0,.06);
+      color: #ff7777;
+    }
+
+    .danger {
+      margin-top: 35px;
+      padding-top: 30px;
+      border-top: 1px solid rgba(255,255,255,.1);
+    }
+
+    .danger h3 {
+      color: #ff2020;
+      font-family: Georgia, serif;
+      text-transform: uppercase;
+      margin-bottom: 8px;
+    }
+
+    .danger p {
+      color: #777;
+      font-size: 12px;
+      line-height: 1.6;
+    }
+
+    @media (max-width: 700px) {
+      .nav {
+        padding: 0 15px;
+      }
+
+      .nav-links a {
+        padding: 8px;
+        font-size: 10px;
+      }
+
+      main {
+        margin-top: 35px;
+      }
+
+      .panel {
+        padding: 20px;
+      }
+
+      .avatar-section {
+        flex-direction: column;
+        align-items: flex-start;
+      }
+
+      .form-grid {
+        grid-template-columns: 1fr;
+      }
+
+      .field.full {
+        grid-column: auto;
+      }
+
+      .actions {
+        flex-direction: column-reverse;
+        align-items: stretch;
+      }
+
+      .save-button,
+      .view-button {
+        text-align: center;
+        width: 100%;
+      }
+    }
+  </style>
+</head>
+
+<body>
+
+<header>
+  <nav class="nav">
+
+    <a href="./index.html" class="logo">
+      Y2K<span>SK8</span>DOCU
+    </a>
+
+    <div class="nav-links">
+      <a href="./explore.html">EXPLORE</a>
+      <a href="./dashboard.html">ARCHIVE</a>
+      <button id="signOutButton">SIGN OUT</button>
+    </div>
+
+  </nav>
+</header>
+
+<main>
+
+  <div class="eyebrow">SKATER SETTINGS</div>
+
+  <h1>EDIT<br>PROFILE.</h1>
+
+  <section class="panel">
+
+    <div class="avatar-section">
+
+      <div class="avatar" id="avatarPreview">
+        <div class="avatar-placeholder" id="avatarPlaceholder">
+          ?
+        </div>
+      </div>
+
+      <div class="avatar-controls">
+
+        <h2>Your Avatar</h2>
+
+        <p>
+          This image appears on your public skater profile.
+          JPG, PNG, or WEBP. Keep it under 5MB.
+        </p>
+
+        <label class="file-label" for="avatarInput">
+          CHANGE AVATAR
+        </label>
+
+        <input
+          type="file"
+          id="avatarInput"
+          accept="image/png,image/jpeg,image/webp"
+        >
+
+        <button
+          class="remove-avatar"
+          id="removeAvatarButton"
+          type="button"
+        >
+          REMOVE
+        </button>
+
+      </div>
+
+    </div>
+
+    <div class="form-grid">
+
+      <div class="field">
+
+        <label for="username">
+          Username
+        </label>
+
+        <input
+          id="username"
+          type="text"
+          maxlength="30"
+          autocomplete="username"
+          placeholder="yourusername"
+        >
+
+        <div class="username-help">
+          3–30 characters. Letters, numbers, underscores, and hyphens.
+        </div>
+
+      </div>
+
+      <div class="field">
+
+        <label for="displayName">
+          Display Name
+        </label>
+
+        <input
+          id="displayName"
+          type="text"
+          maxlength="50"
+          placeholder="Your Name"
+        >
+
+      </div>
+
+      <div class="field full">
+
+        <label for="bio">
+          Bio
+        </label>
+
+        <textarea
+          id="bio"
+          maxlength="300"
+          placeholder="Tell people what you skate..."
+        ></textarea>
+
+      </div>
+
+    </div>
+
+    <div class="actions">
+
+      <a
+        id="viewProfileButton"
+        class="view-button"
+        href="#"
+      >
+        VIEW PUBLIC PROFILE
+      </a>
+
+      <button
+        id="saveButton"
+        class="save-button"
+        type="button"
+      >
+        SAVE PROFILE
+      </button>
+
+    </div>
+
+    <div id="status" class="status"></div>
+
+    <div class="danger">
+
+      <h3>Profile Visibility</h3>
+
+      <p>
+        Your username, display name, avatar, and bio can appear
+        on your public skater profile. Private tricks and private
+        videos remain hidden from other users.
+      </p>
+
+    </div>
+
+  </section>
+
+</main>
+
+<script>
+
+  const client = window.supabaseClient;
+
+  let currentUser = null;
+  let currentProfile = null;
+  let avatarFile = null;
+  let removeAvatar = false;
+
+  const usernameInput = document.getElementById("username");
+  const displayNameInput = document.getElementById("displayName");
+  const bioInput = document.getElementById("bio");
+  const avatarInput = document.getElementById("avatarInput");
+  const avatarPreview = document.getElementById("avatarPreview");
+  const avatarPlaceholder = document.getElementById("avatarPlaceholder");
+  const saveButton = document.getElementById("saveButton");
+  const statusBox = document.getElementById("status");
+  const viewProfileButton = document.getElementById("viewProfileButton");
+  const removeAvatarButton = document.getElementById("removeAvatarButton");
+
+  function showStatus(message, type) {
+    statusBox.textContent = message;
+    statusBox.className = "status " + type;
+  }
+
+  function clearStatus() {
+    statusBox.textContent = "";
+    statusBox.className = "status";
+  }
+
+  function validUsername(username) {
+    return /^[a-zA-Z0-9_-]{3,30}$/.test(username);
+  }
+
+  function showAvatar(url, username) {
+
+    avatarPlaceholder.style.display = "none";
+
+    let image = avatarPreview.querySelector("img");
+
+    if (!image) {
+      image = document.createElement("img");
+      avatarPreview.appendChild(image);
+    }
+
+    image.src = url;
+    image.alt = username + " avatar";
+  }
+
+  function showPlaceholder(username) {
+
+    const image = avatarPreview.querySelector("img");
+
+    if (image) {
+      image.remove();
+    }
+
+    avatarPlaceholder.style.display = "block";
+
+    avatarPlaceholder.textContent =
+      username
+        ? username.charAt(0).toUpperCase()
+        : "?";
+  }
+
+  async function loadAccount() {
+
+    const {
+      data: { session },
+      error
+    } = await client.auth.getSession();
+
+    if (error || !session) {
+      window.location.href = "./auth.html";
+      return;
+    }
+
+    currentUser = session.user;
+
+    const { data: profile, error: profileError } =
+      await client
+        .from("profiles")
+        .select(`
+          id,
+          username,
+          display_name,
+          bio,
+          avatar_url
+        `)
+        .eq("id", currentUser.id)
+        .single();
+
+    if (profileError || !profile) {
+      showStatus(
+        "Could not load your profile.",
+        "error"
+      );
+      return;
+    }
+
+    currentProfile = profile;
+
+    usernameInput.value = profile.username || "";
+    displayNameInput.value = profile.display_name || "";
+    bioInput.value = profile.bio || "";
+
+    if (profile.avatar_url) {
+      showAvatar(
+        profile.avatar_url,
+        profile.username
+      );
+    } else {
+      showPlaceholder(profile.username);
+    }
+
+    updateProfileLink();
+  }
+
+  function updateProfileLink() {
+
+    const username =
+      usernameInput.value.trim();
+
+    if (!username) {
+      viewProfileButton.href = "#";
+      return;
+    }
+
+    viewProfileButton.href =
+      "./profile.html?username=" +
+      encodeURIComponent(username);
+  }
+
+  usernameInput.addEventListener(
+    "input",
+    updateProfileLink
+  );
+
+  avatarInput.addEventListener(
+    "change",
+    () => {
+
+      const file = avatarInput.files[0];
+
+      if (!file) {
+        return;
+      }
+
+      if (file.size > 5 * 1024 * 1024) {
+
+        showStatus(
+          "Avatar must be smaller than 5MB.",
+          "error"
+        );
+
+        avatarInput.value = "";
+        avatarFile = null;
+
+        return;
+      }
+
+      if (![
+        "image/jpeg",
+        "image/png",
+        "image/webp"
+      ].includes(file.type)) {
+
+        showStatus(
+          "Please choose a JPG, PNG, or WEBP image.",
+          "error"
+        );
+
+        avatarInput.value = "";
+        avatarFile = null;
+
+        return;
+      }
+
+      avatarFile = file;
+      removeAvatar = false;
+
+      const previewUrl =
+        URL.createObjectURL(file);
+
+      showAvatar(
+        previewUrl,
+        currentProfile?.username || "user"
+      );
+
+      clearStatus();
+    }
+  );
+
+  removeAvatarButton.addEventListener(
+    "click",
+    () => {
+
+      avatarFile = null;
+      avatarInput.value = "";
+      removeAvatar = true;
+
+      showPlaceholder(
+        usernameInput.value.trim()
+      );
+
+      showStatus(
+        "Avatar will be removed when you save.",
+        "success"
+      );
+    }
+  );
+
+  async function uploadAvatar(file) {
+
+    const extension =
+      file.name.split(".").pop().toLowerCase();
+
+    const path =
+      currentUser.id +
+      "/" +
+      crypto.randomUUID() +
+      "." +
+      extension;
+
+    const { error } =
+      await client.storage
+        .from("avatars")
+        .upload(path, file, {
+          cacheControl: "3600",
+          upsert: false
+        });
+
+    if (error) {
+      throw error;
+    }
+
+    const {
+      data: publicUrlData
+    } =
+      client.storage
+        .from("avatars")
+        .getPublicUrl(path);
+
+    return {
+      path,
+      url: publicUrlData.publicUrl
+    };
+  }
+
+  async function saveProfile() {
+
+    clearStatus();
+
+    const username =
+      usernameInput.value.trim();
+
+    const displayName =
+      displayNameInput.value.trim();
+
+    const bio =
+      bioInput.value.trim();
+
+    if (!validUsername(username)) {
+
+      showStatus(
+        "Username must be 3–30 characters and can only contain letters, numbers, underscores, and hyphens.",
+        "error"
+      );
+
+      usernameInput.focus();
+
+      return;
+    }
+
+    if (displayName.length > 50) {
+
+      showStatus(
+        "Display name is too long.",
+        "error"
+      );
+
+      return;
+    }
+
+    if (bio.length > 300) {
+
+      showStatus(
+        "Bio is too long.",
+        "error"
+      );
+
+      return;
+    }
+
+    saveButton.disabled = true;
+    saveButton.textContent = "SAVING...";
+
+    try {
+
+      let avatarUrl =
+        currentProfile.avatar_url;
+
+      /*
+       * Upload new avatar
+       */
+      if (avatarFile) {
+
+        const uploaded =
+          await uploadAvatar(avatarFile);
+
+        avatarUrl = uploaded.url;
+      }
+
+      /*
+       * Remove avatar
+       */
+      if (removeAvatar) {
+        avatarUrl = null;
+      }
+
+      /*
+       * Update profile
+       */
+      const { data, error } =
+        await client
+          .from("profiles")
+          .update({
+            username,
+            display_name:
+              displayName || null,
+            bio:
+              bio || null,
+            avatar_url:
+              avatarUrl
+          })
+          .eq("id", currentUser.id)
+          .select()
+          .single();
+
+      if (error) {
+
+        if (
+          error.code === "23505" ||
+          error.message.toLowerCase().includes("username")
+        ) {
+          throw new Error(
+            "That username is already taken."
+          );
+        }
+
+        throw error;
+      }
+
+      currentProfile = data;
+
+      avatarFile = null;
+      removeAvatar = false;
+      avatarInput.value = "";
+
+      if (data.avatar_url) {
+
+        showAvatar(
+          data.avatar_url,
+          data.username
+        );
+
+      } else {
+
+        showPlaceholder(
+          data.username
+        );
+
+      }
+
+      updateProfileLink();
+
+      showStatus(
+        "PROFILE SAVED.",
+        "success"
+      );
+
+    } catch (error) {
+
+      console.error(error);
+
+      showStatus(
+        error.message ||
+        "Could not save your profile.",
+        "error"
+      );
+
+    } finally {
+
+      saveButton.disabled = false;
+      saveButton.textContent = "SAVE PROFILE";
+    }
+  }
+
+  saveButton.addEventListener(
+    "click",
+    saveProfile
+  );
+
+  document
+    .getElementById("signOutButton")
+    .addEventListener(
+      "click",
+      async () => {
+
+        await client.auth.signOut();
+
+        window.location.href =
+          "./auth.html";
+      }
+    );
+
+  loadAccount();
+
+</script>
+
+</body>
+</html>
