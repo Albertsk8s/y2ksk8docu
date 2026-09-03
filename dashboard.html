@@ -1,5 +1,4 @@
 <!DOCTYPE html>
-
 <html lang="en">
 <head>
   <meta charset="UTF-8">
@@ -262,13 +261,13 @@
     }
 
     .card-actions {
-      display: flex;
+      display: grid;
+      grid-template-columns: 1.4fr 1fr 1fr;
       gap: 8px;
     }
 
     .card-btn {
-      flex: 1;
-      padding: 11px;
+      padding: 11px 6px;
       border: 1px solid #333;
       background: transparent;
       color: #888;
@@ -281,6 +280,16 @@
     .card-btn:hover {
       border-color: #e00000;
       color: #e00000;
+    }
+
+    .open-btn {
+      border-color: #e00000;
+      color: #e00000;
+    }
+
+    .open-btn:hover {
+      background: #e00000;
+      color: white;
     }
 
     .delete-btn:hover {
@@ -500,9 +509,12 @@
       main {
         padding: 45px 0;
       }
+
+      .card-actions {
+        grid-template-columns: 1fr;
+      }
     }
   </style>
-
 </head>
 
 <body>
@@ -513,12 +525,9 @@
   <div class="header-right">
     <span class="user-name" id="userName">LOADING...</span>
 
-```
-<button class="logout" id="logoutBtn">
-  SIGN OUT
-</button>
-```
-
+    <button class="logout" id="logoutBtn">
+      SIGN OUT
+    </button>
   </div>
 </header>
 
@@ -526,54 +535,49 @@
 
   <section class="top">
 
-```
-<div>
-  <div class="eyebrow">PERSONAL SKATE ARCHIVE</div>
-  <h1>MY TRICKS.</h1>
-</div>
+    <div>
+      <div class="eyebrow">PERSONAL SKATE ARCHIVE</div>
+      <h1>MY TRICKS.</h1>
+    </div>
 
-<button class="add-btn" id="openAddBtn">
-  + ADD TRICK
-</button>
-```
+    <button class="add-btn" id="openAddBtn">
+      + ADD TRICK
+    </button>
 
   </section>
 
   <section class="stats">
 
-```
-<div class="stat">
-  <div class="stat-label">Tricks Logged</div>
-  <div class="stat-value" id="trickCount">0</div>
-</div>
+    <div class="stat">
+      <div class="stat-label">Tricks Logged</div>
+      <div class="stat-value" id="trickCount">0</div>
+    </div>
 
-<div class="stat">
-  <div class="stat-label">Average Confidence</div>
-  <div class="stat-value" id="averageConfidence">—</div>
-</div>
+    <div class="stat">
+      <div class="stat-label">Average Confidence</div>
+      <div class="stat-value" id="averageConfidence">—</div>
+    </div>
 
-<div class="stat">
-  <div class="stat-label">Public Tricks</div>
-  <div class="stat-value" id="publicCount">0</div>
-</div>
-```
+    <div class="stat">
+      <div class="stat-label">Public Tricks</div>
+      <div class="stat-value" id="publicCount">0</div>
+    </div>
 
   </section>
 
   <section>
 
-```
-<div class="archive-title">
-  <h2>Archive</h2>
-  <span id="archiveStatus">LOADING...</span>
-</div>
+    <div class="archive-title">
+      <h2>Archive</h2>
+      <span id="archiveStatus">LOADING...</span>
+    </div>
 
-<div id="trickContainer"></div>
-```
+    <div id="trickContainer"></div>
 
   </section>
 
 </main>
+
 
 <!-- ADD / EDIT MODAL -->
 
@@ -581,138 +585,182 @@
 
   <div class="modal-box">
 
-```
-<div class="modal-head">
-  <h2 id="modalTitle">Add Trick</h2>
+    <div class="modal-head">
 
-  <button class="close" id="closeModal">
-    ×
-  </button>
-</div>
+      <h2 id="modalTitle">Add Trick</h2>
 
-
-<div class="modal-message" id="modalMessage"></div>
-
-
-<form id="trickForm">
-
-  <div class="field">
-    <label for="trickName">Trick Name</label>
-
-    <input
-      type="text"
-      id="trickName"
-      placeholder="Kickflip"
-      required
-    >
-  </div>
-
-
-  <div class="field">
-    <label for="category">Category</label>
-
-    <select id="category">
-
-      <option value="Flatground">Flatground</option>
-      <option value="Grinds">Grinds</option>
-      <option value="Slides">Slides</option>
-      <option value="Manuals">Manuals</option>
-      <option value="Transition">Transition</option>
-      <option value="Freestyle">Freestyle</option>
-      <option value="Other">Other</option>
-
-    </select>
-  </div>
-
-
-  <div class="field">
-
-    <label>Confidence</label>
-
-    <div class="confidence-options">
-
-      <label class="confidence-option">
-        <input type="radio" name="confidence" value="1">
-        <span>1</span>
-      </label>
-
-      <label class="confidence-option">
-        <input type="radio" name="confidence" value="2">
-        <span>2</span>
-      </label>
-
-      <label class="confidence-option">
-        <input type="radio" name="confidence" value="3" checked>
-        <span>3</span>
-      </label>
-
-      <label class="confidence-option">
-        <input type="radio" name="confidence" value="4">
-        <span>4</span>
-      </label>
-
-      <label class="confidence-option">
-        <input type="radio" name="confidence" value="5">
-        <span>5</span>
-      </label>
+      <button class="close" id="closeModal">
+        ×
+      </button>
 
     </div>
 
-  </div>
+    <div class="modal-message" id="modalMessage"></div>
 
+    <form id="trickForm">
 
-  <div class="field">
+      <div class="field">
 
-    <label for="notes">Notes</label>
+        <label for="trickName">
+          Trick Name
+        </label>
 
-    <textarea
-      id="notes"
-      placeholder="What are you working on?"
-    ></textarea>
-
-  </div>
-
-
-  <div class="field">
-
-    <label>Visibility</label>
-
-    <div class="visibility-options">
-
-      <label class="visibility-option">
         <input
-          type="radio"
-          name="visibility"
-          value="private"
-          checked
+          type="text"
+          id="trickName"
+          placeholder="Kickflip"
+          required
         >
-        <span>PRIVATE</span>
-      </label>
 
-      <label class="visibility-option">
-        <input
-          type="radio"
-          name="visibility"
-          value="public"
-        >
-        <span>PUBLIC</span>
-      </label>
-
-    </div>
-
-  </div>
+      </div>
 
 
-  <button class="save-btn" id="saveBtn" type="submit">
-    SAVE TRICK →
-  </button>
+      <div class="field">
 
-</form>
-```
+        <label for="category">
+          Category
+        </label>
+
+        <select id="category">
+
+          <option value="Flatground">Flatground</option>
+          <option value="Grinds">Grinds</option>
+          <option value="Slides">Slides</option>
+          <option value="Manuals">Manuals</option>
+          <option value="Transition">Transition</option>
+          <option value="Freestyle">Freestyle</option>
+          <option value="Other">Other</option>
+
+        </select>
+
+      </div>
+
+
+      <div class="field">
+
+        <label>
+          Confidence
+        </label>
+
+        <div class="confidence-options">
+
+          <label class="confidence-option">
+            <input
+              type="radio"
+              name="confidence"
+              value="1"
+            >
+            <span>1</span>
+          </label>
+
+          <label class="confidence-option">
+            <input
+              type="radio"
+              name="confidence"
+              value="2"
+            >
+            <span>2</span>
+          </label>
+
+          <label class="confidence-option">
+            <input
+              type="radio"
+              name="confidence"
+              value="3"
+              checked
+            >
+            <span>3</span>
+          </label>
+
+          <label class="confidence-option">
+            <input
+              type="radio"
+              name="confidence"
+              value="4"
+            >
+            <span>4</span>
+          </label>
+
+          <label class="confidence-option">
+            <input
+              type="radio"
+              name="confidence"
+              value="5"
+            >
+            <span>5</span>
+          </label>
+
+        </div>
+
+      </div>
+
+
+      <div class="field">
+
+        <label for="notes">
+          Notes
+        </label>
+
+        <textarea
+          id="notes"
+          placeholder="What are you working on?"
+        ></textarea>
+
+      </div>
+
+
+      <div class="field">
+
+        <label>
+          Visibility
+        </label>
+
+        <div class="visibility-options">
+
+          <label class="visibility-option">
+
+            <input
+              type="radio"
+              name="visibility"
+              value="private"
+              checked
+            >
+
+            <span>PRIVATE</span>
+
+          </label>
+
+          <label class="visibility-option">
+
+            <input
+              type="radio"
+              name="visibility"
+              value="public"
+            >
+
+            <span>PUBLIC</span>
+
+          </label>
+
+        </div>
+
+      </div>
+
+
+      <button
+        class="save-btn"
+        id="saveBtn"
+        type="submit"
+      >
+        SAVE TRICK →
+      </button>
+
+    </form>
 
   </div>
 
 </div>
+
 
 <!-- SUPABASE -->
 
@@ -780,8 +828,10 @@
 
   async function checkUser() {
 
-    const { data, error } =
-      await window.supabaseClient.auth.getSession();
+    const {
+      data,
+      error
+    } = await window.supabaseClient.auth.getSession();
 
     if (error) {
 
@@ -804,7 +854,6 @@
       currentUser.email?.split("@")[0] ||
       "SKATER";
 
-
     await loadTricks();
 
   }
@@ -819,12 +868,16 @@
     trickContainer.innerHTML =
       '<div class="empty"><p>LOADING ARCHIVE...</p></div>';
 
-    const { data, error } =
-      await window.supabaseClient
-        .from("tricks")
-        .select("*")
-        .eq("user_id", currentUser.id)
-        .order("created_at", { ascending: false });
+    const {
+      data,
+      error
+    } = await window.supabaseClient
+      .from("tricks")
+      .select("*")
+      .eq("user_id", currentUser.id)
+      .order("created_at", {
+        ascending: false
+      });
 
 
     if (error) {
@@ -832,9 +885,12 @@
       console.error(error);
 
       trickContainer.innerHTML =
-        '<div class="empty"><h3>DATABASE ERROR.</h3><p>' +
+        '<div class="empty">' +
+        '<h3>DATABASE ERROR.</h3>' +
+        '<p>' +
         escapeHtml(error.message) +
-        '</p></div>';
+        '</p>' +
+        '</div>';
 
       return;
     }
@@ -878,7 +934,8 @@
 
     const total =
       tricks.reduce(
-        (sum, trick) => sum + Number(trick.confidence),
+        (sum, trick) =>
+          sum + Number(trick.confidence),
         0
       );
 
@@ -886,30 +943,38 @@
     document.getElementById("averageConfidence").textContent =
       (total / tricks.length).toFixed(1);
 
-
   }
 
 
   // ============================================
-  // RENDER
+  // RENDER TRICKS
   // ============================================
 
   function renderTricks(tricks) {
 
     document.getElementById("archiveStatus").textContent =
-      tricks.length + (tricks.length === 1 ? " TRICK" : " TRICKS");
+      tricks.length +
+      (tricks.length === 1 ? " TRICK" : " TRICKS");
 
 
     if (tricks.length === 0) {
 
       trickContainer.innerHTML = `
         <div class="empty">
-          <h3>NOTHING HERE YET.</h3>
-          <p>Start documenting your progression.</p>
 
-          <button class="add-btn" onclick="openAddModal()">
+          <h3>NOTHING HERE YET.</h3>
+
+          <p>
+            Start documenting your progression.
+          </p>
+
+          <button
+            class="add-btn"
+            onclick="openAddModal()"
+          >
             + ADD YOUR FIRST TRICK
           </button>
+
         </div>
       `;
 
@@ -926,7 +991,6 @@
         const confidence =
           Number(trick.confidence);
 
-
         const width =
           confidence * 20;
 
@@ -938,11 +1002,17 @@
             <div class="card-top">
 
               <span class="category">
-                ${escapeHtml(trick.category || "OTHER")}
+                ${escapeHtml(
+                  trick.category || "OTHER"
+                )}
               </span>
 
               <span class="visibility">
-                ${trick.visibility === "public" ? "PUBLIC" : "PRIVATE"}
+                ${
+                  trick.visibility === "public"
+                    ? "PUBLIC"
+                    : "PRIVATE"
+                }
               </span>
 
             </div>
@@ -954,25 +1024,43 @@
 
 
             <p class="notes">
-              ${escapeHtml(trick.notes || "No notes yet.")}
+              ${escapeHtml(
+                trick.notes || "No notes yet."
+              )}
             </p>
 
 
             <div class="confidence-label">
-              <span>CONFIDENCE</span>
-              <span>${confidence}/5</span>
+
+              <span>
+                CONFIDENCE
+              </span>
+
+              <span>
+                ${confidence}/5
+              </span>
+
             </div>
 
 
             <div class="confidence-bar">
+
               <div
                 class="confidence-fill"
                 style="width:${width}%"
               ></div>
+
             </div>
 
 
             <div class="card-actions">
+
+              <button
+                class="card-btn open-btn"
+                onclick="openTrick('${trick.id}')"
+              >
+                OPEN / CLIPS
+              </button>
 
               <button
                 class="card-btn"
@@ -1000,33 +1088,56 @@
 
 
   // ============================================
+  // OPEN TRICK / CLIPS
+  // ============================================
+
+  function openTrick(id) {
+
+    window.location.href =
+      "trick.html?id=" +
+      encodeURIComponent(id);
+
+  }
+
+
+  // ============================================
   // OPEN ADD MODAL
   // ============================================
 
   document
     .getElementById("openAddBtn")
-    .addEventListener("click", openAddModal);
+    .addEventListener(
+      "click",
+      openAddModal
+    );
 
 
   function openAddModal() {
 
     editingTrickId = null;
 
-    modalTitle.textContent = "ADD TRICK";
+    modalTitle.textContent =
+      "ADD TRICK";
 
-    saveBtn.textContent = "SAVE TRICK →";
+    saveBtn.textContent =
+      "SAVE TRICK →";
 
     trickForm.reset();
+
 
     document.querySelector(
       'input[name="confidence"][value="3"]'
     ).checked = true;
 
+
     document.querySelector(
       'input[name="visibility"][value="private"]'
     ).checked = true;
 
-    modalMessage.style.display = "none";
+
+    modalMessage.style.display =
+      "none";
+
 
     trickModal.classList.add("show");
 
@@ -1039,7 +1150,10 @@
 
   document
     .getElementById("closeModal")
-    .addEventListener("click", closeModal);
+    .addEventListener(
+      "click",
+      closeModal
+    );
 
 
   function closeModal() {
@@ -1049,82 +1163,104 @@
   }
 
 
-  trickModal.addEventListener("click", function (event) {
+  trickModal.addEventListener(
+    "click",
+    function (event) {
 
-    if (event.target === trickModal) {
+      if (event.target === trickModal) {
 
-      closeModal();
+        closeModal();
+
+      }
 
     }
-
-  });
+  );
 
 
   // ============================================
   // SAVE TRICK
   // ============================================
 
-  trickForm.addEventListener("submit", async function (event) {
+  trickForm.addEventListener(
+    "submit",
+    async function (event) {
 
-    event.preventDefault();
-
-
-    if (!currentUser) {
-
-      showModalMessage("You are not signed in.");
-
-      return;
-    }
+      event.preventDefault();
 
 
-    const name =
-      document.getElementById("trickName").value.trim();
+      if (!currentUser) {
 
-    const category =
-      document.getElementById("category").value;
+        showModalMessage(
+          "You are not signed in."
+        );
 
-    const notes =
-      document.getElementById("notes").value.trim();
+        return;
+      }
 
-    const confidence =
-      Number(
+
+      const name =
+        document
+          .getElementById("trickName")
+          .value
+          .trim();
+
+
+      const category =
+        document
+          .getElementById("category")
+          .value;
+
+
+      const notes =
+        document
+          .getElementById("notes")
+          .value
+          .trim();
+
+
+      const confidence =
+        Number(
+          document.querySelector(
+            'input[name="confidence"]:checked'
+          ).value
+        );
+
+
+      const visibility =
         document.querySelector(
-          'input[name="confidence"]:checked'
-        ).value
-      );
-
-    const visibility =
-      document.querySelector(
-        'input[name="visibility"]:checked'
-      ).value;
+          'input[name="visibility"]:checked'
+        ).value;
 
 
-    if (!name) {
+      if (!name) {
 
-      showModalMessage("Enter a trick name.");
+        showModalMessage(
+          "Enter a trick name."
+        );
 
-      return;
-    }
-
-
-    saveBtn.disabled = true;
-
-    saveBtn.textContent =
-      editingTrickId
-        ? "UPDATING..."
-        : "SAVING...";
+        return;
+      }
 
 
-    try {
+      saveBtn.disabled = true;
 
-      // ========================================
-      // EDIT
-      // ========================================
+      saveBtn.textContent =
+        editingTrickId
+          ? "UPDATING..."
+          : "SAVING...";
 
-      if (editingTrickId) {
 
-        const { error } =
-          await window.supabaseClient
+      try {
+
+        // ======================================
+        // EDIT
+        // ======================================
+
+        if (editingTrickId) {
+
+          const {
+            error
+          } = await window.supabaseClient
             .from("tricks")
             .update({
 
@@ -1133,32 +1269,36 @@
               confidence,
               notes,
               visibility,
-              updated_at: new Date().toISOString()
+              updated_at:
+                new Date().toISOString()
 
             })
             .eq("id", editingTrickId)
             .eq("user_id", currentUser.id);
 
 
-        if (error) {
-          throw error;
+          if (error) {
+            throw error;
+          }
+
         }
 
 
-      }
+        // ======================================
+        // CREATE
+        // ======================================
 
-      // ========================================
-      // CREATE
-      // ========================================
+        else {
 
-      else {
-
-        const { data: trick, error } =
-          await window.supabaseClient
+          const {
+            data: trick,
+            error
+          } = await window.supabaseClient
             .from("tricks")
             .insert({
 
-              user_id: currentUser.id,
+              user_id:
+                currentUser.id,
 
               name,
 
@@ -1175,23 +1315,26 @@
             .single();
 
 
-        if (error) {
-          throw error;
-        }
+          if (error) {
+            throw error;
+          }
 
 
-        // --------------------------------------
-        // CREATE FIRST SESSION
-        // --------------------------------------
+          // ------------------------------------
+          // CREATE FIRST SESSION
+          // ------------------------------------
 
-        const { error: sessionError } =
-          await window.supabaseClient
+          const {
+            error: sessionError
+          } = await window.supabaseClient
             .from("sessions")
             .insert({
 
-              trick_id: trick.id,
+              trick_id:
+                trick.id,
 
-              user_id: currentUser.id,
+              user_id:
+                currentUser.id,
 
               confidence,
 
@@ -1200,44 +1343,46 @@
             });
 
 
-        if (sessionError) {
+          if (sessionError) {
 
-          console.error(
-            "SESSION ERROR:",
-            sessionError
-          );
+            console.error(
+              "SESSION ERROR:",
+              sessionError
+            );
+
+          }
 
         }
 
+
+        closeModal();
+
+        await loadTricks();
+
+
+      } catch (error) {
+
+        console.error(error);
+
+        showModalMessage(
+          error.message ||
+          "Could not save trick."
+        );
+
+
+      } finally {
+
+        saveBtn.disabled = false;
+
+        saveBtn.textContent =
+          editingTrickId
+            ? "UPDATE TRICK →"
+            : "SAVE TRICK →";
+
       }
 
-
-      closeModal();
-
-      await loadTricks();
-
-
-    } catch (error) {
-
-      console.error(error);
-
-      showModalMessage(
-        error.message || "Could not save trick."
-      );
-
-
-    } finally {
-
-      saveBtn.disabled = false;
-
-      saveBtn.textContent =
-        editingTrickId
-          ? "UPDATE TRICK →"
-          : "SAVE TRICK →";
-
     }
-
-  });
+  );
 
 
   // ============================================
@@ -1246,13 +1391,15 @@
 
   async function editTrick(id) {
 
-    const { data, error } =
-      await window.supabaseClient
-        .from("tricks")
-        .select("*")
-        .eq("id", id)
-        .eq("user_id", currentUser.id)
-        .single();
+    const {
+      data,
+      error
+    } = await window.supabaseClient
+      .from("tricks")
+      .select("*")
+      .eq("id", id)
+      .eq("user_id", currentUser.id)
+      .single();
 
 
     if (error) {
@@ -1265,9 +1412,11 @@
 
     editingTrickId = id;
 
-    modalTitle.textContent = "EDIT TRICK";
+    modalTitle.textContent =
+      "EDIT TRICK";
 
-    saveBtn.textContent = "UPDATE TRICK →";
+    saveBtn.textContent =
+      "UPDATE TRICK →";
 
 
     document.getElementById("trickName").value =
@@ -1292,7 +1441,9 @@
     ).checked = true;
 
 
-    modalMessage.style.display = "none";
+    modalMessage.style.display =
+      "none";
+
 
     trickModal.classList.add("show");
 
@@ -1316,12 +1467,13 @@
     }
 
 
-    const { error } =
-      await window.supabaseClient
-        .from("tricks")
-        .delete()
-        .eq("id", id)
-        .eq("user_id", currentUser.id);
+    const {
+      error
+    } = await window.supabaseClient
+      .from("tricks")
+      .delete()
+      .eq("id", id)
+      .eq("user_id", currentUser.id);
 
 
     if (error) {
@@ -1343,13 +1495,19 @@
 
   document
     .getElementById("logoutBtn")
-    .addEventListener("click", async function () {
+    .addEventListener(
+      "click",
+      async function () {
 
-      await window.supabaseClient.auth.signOut();
+        await window.supabaseClient
+          .auth
+          .signOut();
 
-      window.location.href = "auth.html";
+        window.location.href =
+          "auth.html";
 
-    });
+      }
+    );
 
 
   // ============================================
@@ -1358,9 +1516,11 @@
 
   function showModalMessage(text) {
 
-    modalMessage.textContent = text;
+    modalMessage.textContent =
+      text;
 
-    modalMessage.style.display = "block";
+    modalMessage.style.display =
+      "block";
 
   }
 
