@@ -1,11 +1,11 @@
+```html
 <!DOCTYPE html>
-
 <html lang="en">
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-  <title>y2ksk8docu — Enter</title>
+  <title>y2ksk8docu — Sign In</title>
 
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -22,173 +22,189 @@
     body {
       min-height: 100vh;
       background:
-        radial-gradient(circle at 20% 20%, rgba(229, 9, 20, 0.12), transparent 30%),
-        radial-gradient(circle at 80% 80%, rgba(229, 9, 20, 0.08), transparent 30%),
-        #080808;
-      color: #f5f5f5;
+        radial-gradient(circle at 20% 20%, rgba(229, 9, 20, 0.15), transparent 30%),
+        radial-gradient(circle at 80% 80%, rgba(229, 9, 20, 0.1), transparent 30%),
+        #050505;
+      color: #fff;
       font-family: "Inter", sans-serif;
       display: flex;
       align-items: center;
       justify-content: center;
       padding: 24px;
-      overflow-x: hidden;
     }
 
     body::before {
-      content: "SKATE • DOCUMENT • REFINE • REPEAT • ";
+      content: "";
       position: fixed;
-      top: 8%;
-      left: -10%;
-      width: 120%;
-      font-family: "Bebas Neue", sans-serif;
-      font-size: clamp(70px, 12vw, 180px);
-      color: rgba(255, 255, 255, 0.025);
-      white-space: nowrap;
-      transform: rotate(-7deg);
+      inset: 0;
       pointer-events: none;
+      opacity: 0.08;
+      background-image:
+        linear-gradient(rgba(255,255,255,.08) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(255,255,255,.08) 1px, transparent 1px);
+      background-size: 40px 40px;
     }
 
-    .page {
+    .auth-shell {
       width: 100%;
-      max-width: 480px;
+      max-width: 470px;
       position: relative;
       z-index: 2;
     }
 
     .brand {
       text-align: center;
-      margin-bottom: 28px;
+      margin-bottom: 30px;
+    }
+
+    .brand-mark {
+      width: 58px;
+      height: 58px;
+      margin: 0 auto 14px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      background: #e50914;
+      color: #050505;
+      font-family: "Creepster", cursive;
+      font-size: 35px;
+      transform: rotate(-5deg);
+      box-shadow: 7px 7px 0 #fff;
     }
 
     .brand-name {
       font-family: "Bebas Neue", sans-serif;
-      font-size: 52px;
-      letter-spacing: 3px;
-      line-height: 0.9;
+      font-size: 38px;
+      letter-spacing: 2px;
     }
 
-    .brand-name span {
-      color: #e50914;
-    }
-
-    .tagline {
-      margin-top: 10px;
-      font-family: "Permanent Marker", cursive;
+    .brand-sub {
       color: #888;
+      font-family: "Permanent Marker", cursive;
       font-size: 14px;
-      transform: rotate(-2deg);
+      margin-top: 4px;
     }
 
     .card {
-      background: rgba(18, 18, 18, 0.9);
+      background: rgba(15, 15, 15, 0.9);
       border: 1px solid #292929;
       border-radius: 24px;
-      padding: 32px;
-      box-shadow:
-        0 30px 80px rgba(0, 0, 0, 0.6),
-        0 0 40px rgba(229, 9, 20, 0.05);
+      padding: 34px;
+      box-shadow: 0 25px 80px rgba(0,0,0,.55);
+      backdrop-filter: blur(15px);
     }
 
-    .tabs {
-      display: grid;
-      grid-template-columns: 1fr 1fr;
-      background: #0b0b0b;
-      border-radius: 12px;
-      padding: 4px;
-      margin-bottom: 28px;
-    }
-
-    .tab {
-      border: 0;
-      background: transparent;
-      color: #777;
-      padding: 12px;
-      border-radius: 9px;
-      cursor: pointer;
-      font-family: "Inter", sans-serif;
-      font-weight: 800;
-      letter-spacing: 1px;
-      transition: 0.2s ease;
-    }
-
-    .tab.active {
-      background: #e50914;
-      color: white;
-    }
-
-    h1 {
+    .form-title {
       font-family: "Bebas Neue", sans-serif;
-      font-size: 42px;
+      font-size: 44px;
       letter-spacing: 1px;
       margin-bottom: 6px;
     }
 
-    .subtitle {
-      color: #777;
+    .form-subtitle {
+      color: #888;
       font-size: 14px;
-      margin-bottom: 26px;
+      line-height: 1.6;
+      margin-bottom: 28px;
     }
 
-    .field {
-      margin-bottom: 16px;
+    .form-group {
+      margin-bottom: 18px;
     }
 
     label {
       display: block;
+      color: #aaa;
       font-size: 11px;
       font-weight: 800;
       letter-spacing: 1.5px;
-      color: #aaa;
-      margin-bottom: 7px;
+      margin-bottom: 8px;
+      text-transform: uppercase;
     }
 
     input {
       width: 100%;
-      border: 1px solid #303030;
-      background: #0b0b0b;
-      color: white;
-      border-radius: 11px;
-      padding: 14px 15px;
-      font-family: "Inter", sans-serif;
+      padding: 15px 16px;
+      border: 1px solid #333;
+      border-radius: 12px;
+      background: #0a0a0a;
+      color: #fff;
       outline: none;
-      transition: 0.2s ease;
+      font-size: 15px;
+      transition: .2s ease;
     }
 
     input:focus {
       border-color: #e50914;
-      box-shadow: 0 0 0 3px rgba(229, 9, 20, 0.1);
+      box-shadow: 0 0 0 3px rgba(229, 9, 20, .12);
     }
 
-    .submit {
+    .primary-btn {
       width: 100%;
       border: 0;
+      border-radius: 12px;
+      padding: 16px;
       background: #e50914;
-      color: white;
-      border-radius: 11px;
-      padding: 15px;
-      margin-top: 8px;
-      font-family: "Inter", sans-serif;
-      font-weight: 900;
+      color: #fff;
+      font-family: "Bebas Neue", sans-serif;
+      font-size: 22px;
       letter-spacing: 1px;
       cursor: pointer;
-      transition: 0.2s ease;
+      transition: .2s ease;
+      margin-top: 4px;
     }
 
-    .submit:hover {
-      background: #ff1824;
-      transform: translateY(-1px);
+    .primary-btn:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 10px 30px rgba(229, 9, 20, .25);
     }
 
-    .submit:disabled {
-      opacity: 0.5;
+    .primary-btn:disabled {
+      opacity: .6;
       cursor: wait;
       transform: none;
     }
 
+    .switch-text {
+      text-align: center;
+      color: #777;
+      font-size: 13px;
+      margin-top: 22px;
+    }
+
+    .switch-link {
+      border: 0;
+      background: transparent;
+      color: #e50914;
+      font-family: "Inter", sans-serif;
+      font-weight: 800;
+      font-size: 13px;
+      cursor: pointer;
+      padding: 0;
+    }
+
+    .switch-link:hover {
+      text-decoration: underline;
+    }
+
+    .back-home {
+      display: block;
+      text-align: center;
+      margin-top: 22px;
+      color: #666;
+      text-decoration: none;
+      font-size: 12px;
+      transition: .2s ease;
+    }
+
+    .back-home:hover {
+      color: #fff;
+    }
+
     .message {
       display: none;
-      margin-top: 18px;
-      padding: 12px;
+      margin-bottom: 18px;
+      padding: 13px 15px;
       border-radius: 10px;
       font-size: 13px;
       line-height: 1.5;
@@ -196,227 +212,256 @@
 
     .message.error {
       display: block;
-      background: rgba(229, 9, 20, 0.1);
-      border: 1px solid rgba(229, 9, 20, 0.3);
-      color: #ff737b;
+      background: rgba(229, 9, 20, .1);
+      border: 1px solid rgba(229, 9, 20, .35);
+      color: #ff7278;
     }
 
     .message.success {
       display: block;
-      background: rgba(70, 180, 100, 0.1);
-      border: 1px solid rgba(70, 180, 100, 0.3);
-      color: #83d99a;
-    }
-
-    .back {
-      display: block;
-      text-align: center;
-      color: #666;
-      text-decoration: none;
-      margin-top: 22px;
-      font-size: 13px;
-      transition: 0.2s;
-    }
-
-    .back:hover {
-      color: white;
+      background: rgba(50, 205, 50, .08);
+      border: 1px solid rgba(50, 205, 50, .25);
+      color: #8be28b;
     }
 
     .hidden {
-      display: none;
+      display: none !important;
     }
 
-    @media (max-width: 500px) {
+    .skate-line {
+      width: 70px;
+      height: 4px;
+      background: #e50914;
+      margin: 0 0 24px;
+      transform: skewX(-25deg);
+    }
+
+    @media (max-width: 520px) {
       .card {
-        padding: 24px;
+        padding: 25px 20px;
+      }
+
+      .form-title {
+        font-size: 38px;
       }
 
       .brand-name {
-        font-size: 44px;
+        font-size: 32px;
       }
     }
   </style>
-
 </head>
 
 <body>
 
-  <main class="page">
+  <main class="auth-shell">
 
-```
-<div class="brand">
-  <div class="brand-name">
-    y2k<span>sk8</span>docu
-  </div>
-
-  <div class="tagline">
-    your skate archive starts here.
-  </div>
-</div>
-
-<section class="card">
-
-  <div class="tabs">
-    <button class="tab active" id="loginTab">
-      SIGN IN
-    </button>
-
-    <button class="tab" id="signupTab">
-      CREATE
-    </button>
-  </div>
-
-  <!-- LOGIN -->
-
-  <div id="loginForm">
-
-    <h1>WELCOME BACK.</h1>
-
-    <p class="subtitle">
-      Keep documenting. Keep progressing.
-    </p>
-
-    <div class="field">
-      <label>EMAIL</label>
-      <input
-        id="loginEmail"
-        type="email"
-        placeholder="you@email.com"
-        autocomplete="email"
-      >
+    <div class="brand">
+      <div class="brand-mark">Y</div>
+      <div class="brand-name">y2ksk8docu</div>
+      <div class="brand-sub">land it. film it. refine it.</div>
     </div>
 
-    <div class="field">
-      <label>PASSWORD</label>
-      <input
-        id="loginPassword"
-        type="password"
-        placeholder="••••••••"
-        autocomplete="current-password"
-      >
+    <div class="card">
+
+      <!-- LOGIN -->
+      <section id="loginSection">
+
+        <div class="form-title">SIGN IN.</div>
+        <div class="skate-line"></div>
+
+        <p class="form-subtitle">
+          Get back into your skate archive and keep progressing.
+        </p>
+
+        <div id="loginMessage" class="message"></div>
+
+        <form id="loginForm">
+
+          <div class="form-group">
+            <label for="loginEmail">Email</label>
+            <input
+              type="email"
+              id="loginEmail"
+              placeholder="you@email.com"
+              required
+            >
+          </div>
+
+          <div class="form-group">
+            <label for="loginPassword">Password</label>
+            <input
+              type="password"
+              id="loginPassword"
+              placeholder="••••••••"
+              required
+            >
+          </div>
+
+          <button type="submit" class="primary-btn" id="loginButton">
+            ENTER ARCHIVE →
+          </button>
+
+        </form>
+
+        <div class="switch-text">
+          Don't have an account?
+          <button
+            type="button"
+            class="switch-link"
+            id="showSignup"
+          >
+            CREATE
+          </button>
+        </div>
+
+      </section>
+
+
+      <!-- SIGN UP -->
+      <section id="signupSection" class="hidden">
+
+        <div class="form-title">CREATE.</div>
+        <div class="skate-line"></div>
+
+        <p class="form-subtitle">
+          Start documenting your progression. Your archive is yours.
+        </p>
+
+        <div id="signupMessage" class="message"></div>
+
+        <form id="signupForm">
+
+          <div class="form-group">
+            <label for="signupUsername">Username</label>
+            <input
+              type="text"
+              id="signupUsername"
+              placeholder="skatername"
+              minlength="3"
+              maxlength="30"
+              required
+            >
+          </div>
+
+          <div class="form-group">
+            <label for="signupEmail">Email</label>
+            <input
+              type="email"
+              id="signupEmail"
+              placeholder="you@email.com"
+              required
+            >
+          </div>
+
+          <div class="form-group">
+            <label for="signupPassword">Password</label>
+            <input
+              type="password"
+              id="signupPassword"
+              placeholder="••••••••"
+              minlength="6"
+              required
+            >
+          </div>
+
+          <button type="submit" class="primary-btn" id="signupButton">
+            CREATE ACCOUNT →
+          </button>
+
+        </form>
+
+        <div class="switch-text">
+          Already have an account?
+          <button
+            type="button"
+            class="switch-link"
+            id="showLogin"
+          >
+            SIGN IN
+          </button>
+        </div>
+
+      </section>
+
     </div>
 
-    <button class="submit" id="loginButton">
-      SIGN IN →
-    </button>
-
-  </div>
-
-  <!-- SIGN UP -->
-
-  <div id="signupForm" class="hidden">
-
-    <h1>START YOUR ARCHIVE.</h1>
-
-    <p class="subtitle">
-      Create your account. Then start stacking tricks.
-    </p>
-
-    <div class="field">
-      <label>USERNAME</label>
-      <input
-        id="signupUsername"
-        type="text"
-        placeholder="skatername"
-        maxlength="24"
-        autocomplete="username"
-      >
-    </div>
-
-    <div class="field">
-      <label>EMAIL</label>
-      <input
-        id="signupEmail"
-        type="email"
-        placeholder="you@email.com"
-        autocomplete="email"
-      >
-    </div>
-
-    <div class="field">
-      <label>PASSWORD</label>
-      <input
-        id="signupPassword"
-        type="password"
-        placeholder="at least 6 characters"
-        autocomplete="new-password"
-      >
-    </div>
-
-    <button class="submit" id="signupButton">
-      CREATE ACCOUNT →
-    </button>
-
-  </div>
-
-  <div id="message" class="message"></div>
-
-</section>
-
-<a href="index.html" class="back">
-  ← BACK TO Y2KSK8DOCU
-</a>
-```
+    <a href="index.html" class="back-home">
+      ← BACK TO HOME
+    </a>
 
   </main>
 
-  <!-- Supabase library -->
 
+  <!-- Supabase -->
   <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
-
-  <!-- Your Supabase connection -->
-
   <script src="supabase.js"></script>
 
   <script>
 
-    const loginTab = document.getElementById("loginTab");
-    const signupTab = document.getElementById("signupTab");
+    const loginSection = document.getElementById("loginSection");
+    const signupSection = document.getElementById("signupSection");
 
     const loginForm = document.getElementById("loginForm");
     const signupForm = document.getElementById("signupForm");
 
+    const showSignup = document.getElementById("showSignup");
+    const showLogin = document.getElementById("showLogin");
+
+    const loginMessage = document.getElementById("loginMessage");
+    const signupMessage = document.getElementById("signupMessage");
+
     const loginButton = document.getElementById("loginButton");
     const signupButton = document.getElementById("signupButton");
 
-    const message = document.getElementById("message");
 
+    // -------------------------
+    // SWITCH TO SIGN UP
+    // -------------------------
 
-    // -----------------------------
-    // SWITCH BETWEEN LOGIN / SIGNUP
-    // -----------------------------
+    showSignup.addEventListener("click", function(event) {
+      event.preventDefault();
 
-    loginTab.addEventListener("click", () => {
+      loginSection.classList.add("hidden");
+      signupSection.classList.remove("hidden");
 
-      loginTab.classList.add("active");
-      signupTab.classList.remove("active");
+      clearMessages();
 
-      loginForm.classList.remove("hidden");
-      signupForm.classList.add("hidden");
-
-      clearMessage();
-
+      window.scrollTo({
+        top: 0,
+        behavior: "smooth"
+      });
     });
 
 
-    signupTab.addEventListener("click", () => {
+    // -------------------------
+    // SWITCH TO LOGIN
+    // -------------------------
 
-      signupTab.classList.add("active");
-      loginTab.classList.remove("active");
+    showLogin.addEventListener("click", function(event) {
+      event.preventDefault();
 
-      signupForm.classList.remove("hidden");
-      loginForm.classList.add("hidden");
+      signupSection.classList.add("hidden");
+      loginSection.classList.remove("hidden");
 
-      clearMessage();
+      clearMessages();
 
+      window.scrollTo({
+        top: 0,
+        behavior: "smooth"
+      });
     });
 
 
-    // -----------------------------
+    // -------------------------
     // LOGIN
-    // -----------------------------
+    // -------------------------
 
-    loginButton.addEventListener("click", async () => {
+    loginForm.addEventListener("submit", async function(event) {
+
+      event.preventDefault();
+
+      clearMessages();
 
       const email =
         document.getElementById("loginEmail").value.trim();
@@ -425,49 +470,60 @@
         document.getElementById("loginPassword").value;
 
 
-      if (!email || !password) {
-        showMessage("Enter your email and password.", "error");
-        return;
-      }
-
-
       loginButton.disabled = true;
       loginButton.textContent = "SIGNING IN...";
 
 
-      const { error } =
+      const { data, error } =
         await supabaseClient.auth.signInWithPassword({
-          email,
-          password
+          email: email,
+          password: password
         });
 
 
       if (error) {
 
-        showMessage(error.message, "error");
+        showMessage(
+          loginMessage,
+          error.message,
+          "error"
+        );
 
         loginButton.disabled = false;
-        loginButton.textContent = "SIGN IN →";
+        loginButton.textContent = "ENTER ARCHIVE →";
 
         return;
       }
 
 
-      showMessage(
-        "You're in. Loading your archive...",
-        "success"
-      );
+      if (data.session && data.user) {
 
-      window.location.href = "dashboard.html";
+        window.location.href = "dashboard.html";
+
+      } else {
+
+        showMessage(
+          loginMessage,
+          "Login successful, but no active session was created.",
+          "error"
+        );
+
+        loginButton.disabled = false;
+        loginButton.textContent = "ENTER ARCHIVE →";
+      }
 
     });
 
 
-    // -----------------------------
+    // -------------------------
     // SIGN UP
-    // -----------------------------
+    // -------------------------
 
-    signupButton.addEventListener("click", async () => {
+    signupForm.addEventListener("submit", async function(event) {
+
+      event.preventDefault();
+
+      clearMessages();
 
       const username =
         document.getElementById("signupUsername").value.trim();
@@ -479,32 +535,11 @@
         document.getElementById("signupPassword").value;
 
 
-      if (!username || !email || !password) {
-
-        showMessage(
-          "Fill out your username, email, and password.",
-          "error"
-        );
-
-        return;
-      }
-
-
       if (username.length < 3) {
 
         showMessage(
+          signupMessage,
           "Username must be at least 3 characters.",
-          "error"
-        );
-
-        return;
-      }
-
-
-      if (password.length < 6) {
-
-        showMessage(
-          "Password must be at least 6 characters.",
           "error"
         );
 
@@ -516,25 +551,31 @@
       signupButton.textContent = "CREATING...";
 
 
-      // Create the Supabase authentication account.
-      // The username is saved in user metadata so we can
-      // create the profile after email verification/login.
-
       const { data, error } =
         await supabaseClient.auth.signUp({
-          email,
-          password,
+
+          email: email,
+
+          password: password,
+
           options: {
+
             data: {
               username: username
             }
+
           }
+
         });
 
 
       if (error) {
 
-        showMessage(error.message, "error");
+        showMessage(
+          signupMessage,
+          error.message,
+          "error"
+        );
 
         signupButton.disabled = false;
         signupButton.textContent = "CREATE ACCOUNT →";
@@ -543,12 +584,8 @@
       }
 
 
-      // If Supabase gives us a session immediately,
-      // create the profile now.
-      //
-      // If email confirmation is required, there may be
-      // no session yet. In that case we wait until the
-      // user verifies their email and signs in.
+      // If email confirmation is OFF,
+      // Supabase gives us a session immediately.
 
       if (data.session && data.user) {
 
@@ -556,15 +593,24 @@
           await supabaseClient
             .from("profiles")
             .insert({
+
               id: data.user.id,
+
               username: username
+
             });
 
 
         if (profileError) {
 
+          console.error(
+            "Profile creation error:",
+            profileError
+          );
+
           showMessage(
-            profileError.message,
+            signupMessage,
+            "Account created, but your profile could not be created. You can still continue.",
             "error"
           );
 
@@ -574,17 +620,24 @@
           return;
         }
 
+
+        window.location.href = "dashboard.html";
+
+        return;
       }
 
 
-      // Email confirmation is ON, so don't redirect
-      // to the dashboard yet.
+      // Your Supabase setup currently uses
+      // email confirmation.
 
       showMessage(
-        "Account created. Check your email to verify your account, then sign in.",
+        signupMessage,
+        "ACCOUNT CREATED. Check your email to verify your account, then come back and sign in.",
         "success"
       );
 
+
+      signupForm.reset();
 
       signupButton.disabled = false;
       signupButton.textContent = "CREATE ACCOUNT →";
@@ -592,26 +645,26 @@
     });
 
 
-    // -----------------------------
+    // -------------------------
     // MESSAGE HELPERS
-    // -----------------------------
+    // -------------------------
 
-    function showMessage(text, type) {
+    function showMessage(element, text, type) {
 
-      message.textContent = text;
+      element.textContent = text;
 
-      message.className =
-        "message " + type;
+      element.className = "message " + type;
 
     }
 
 
-    function clearMessage() {
+    function clearMessages() {
 
-      message.textContent = "";
+      loginMessage.textContent = "";
+      loginMessage.className = "message";
 
-      message.className =
-        "message";
+      signupMessage.textContent = "";
+      signupMessage.className = "message";
 
     }
 
@@ -619,3 +672,4 @@
 
 </body>
 </html>
+```
