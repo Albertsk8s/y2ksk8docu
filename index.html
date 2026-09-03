@@ -1,0 +1,366 @@
+```html
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>y2ksk8docu</title>
+
+    <style>
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        body {
+            background: #080808;
+            color: #f4f4f0;
+            font-family: Arial, Helvetica, sans-serif;
+        }
+
+        nav {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+
+            padding: 20px 6%;
+
+            border-bottom: 1px solid #292929;
+        }
+
+        .logo {
+            color: #eaff00;
+            font-size: 22px;
+            font-weight: 900;
+        }
+
+        nav a {
+            color: white;
+            text-decoration: none;
+            margin-left: 25px;
+            font-size: 12px;
+            font-weight: bold;
+        }
+
+        nav a:hover {
+            color: #ff3cac;
+        }
+
+        .hero {
+            min-height: 85vh;
+
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+
+            padding: 80px 8%;
+
+            background:
+                radial-gradient(
+                    circle at 80% 40%,
+                    rgba(255, 60, 172, 0.18),
+                    transparent 35%
+                );
+        }
+
+        .eyebrow {
+            color: #ff3cac;
+            font-size: 12px;
+            font-weight: bold;
+            letter-spacing: 3px;
+            margin-bottom: 20px;
+        }
+
+        h1 {
+            font-size: clamp(60px, 12vw, 150px);
+            line-height: .85;
+            font-weight: 900;
+        }
+
+        h1 span {
+            color: #eaff00;
+        }
+
+        .description {
+            max-width: 550px;
+            margin: 35px 0;
+            color: #999;
+            line-height: 1.7;
+        }
+
+        .button {
+            display: inline-block;
+
+            background: #ff3cac;
+            color: black;
+
+            padding: 16px 24px;
+
+            text-decoration: none;
+            font-weight: bold;
+            font-size: 12px;
+        }
+
+        .button:hover {
+            background: #eaff00;
+        }
+
+        .section {
+            padding: 100px 8%;
+        }
+
+        .dark-section {
+            background: #111;
+        }
+
+        h2 {
+            font-size: clamp(45px, 8vw, 100px);
+            line-height: .9;
+            margin-bottom: 50px;
+        }
+
+        .features {
+            display: grid;
+
+            grid-template-columns:
+                repeat(auto-fit, minmax(220px, 1fr));
+
+            gap: 20px;
+        }
+
+        .feature {
+            padding: 30px;
+
+            border: 1px solid #333;
+
+            background: #0d0d0d;
+        }
+
+        .feature-number {
+            color: #eaff00;
+            font-size: 40px;
+            font-weight: 900;
+            margin-bottom: 20px;
+        }
+
+        .feature h3 {
+            margin-bottom: 12px;
+        }
+
+        .feature p {
+            color: #888;
+            font-size: 13px;
+            line-height: 1.6;
+        }
+
+        .login-area {
+            text-align: center;
+            background: #eaff00;
+            color: black;
+        }
+
+        .login-area .eyebrow {
+            color: #ff3cac;
+        }
+
+        footer {
+            display: flex;
+            justify-content: space-between;
+
+            padding: 30px 8%;
+
+            color: #666;
+
+            font-size: 10px;
+        }
+
+        @media (max-width: 700px) {
+
+            nav a {
+                display: none;
+            }
+
+            .hero {
+                min-height: 75vh;
+            }
+
+            footer {
+                flex-direction: column;
+                gap: 10px;
+            }
+        }
+    </style>
+</head>
+
+<body>
+
+    <nav>
+
+        <div class="logo">
+            y2ksk8docu
+        </div>
+
+        <div>
+            <a href="#features">FEATURES</a>
+            <a href="#account">ACCOUNT</a>
+        </div>
+
+    </nav>
+
+
+    <main>
+
+        <section class="hero">
+
+            <p class="eyebrow">
+                SKATE / DOCUMENT / REFINE
+            </p>
+
+            <h1>
+                DOCUMENT<br>
+                YOUR <span>SKATE.</span>
+            </h1>
+
+            <p class="description">
+                A digital archive for your skate progression.
+                Track tricks, rate your confidence, save sessions,
+                and document your progression with video.
+            </p>
+
+            <div>
+                <a href="#account" class="button">
+                    START DOCUMENTING →
+                </a>
+            </div>
+
+        </section>
+
+
+        <section id="features" class="section dark-section">
+
+            <p class="eyebrow">
+                THE IDEA
+            </p>
+
+            <h2>
+                YOUR<br>
+                PROGRESSION.
+            </h2>
+
+
+            <div class="features">
+
+                <div class="feature">
+
+                    <div class="feature-number">
+                        01
+                    </div>
+
+                    <h3>
+                        TRACK TRICKS
+                    </h3>
+
+                    <p>
+                        Build your personal trick archive
+                        and keep everything organized.
+                    </p>
+
+                </div>
+
+
+                <div class="feature">
+
+                    <div class="feature-number">
+                        02
+                    </div>
+
+                    <h3>
+                        CONFIDENCE
+                    </h3>
+
+                    <p>
+                        Rate every trick from 1 to 5
+                        and watch your confidence improve.
+                    </p>
+
+                </div>
+
+
+                <div class="feature">
+
+                    <div class="feature-number">
+                        03
+                    </div>
+
+                    <h3>
+                        VIDEO
+                    </h3>
+
+                    <p>
+                        Attach skate clips directly
+                        to the tricks you're working on.
+                    </p>
+
+                </div>
+
+
+                <div class="feature">
+
+                    <div class="feature-number">
+                        04
+                    </div>
+
+                    <h3>
+                        YOUR PRIVACY
+                    </h3>
+
+                    <p>
+                        Decide whether your tricks and
+                        videos are private or public.
+                    </p>
+
+                </div>
+
+            </div>
+
+        </section>
+
+
+        <section id="account" class="section login-area">
+
+            <p class="eyebrow">
+                COMING NEXT
+            </p>
+
+            <h2>
+                CREATE<br>
+                YOUR ARCHIVE.
+            </h2>
+
+            <p>
+                Accounts, profiles, tricks, videos,
+                and progression tracking are next.
+            </p>
+
+        </section>
+
+    </main>
+
+
+    <footer>
+
+        <span>
+            y2ksk8docu © 2026
+        </span>
+
+        <span>
+            SKATE. DOCUMENT. REFINE.
+        </span>
+
+    </footer>
+
+</body>
+</html>
+```
