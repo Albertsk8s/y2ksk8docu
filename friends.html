@@ -1,0 +1,2328 @@
+```html
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+  <meta charset="UTF-8">
+
+  <meta
+    name="viewport"
+    content="width=device-width, initial-scale=1.0"
+  >
+
+  <title>FRIENDS // y2ksk8docu</title>
+
+
+  <!-- GOOGLE FONTS -->
+
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+
+  <link
+    rel="preconnect"
+    href="https://fonts.gstatic.com"
+    crossorigin
+  >
+
+  <link
+    href="https://fonts.googleapis.com/css2?family=Archivo+Black&family=Space+Mono:wght@400;700&display=swap"
+    rel="stylesheet"
+  >
+
+
+  <!-- SUPABASE -->
+
+  <script
+    src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"
+  ></script>
+
+  <script src="./supabase.js"></script>
+
+
+  <style>
+
+    /* ========================================================
+       RESET
+    ======================================================== */
+
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+
+    /* ========================================================
+       BODY
+    ======================================================== */
+
+    body {
+
+      background: #080808;
+
+      color: #f2f2f2;
+
+      font-family: "Space Mono", monospace;
+
+      min-height: 100vh;
+
+    }
+
+
+    /* CRT / SCANLINE EFFECT */
+
+    body::before {
+
+      content: "";
+
+      position: fixed;
+
+      inset: 0;
+
+      pointer-events: none;
+
+      opacity: 0.045;
+
+      background-image:
+        repeating-linear-gradient(
+          0deg,
+          transparent,
+          transparent 3px,
+          #fff 4px
+        );
+
+      z-index: 9999;
+
+    }
+
+
+    /* ========================================================
+       HEADER
+    ======================================================== */
+
+    header {
+
+      height: 76px;
+
+      border-bottom: 1px solid #252525;
+
+      display: flex;
+
+      align-items: center;
+
+      justify-content: space-between;
+
+      padding: 0 5%;
+
+      position: sticky;
+
+      top: 0;
+
+      background: rgba(8, 8, 8, 0.95);
+
+      backdrop-filter: blur(12px);
+
+      z-index: 100;
+
+    }
+
+
+    .logo {
+
+      color: #ff2020;
+
+      font-family: "Archivo Black", sans-serif;
+
+      font-size: 22px;
+
+      letter-spacing: -1px;
+
+      text-decoration: none;
+
+      transition: 0.2s;
+
+    }
+
+
+    .logo:hover {
+
+      color: white;
+
+    }
+
+
+    nav {
+
+      display: flex;
+
+      align-items: center;
+
+      gap: 25px;
+
+    }
+
+
+    nav a {
+
+      color: #777;
+
+      text-decoration: none;
+
+      font-size: 10px;
+
+      letter-spacing: 1px;
+
+      transition: 0.2s;
+
+    }
+
+
+    nav a:hover,
+    nav a.active {
+
+      color: #ff2020;
+
+    }
+
+
+    /* ========================================================
+       MAIN
+    ======================================================== */
+
+    main {
+
+      width: min(1100px, 90%);
+
+      margin: 0 auto;
+
+      padding: 70px 0 100px;
+
+    }
+
+
+    .eyebrow {
+
+      color: #ff2020;
+
+      font-size: 10px;
+
+      letter-spacing: 4px;
+
+      margin-bottom: 12px;
+
+    }
+
+
+    h1 {
+
+      font-family: "Archivo Black", sans-serif;
+
+      font-size: clamp(55px, 9vw, 105px);
+
+      line-height: 0.85;
+
+      letter-spacing: -5px;
+
+      text-transform: uppercase;
+
+      margin-bottom: 18px;
+
+    }
+
+
+    .intro {
+
+      color: #666;
+
+      max-width: 600px;
+
+      line-height: 1.7;
+
+      font-size: 12px;
+
+      margin-bottom: 50px;
+
+    }
+
+
+    /* ========================================================
+       SEARCH
+    ======================================================== */
+
+    .search-box {
+
+      display: flex;
+
+      gap: 10px;
+
+      margin-bottom: 50px;
+
+    }
+
+
+    .search-box input {
+
+      flex: 1;
+
+      min-width: 0;
+
+      background: #0d0d0d;
+
+      border: 1px solid #333;
+
+      color: white;
+
+      padding: 16px;
+
+      outline: none;
+
+      font-family: inherit;
+
+      font-size: 12px;
+
+    }
+
+
+    .search-box input:focus {
+
+      border-color: #ff2020;
+
+    }
+
+
+    .search-box input::placeholder {
+
+      color: #555;
+
+    }
+
+
+    .search-box button {
+
+      border: 0;
+
+      background: #ff2020;
+
+      color: white;
+
+      padding: 0 25px;
+
+      font-family: "Archivo Black", sans-serif;
+
+      cursor: pointer;
+
+      transition: 0.2s;
+
+    }
+
+
+    .search-box button:hover {
+
+      background: white;
+
+      color: black;
+
+    }
+
+
+    /* ========================================================
+       SECTION
+    ======================================================== */
+
+    .section {
+
+      margin-bottom: 60px;
+
+    }
+
+
+    .section-header {
+
+      display: flex;
+
+      align-items: center;
+
+      justify-content: space-between;
+
+      border-bottom: 1px solid #292929;
+
+      padding-bottom: 15px;
+
+      margin-bottom: 20px;
+
+    }
+
+
+    .section-title {
+
+      font-family: "Archivo Black", sans-serif;
+
+      font-size: 18px;
+
+    }
+
+
+    .section-count {
+
+      color: #555;
+
+      font-size: 9px;
+
+      letter-spacing: 1px;
+
+    }
+
+
+    /* ========================================================
+       SEARCH RESULTS
+    ======================================================== */
+
+    .results {
+
+      display: grid;
+
+      grid-template-columns:
+        repeat(2, minmax(0, 1fr));
+
+      gap: 12px;
+
+    }
+
+
+    .user-card {
+
+      background: #0d0d0d;
+
+      border: 1px solid #292929;
+
+      padding: 20px;
+
+      display: flex;
+
+      align-items: center;
+
+      gap: 16px;
+
+      transition: 0.2s;
+
+    }
+
+
+    .user-card:hover {
+
+      border-color: #ff2020;
+
+      transform: translateY(-2px);
+
+    }
+
+
+    .avatar {
+
+      width: 52px;
+
+      height: 52px;
+
+      flex-shrink: 0;
+
+      border: 1px solid #333;
+
+      background: #151515;
+
+      display: flex;
+
+      align-items: center;
+
+      justify-content: center;
+
+      overflow: hidden;
+
+      color: #ff2020;
+
+      font-family: "Archivo Black", sans-serif;
+
+      font-size: 18px;
+
+    }
+
+
+    .avatar img {
+
+      width: 100%;
+
+      height: 100%;
+
+      object-fit: cover;
+
+    }
+
+
+    .user-info {
+
+      min-width: 0;
+
+      flex: 1;
+
+    }
+
+
+    .display-name {
+
+      font-family: "Archivo Black", sans-serif;
+
+      font-size: 15px;
+
+      margin-bottom: 5px;
+
+      white-space: nowrap;
+
+      overflow: hidden;
+
+      text-overflow: ellipsis;
+
+    }
+
+
+    .username {
+
+      color: #ff2020;
+
+      font-size: 10px;
+
+      margin-bottom: 8px;
+
+    }
+
+
+    .user-bio {
+
+      color: #555;
+
+      font-size: 9px;
+
+      white-space: nowrap;
+
+      overflow: hidden;
+
+      text-overflow: ellipsis;
+
+    }
+
+
+    /* ========================================================
+       BUTTONS
+    ======================================================== */
+
+    .friend-btn {
+
+      border: 1px solid #333;
+
+      background: transparent;
+
+      color: white;
+
+      padding: 10px 13px;
+
+      font-family: "Space Mono", monospace;
+
+      font-size: 8px;
+
+      letter-spacing: 1px;
+
+      cursor: pointer;
+
+      white-space: nowrap;
+
+      transition: 0.2s;
+
+    }
+
+
+    .friend-btn:hover {
+
+      border-color: #ff2020;
+
+      background: #ff2020;
+
+    }
+
+
+    .friend-btn.primary {
+
+      background: #ff2020;
+
+      border-color: #ff2020;
+
+    }
+
+
+    .friend-btn.primary:hover {
+
+      background: white;
+
+      border-color: white;
+
+      color: black;
+
+    }
+
+
+    .friend-btn.danger:hover {
+
+      background: #ff2020;
+
+      border-color: #ff2020;
+
+    }
+
+
+    .friend-btn:disabled {
+
+      opacity: 0.45;
+
+      cursor: not-allowed;
+
+    }
+
+
+    /* ========================================================
+       REQUEST CARDS
+    ======================================================== */
+
+    .request-list {
+
+      display: flex;
+
+      flex-direction: column;
+
+      gap: 10px;
+
+    }
+
+
+    .request-card {
+
+      background: #0d0d0d;
+
+      border: 1px solid #292929;
+
+      padding: 18px;
+
+      display: flex;
+
+      align-items: center;
+
+      justify-content: space-between;
+
+      gap: 20px;
+
+    }
+
+
+    .request-user {
+
+      display: flex;
+
+      align-items: center;
+
+      gap: 15px;
+
+      min-width: 0;
+
+    }
+
+
+    .request-actions {
+
+      display: flex;
+
+      gap: 8px;
+
+      flex-shrink: 0;
+
+    }
+
+
+    /* ========================================================
+       FRIEND LIST
+    ======================================================== */
+
+    .friend-list {
+
+      display: grid;
+
+      grid-template-columns:
+        repeat(2, minmax(0, 1fr));
+
+      gap: 12px;
+
+    }
+
+
+    .friend-card {
+
+      background: #0d0d0d;
+
+      border: 1px solid #292929;
+
+      padding: 20px;
+
+      display: flex;
+
+      align-items: center;
+
+      gap: 15px;
+
+      transition: 0.2s;
+
+    }
+
+
+    .friend-card:hover {
+
+      border-color: #ff2020;
+
+    }
+
+
+    .friend-card .user-info {
+
+      flex: 1;
+
+    }
+
+
+    /* ========================================================
+       EMPTY / LOADING
+    ======================================================== */
+
+    .empty {
+
+      border: 1px dashed #333;
+
+      padding: 50px 20px;
+
+      text-align: center;
+
+      color: #555;
+
+      font-size: 10px;
+
+      grid-column: 1 / -1;
+
+    }
+
+
+    .loading {
+
+      color: #555;
+
+      padding: 35px 0;
+
+      font-size: 10px;
+
+    }
+
+
+    /* ========================================================
+       TOAST
+    ======================================================== */
+
+    #toast {
+
+      position: fixed;
+
+      left: 50%;
+
+      bottom: 25px;
+
+      transform: translateX(-50%) translateY(20px);
+
+      background: #ff2020;
+
+      color: white;
+
+      padding: 13px 20px;
+
+      font-size: 9px;
+
+      letter-spacing: 1px;
+
+      z-index: 10000;
+
+      opacity: 0;
+
+      pointer-events: none;
+
+      transition: 0.25s;
+
+      text-align: center;
+
+      max-width: 90%;
+
+    }
+
+
+    #toast.show {
+
+      opacity: 1;
+
+      transform:
+        translateX(-50%)
+        translateY(0);
+
+    }
+
+
+    #toast.error {
+
+      background: #550000;
+
+      border: 1px solid #ff2020;
+
+    }
+
+
+    /* ========================================================
+       MOBILE
+    ======================================================== */
+
+    @media (max-width: 800px) {
+
+      .results,
+      .friend-list {
+
+        grid-template-columns: 1fr;
+
+      }
+
+    }
+
+
+    @media (max-width: 600px) {
+
+      header {
+
+        padding: 0 4%;
+
+      }
+
+
+      .logo {
+
+        font-size: 17px;
+
+      }
+
+
+      nav {
+
+        gap: 12px;
+
+      }
+
+
+      nav a {
+
+        font-size: 8px;
+
+      }
+
+
+      main {
+
+        width: 92%;
+
+        padding-top: 45px;
+
+      }
+
+
+      h1 {
+
+        font-size: 65px;
+
+        letter-spacing: -3px;
+
+      }
+
+
+      .search-box {
+
+        flex-direction: column;
+
+      }
+
+
+      .search-box button {
+
+        height: 48px;
+
+      }
+
+
+      .user-card {
+
+        align-items: flex-start;
+
+        flex-wrap: wrap;
+
+      }
+
+
+      .user-card .friend-btn {
+
+        width: 100%;
+
+      }
+
+
+      .request-card {
+
+        flex-direction: column;
+
+        align-items: stretch;
+
+      }
+
+
+      .request-actions {
+
+        width: 100%;
+
+      }
+
+
+      .request-actions button {
+
+        flex: 1;
+
+      }
+
+    }
+
+  </style>
+
+</head>
+
+
+<body>
+
+
+<header>
+
+  <!-- PRIVATE PAGE: LOGO RETURNS TO DASHBOARD -->
+
+  <a
+    href="./dashboard.html"
+    class="logo"
+  >
+    Y2KSK8DOCU
+  </a>
+
+
+  <nav>
+
+    <a href="./dashboard.html">
+      ARCHIVE
+    </a>
+
+    <a
+      href="./friends.html"
+      class="active"
+    >
+      FRIENDS
+    </a>
+
+    <a href="./messages.html">
+      MESSAGES
+    </a>
+
+    <a href="./explore.html">
+      EXPLORE
+    </a>
+
+    <a href="./account.html">
+      ACCOUNT
+    </a>
+
+  </nav>
+
+</header>
+
+
+<main>
+
+
+  <!-- ======================================================
+       PAGE INTRO
+  ======================================================= -->
+
+  <div class="eyebrow">
+    SKATE NETWORK //
+  </div>
+
+
+  <h1>
+    FRIENDS.
+  </h1>
+
+
+  <p class="intro">
+    Find skaters. Build your circle.
+    Send requests and keep up with the people
+    pushing their skating forward.
+  </p>
+
+
+  <!-- ======================================================
+       SEARCH
+  ======================================================= -->
+
+  <div class="search-box">
+
+    <input
+      type="text"
+      id="searchInput"
+      placeholder="SEARCH USERNAME..."
+      autocomplete="off"
+    >
+
+    <button id="searchButton">
+      SEARCH
+    </button>
+
+  </div>
+
+
+  <!-- ======================================================
+       SEARCH RESULTS
+  ======================================================= -->
+
+  <section class="section">
+
+    <div class="section-header">
+
+      <div class="section-title">
+        SKATERS
+      </div>
+
+      <div
+        class="section-count"
+        id="searchCount"
+      >
+        SEARCH TO FIND SKATERS
+      </div>
+
+    </div>
+
+
+    <div
+      class="results"
+      id="searchResults"
+    >
+
+      <div class="empty">
+        SEARCH FOR A USERNAME TO FIND SKATERS.
+      </div>
+
+    </div>
+
+  </section>
+
+
+  <!-- ======================================================
+       INCOMING REQUESTS
+  ======================================================= -->
+
+  <section class="section">
+
+    <div class="section-header">
+
+      <div class="section-title">
+        FRIEND REQUESTS
+      </div>
+
+      <div
+        class="section-count"
+        id="requestCount"
+      >
+        0
+      </div>
+
+    </div>
+
+
+    <div
+      class="request-list"
+      id="requestList"
+    >
+
+      <div class="empty">
+        NO PENDING REQUESTS.
+      </div>
+
+    </div>
+
+  </section>
+
+
+  <!-- ======================================================
+       FRIENDS
+  ======================================================= -->
+
+  <section class="section">
+
+    <div class="section-header">
+
+      <div class="section-title">
+        MY FRIENDS
+      </div>
+
+      <div
+        class="section-count"
+        id="friendCount"
+      >
+        0
+      </div>
+
+    </div>
+
+
+    <div
+      class="friend-list"
+      id="friendList"
+    >
+
+      <div class="empty">
+        YOU DON'T HAVE ANY FRIENDS YET.
+      </div>
+
+    </div>
+
+  </section>
+
+
+</main>
+
+
+<div id="toast"></div>
+
+
+<script>
+
+  /* ==========================================================
+     SUPABASE
+  ========================================================== */
+
+  const client = window.supabaseClient;
+
+
+  /* ==========================================================
+     ELEMENTS
+  ========================================================== */
+
+  const searchInput =
+    document.getElementById("searchInput");
+
+  const searchButton =
+    document.getElementById("searchButton");
+
+  const searchResults =
+    document.getElementById("searchResults");
+
+  const searchCount =
+    document.getElementById("searchCount");
+
+  const requestList =
+    document.getElementById("requestList");
+
+  const requestCount =
+    document.getElementById("requestCount");
+
+  const friendList =
+    document.getElementById("friendList");
+
+  const friendCount =
+    document.getElementById("friendCount");
+
+  const toast =
+    document.getElementById("toast");
+
+
+  /* ==========================================================
+     STATE
+  ========================================================== */
+
+  let currentUser = null;
+
+  let friendships = [];
+
+  let searchUsers = [];
+
+
+  /* ==========================================================
+     ESCAPE HTML
+  ========================================================== */
+
+  function escapeHTML(value) {
+
+    if (
+      value === null ||
+      value === undefined
+    ) {
+      return "";
+    }
+
+    return String(value)
+
+      .replace(
+        /&/g,
+        "&amp;"
+      )
+
+      .replace(
+        /</g,
+        "&lt;"
+      )
+
+      .replace(
+        />/g,
+        "&gt;"
+      )
+
+      .replace(
+        /"/g,
+        "&quot;"
+      )
+
+      .replace(
+        /'/g,
+        "&#039;"
+      );
+
+  }
+
+
+  /* ==========================================================
+     TOAST
+  ========================================================== */
+
+  let toastTimer = null;
+
+
+  function showToast(
+    message,
+    isError = false
+  ) {
+
+    clearTimeout(toastTimer);
+
+
+    toast.textContent =
+      message;
+
+
+    toast.classList.toggle(
+      "error",
+      isError
+    );
+
+
+    toast.classList.add(
+      "show"
+    );
+
+
+    toastTimer =
+      setTimeout(
+        () => {
+
+          toast.classList.remove(
+            "show"
+          );
+
+        },
+        3000
+      );
+
+  }
+
+
+  /* ==========================================================
+     AVATAR
+  ========================================================== */
+
+  function avatarHTML(profile) {
+
+    const displayName =
+      profile.display_name ||
+      profile.username ||
+      "?";
+
+
+    if (profile.avatar_url) {
+
+      return `
+
+        <div class="avatar">
+
+          <img
+            src="${escapeHTML(profile.avatar_url)}"
+            alt=""
+          >
+
+        </div>
+
+      `;
+
+    }
+
+
+    return `
+
+      <div class="avatar">
+
+        ${escapeHTML(
+          displayName
+            .charAt(0)
+            .toUpperCase()
+        )}
+
+      </div>
+
+    `;
+
+  }
+
+
+  /* ==========================================================
+     AUTH
+  ========================================================== */
+
+  async function requireUser() {
+
+    if (!client) {
+
+      showToast(
+        "SUPABASE IS NOT CONNECTED.",
+        true
+      );
+
+      return null;
+
+    }
+
+
+    const {
+      data,
+      error
+    } = await client.auth.getUser();
+
+
+    if (
+      error ||
+      !data ||
+      !data.user
+    ) {
+
+      window.location.href =
+        "./auth.html";
+
+      return null;
+
+    }
+
+
+    return data.user;
+
+  }
+
+
+  /* ==========================================================
+     LOAD FRIENDSHIPS
+  ========================================================== */
+
+  async function loadFriendships() {
+
+    const {
+      data,
+      error
+    } = await client
+
+      .from("friendships")
+
+      .select("*")
+
+      .or(
+        `user_id.eq.${currentUser.id},friend_id.eq.${currentUser.id}`
+      )
+
+      .order(
+        "created_at",
+        {
+          ascending: false
+        }
+      );
+
+
+    if (error) {
+
+      console.error(error);
+
+      showToast(
+        "COULD NOT LOAD FRIENDS.",
+        true
+      );
+
+      return;
+
+    }
+
+
+    friendships =
+      data || [];
+
+
+    await renderRequests();
+
+    await renderFriends();
+
+  }
+
+
+  /* ==========================================================
+     GET OTHER USER ID
+  ========================================================== */
+
+  function getOtherUserId(
+    friendship
+  ) {
+
+    if (
+      friendship.user_id ===
+      currentUser.id
+    ) {
+
+      return friendship.friend_id;
+
+    }
+
+
+    return friendship.user_id;
+
+  }
+
+
+  /* ==========================================================
+     LOAD PROFILES
+  ========================================================== */
+
+  async function loadProfiles(
+    ids
+  ) {
+
+    if (!ids.length) {
+
+      return [];
+
+    }
+
+
+    const {
+      data,
+      error
+    } = await client
+
+      .from("profiles")
+
+      .select(`
+        id,
+        username,
+        display_name,
+        bio,
+        avatar_url
+      `)
+
+      .in(
+        "id",
+        ids
+      );
+
+
+    if (error) {
+
+      console.error(error);
+
+      return [];
+
+    }
+
+
+    return data || [];
+
+  }
+
+
+  /* ==========================================================
+     REQUESTS
+  ========================================================== */
+
+  async function renderRequests() {
+
+    const incoming =
+      friendships.filter(
+        friendship =>
+
+          friendship.status ===
+            "pending"
+
+          &&
+
+          friendship.requested_by !==
+            currentUser.id
+
+      );
+
+
+    requestCount.textContent =
+      incoming.length;
+
+
+    if (!incoming.length) {
+
+      requestList.innerHTML = `
+
+        <div class="empty">
+          NO PENDING REQUESTS.
+        </div>
+
+      `;
+
+      return;
+
+    }
+
+
+    const ids =
+      incoming.map(
+        friendship =>
+          getOtherUserId(
+            friendship
+          )
+      );
+
+
+    const profiles =
+      await loadProfiles(ids);
+
+
+    const profileMap =
+      new Map(
+        profiles.map(
+          profile =>
+            [
+              profile.id,
+              profile
+            ]
+        )
+      );
+
+
+    requestList.innerHTML =
+      incoming.map(
+        friendship => {
+
+          const profile =
+            profileMap.get(
+              getOtherUserId(
+                friendship
+              )
+            ) || {};
+
+
+          return `
+
+            <div
+              class="request-card"
+            >
+
+              <div
+                class="request-user"
+              >
+
+                ${avatarHTML(profile)}
+
+                <div
+                  class="user-info"
+                >
+
+                  <div
+                    class="display-name"
+                  >
+                    ${escapeHTML(
+                      profile.display_name ||
+                      profile.username ||
+                      "UNKNOWN SKATER"
+                    )}
+                  </div>
+
+                  <div
+                    class="username"
+                  >
+                    @${escapeHTML(
+                      profile.username ||
+                      "unknown"
+                    )}
+                  </div>
+
+                </div>
+
+              </div>
+
+
+              <div
+                class="request-actions"
+              >
+
+                <button
+                  class="friend-btn primary"
+                  onclick="respondToRequest(
+                    '${friendship.id}',
+                    true
+                  )"
+                >
+                  ACCEPT
+                </button>
+
+
+                <button
+                  class="friend-btn danger"
+                  onclick="respondToRequest(
+                    '${friendship.id}',
+                    false
+                  )"
+                >
+                  DECLINE
+                </button>
+
+              </div>
+
+            </div>
+
+          `;
+
+        }
+      ).join("");
+
+  }
+
+
+  /* ==========================================================
+     ACCEPT / DECLINE
+  ========================================================== */
+
+  async function respondToRequest(
+    friendshipId,
+    accepted
+  ) {
+
+    try {
+
+      const {
+        error
+      } = await client.rpc(
+        "respond_to_friend_request",
+        {
+          friendship_id:
+            friendshipId,
+
+          accept_request:
+            accepted
+        }
+      );
+
+
+      if (error) {
+
+        console.error(error);
+
+        showToast(
+          error.message ||
+          "COULD NOT UPDATE REQUEST.",
+          true
+        );
+
+        return;
+
+      }
+
+
+      showToast(
+        accepted
+          ? "FRIEND REQUEST ACCEPTED."
+          : "FRIEND REQUEST DECLINED."
+      );
+
+
+      await loadFriendships();
+
+    } catch (error) {
+
+      console.error(error);
+
+      showToast(
+        "SOMETHING WENT WRONG.",
+        true
+      );
+
+    }
+
+  }
+
+
+  /* ==========================================================
+     FRIENDS
+  ========================================================== */
+
+  async function renderFriends() {
+
+    const accepted =
+      friendships.filter(
+        friendship =>
+          friendship.status ===
+          "accepted"
+      );
+
+
+    friendCount.textContent =
+      accepted.length;
+
+
+    if (!accepted.length) {
+
+      friendList.innerHTML = `
+
+        <div class="empty">
+          YOU DON'T HAVE ANY FRIENDS YET.
+        </div>
+
+      `;
+
+      return;
+
+    }
+
+
+    const ids =
+      accepted.map(
+        friendship =>
+          getOtherUserId(
+            friendship
+          )
+      );
+
+
+    const profiles =
+      await loadProfiles(ids);
+
+
+    const profileMap =
+      new Map(
+        profiles.map(
+          profile =>
+            [
+              profile.id,
+              profile
+            ]
+        )
+      );
+
+
+    friendList.innerHTML =
+      accepted.map(
+        friendship => {
+
+          const profile =
+            profileMap.get(
+              getOtherUserId(
+                friendship
+              )
+            ) || {};
+
+
+          return `
+
+            <div
+              class="friend-card"
+            >
+
+              ${avatarHTML(profile)}
+
+
+              <div
+                class="user-info"
+              >
+
+                <div
+                  class="display-name"
+                >
+                  ${escapeHTML(
+                    profile.display_name ||
+                    profile.username ||
+                    "UNKNOWN SKATER"
+                  )}
+                </div>
+
+
+                <div
+                  class="username"
+                >
+                  @${escapeHTML(
+                    profile.username ||
+                    "unknown"
+                  )}
+                </div>
+
+              </div>
+
+
+              <button
+                class="friend-btn danger"
+                onclick="removeFriend(
+                  '${friendship.id}'
+                )"
+              >
+                REMOVE
+              </button>
+
+            </div>
+
+          `;
+
+        }
+      ).join("");
+
+  }
+
+
+  /* ==========================================================
+     REMOVE FRIEND
+  ========================================================== */
+
+  async function removeFriend(
+    friendshipId
+  ) {
+
+    const confirmed =
+      confirm(
+        "REMOVE THIS FRIEND?"
+      );
+
+
+    if (!confirmed) {
+
+      return;
+
+    }
+
+
+    try {
+
+      const {
+        error
+      } = await client.rpc(
+        "remove_friend",
+        {
+          friendship_id:
+            friendshipId
+        }
+      );
+
+
+      if (error) {
+
+        console.error(error);
+
+        showToast(
+          error.message ||
+          "COULD NOT REMOVE FRIEND.",
+          true
+        );
+
+        return;
+
+      }
+
+
+      showToast(
+        "FRIEND REMOVED."
+      );
+
+
+      await loadFriendships();
+
+    } catch (error) {
+
+      console.error(error);
+
+      showToast(
+        "SOMETHING WENT WRONG.",
+        true
+      );
+
+    }
+
+  }
+
+
+  /* ==========================================================
+     FRIENDSHIP STATUS
+  ========================================================== */
+
+  function getFriendshipWith(
+    userId
+  ) {
+
+    return friendships.find(
+      friendship =>
+
+        friendship.user_id ===
+          userId
+
+        ||
+
+        friendship.friend_id ===
+          userId
+    );
+
+  }
+
+
+  /* ==========================================================
+     SEARCH USERS
+  ========================================================== */
+
+  async function searchUsersByName() {
+
+    const search =
+      searchInput.value
+        .trim()
+        .toLowerCase();
+
+
+    if (!search) {
+
+      searchResults.innerHTML = `
+
+        <div class="empty">
+          SEARCH FOR A USERNAME TO FIND SKATERS.
+        </div>
+
+      `;
+
+      searchCount.textContent =
+        "SEARCH TO FIND SKATERS";
+
+      return;
+
+    }
+
+
+    searchResults.innerHTML = `
+
+      <div class="loading">
+        SEARCHING...
+      </div>
+
+    `;
+
+
+    /*
+      Search usernames first.
+      Display name is also checked below.
+    */
+
+    const {
+      data,
+      error
+    } = await client
+
+      .from("profiles")
+
+      .select(`
+        id,
+        username,
+        display_name,
+        bio,
+        avatar_url
+      `)
+
+      .neq(
+        "id",
+        currentUser.id
+      )
+
+      .or(
+        `username.ilike.%${search}%,display_name.ilike.%${search}%`
+      )
+
+      .order(
+        "username",
+        {
+          ascending: true
+        }
+      )
+
+      .limit(30);
+
+
+    if (error) {
+
+      console.error(error);
+
+      searchResults.innerHTML = `
+
+        <div class="empty">
+          COULD NOT SEARCH USERS.
+        </div>
+
+      `;
+
+      searchCount.textContent =
+        "ERROR";
+
+      return;
+
+    }
+
+
+    searchUsers =
+      data || [];
+
+
+    searchCount.textContent =
+      searchUsers.length === 1
+        ? "1 SKATER"
+        : `${searchUsers.length} SKATERS`;
+
+
+    renderSearchResults();
+
+  }
+
+
+  /* ==========================================================
+     RENDER SEARCH RESULTS
+  ========================================================== */
+
+  function renderSearchResults() {
+
+    if (!searchUsers.length) {
+
+      searchResults.innerHTML = `
+
+        <div class="empty">
+          NO SKATERS FOUND.
+        </div>
+
+      `;
+
+      return;
+
+    }
+
+
+    searchResults.innerHTML =
+      searchUsers.map(
+        profile => {
+
+          const relationship =
+            getFriendshipWith(
+              profile.id
+            );
+
+
+          let buttonHTML = `
+
+            <button
+              class="friend-btn primary"
+              onclick="sendFriendRequest(
+                '${profile.id}'
+              )"
+            >
+              ADD FRIEND
+            </button>
+
+          `;
+
+
+          if (relationship) {
+
+            if (
+              relationship.status ===
+              "accepted"
+            ) {
+
+              buttonHTML = `
+
+                <button
+                  class="friend-btn"
+                  disabled
+                >
+                  FRIENDS
+                </button>
+
+              `;
+
+            }
+
+            else if (
+              relationship.status ===
+              "pending"
+            ) {
+
+              if (
+                relationship.requested_by ===
+                currentUser.id
+              ) {
+
+                buttonHTML = `
+
+                  <button
+                    class="friend-btn"
+                    disabled
+                  >
+                    REQUEST SENT
+                  </button>
+
+                `;
+
+              } else {
+
+                buttonHTML = `
+
+                  <button
+                    class="friend-btn"
+                    disabled
+                  >
+                    REQUEST RECEIVED
+                  </button>
+
+                `;
+
+              }
+
+            }
+
+            else if (
+              relationship.status ===
+              "declined"
+            ) {
+
+              buttonHTML = `
+
+                <button
+                  class="friend-btn primary"
+                  onclick="sendFriendRequest(
+                    '${profile.id}'
+                  )"
+                >
+                  ADD AGAIN
+                </button>
+
+              `;
+
+            }
+
+          }
+
+
+          return `
+
+            <article
+              class="user-card"
+            >
+
+              ${avatarHTML(profile)}
+
+
+              <div
+                class="user-info"
+              >
+
+                <div
+                  class="display-name"
+                >
+                  ${escapeHTML(
+                    profile.display_name ||
+                    profile.username ||
+                    "UNKNOWN SKATER"
+                  )}
+                </div>
+
+
+                <div
+                  class="username"
+                >
+                  @${escapeHTML(
+                    profile.username ||
+                    "unknown"
+                  )}
+                </div>
+
+
+                <div
+                  class="user-bio"
+                >
+                  ${escapeHTML(
+                    profile.bio ||
+                    "SKATER"
+                  )}
+                </div>
+
+              </div>
+
+
+              ${buttonHTML}
+
+            </article>
+
+          `;
+
+        }
+      ).join("");
+
+  }
+
+
+  /* ==========================================================
+     SEND FRIEND REQUEST
+  ========================================================== */
+
+  async function sendFriendRequest(
+    targetUserId
+  ) {
+
+    try {
+
+      const {
+        error
+      } = await client.rpc(
+        "send_friend_request",
+        {
+          target_user:
+            targetUserId
+        }
+      );
+
+
+      if (error) {
+
+        console.error(error);
+
+        showToast(
+          error.message ||
+          "COULD NOT SEND REQUEST.",
+          true
+        );
+
+        return;
+
+      }
+
+
+      showToast(
+        "FRIEND REQUEST SENT."
+      );
+
+
+      await loadFriendships();
+
+      renderSearchResults();
+
+    } catch (error) {
+
+      console.error(error);
+
+      showToast(
+        "SOMETHING WENT WRONG.",
+        true
+      );
+
+    }
+
+  }
+
+
+  /* ==========================================================
+     SEARCH EVENTS
+  ========================================================== */
+
+  searchButton.addEventListener(
+    "click",
+    searchUsersByName
+  );
+
+
+  searchInput.addEventListener(
+    "keydown",
+    event => {
+
+      if (
+        event.key ===
+        "Enter"
+      ) {
+
+        searchUsersByName();
+
+      }
+
+    }
+  );
+
+
+  /* ==========================================================
+     INITIALIZE
+  ========================================================== */
+
+  async function start() {
+
+    currentUser =
+      await requireUser();
+
+
+    if (!currentUser) {
+
+      return;
+
+    }
+
+
+    await loadFriendships();
+
+  }
+
+
+  start();
+
+
+  /* ==========================================================
+     MAKE FUNCTIONS AVAILABLE TO BUTTONS
+  ========================================================== */
+
+  window.sendFriendRequest =
+    sendFriendRequest;
+
+  window.respondToRequest =
+    respondToRequest;
+
+  window.removeFriend =
+    removeFriend;
+
+</script>
+
+
+</body>
+</html>
+```
