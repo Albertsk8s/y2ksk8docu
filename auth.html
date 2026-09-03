@@ -1,5 +1,5 @@
-```html
 <!DOCTYPE html>
+
 <html lang="en">
 <head>
   <meta charset="UTF-8">
@@ -236,135 +236,137 @@
       }
     }
   </style>
+
 </head>
 
 <body>
 
   <main class="page">
 
-    <div class="brand">
-      <div class="brand-name">
-        y2k<span>sk8</span>docu
-      </div>
+```
+<div class="brand">
+  <div class="brand-name">
+    y2k<span>sk8</span>docu
+  </div>
 
-      <div class="tagline">
-        your skate archive starts here.
-      </div>
+  <div class="tagline">
+    your skate archive starts here.
+  </div>
+</div>
+
+<section class="card">
+
+  <div class="tabs">
+    <button class="tab active" id="loginTab">
+      SIGN IN
+    </button>
+
+    <button class="tab" id="signupTab">
+      CREATE
+    </button>
+  </div>
+
+  <!-- LOGIN -->
+
+  <div id="loginForm">
+
+    <h1>WELCOME BACK.</h1>
+
+    <p class="subtitle">
+      Keep documenting. Keep progressing.
+    </p>
+
+    <div class="field">
+      <label>EMAIL</label>
+      <input
+        id="loginEmail"
+        type="email"
+        placeholder="you@email.com"
+        autocomplete="email"
+      >
     </div>
 
-    <section class="card">
+    <div class="field">
+      <label>PASSWORD</label>
+      <input
+        id="loginPassword"
+        type="password"
+        placeholder="••••••••"
+        autocomplete="current-password"
+      >
+    </div>
 
-      <div class="tabs">
-        <button class="tab active" id="loginTab">
-          SIGN IN
-        </button>
+    <button class="submit" id="loginButton">
+      SIGN IN →
+    </button>
 
-        <button class="tab" id="signupTab">
-          CREATE
-        </button>
-      </div>
+  </div>
 
-      <!-- LOGIN -->
+  <!-- SIGN UP -->
 
-      <div id="loginForm">
+  <div id="signupForm" class="hidden">
 
-        <h1>WELCOME BACK.</h1>
+    <h1>START YOUR ARCHIVE.</h1>
 
-        <p class="subtitle">
-          Keep documenting. Keep progressing.
-        </p>
+    <p class="subtitle">
+      Create your account. Then start stacking tricks.
+    </p>
 
-        <div class="field">
-          <label>EMAIL</label>
-          <input
-            id="loginEmail"
-            type="email"
-            placeholder="you@email.com"
-            autocomplete="email"
-          >
-        </div>
+    <div class="field">
+      <label>USERNAME</label>
+      <input
+        id="signupUsername"
+        type="text"
+        placeholder="skatername"
+        maxlength="24"
+        autocomplete="username"
+      >
+    </div>
 
-        <div class="field">
-          <label>PASSWORD</label>
-          <input
-            id="loginPassword"
-            type="password"
-            placeholder="••••••••"
-            autocomplete="current-password"
-          >
-        </div>
+    <div class="field">
+      <label>EMAIL</label>
+      <input
+        id="signupEmail"
+        type="email"
+        placeholder="you@email.com"
+        autocomplete="email"
+      >
+    </div>
 
-        <button class="submit" id="loginButton">
-          SIGN IN →
-        </button>
+    <div class="field">
+      <label>PASSWORD</label>
+      <input
+        id="signupPassword"
+        type="password"
+        placeholder="at least 6 characters"
+        autocomplete="new-password"
+      >
+    </div>
 
-      </div>
+    <button class="submit" id="signupButton">
+      CREATE ACCOUNT →
+    </button>
 
+  </div>
 
-      <!-- SIGN UP -->
+  <div id="message" class="message"></div>
 
-      <div id="signupForm" class="hidden">
+</section>
 
-        <h1>START YOUR ARCHIVE.</h1>
-
-        <p class="subtitle">
-          Create your account. Then start stacking tricks.
-        </p>
-
-        <div class="field">
-          <label>USERNAME</label>
-          <input
-            id="signupUsername"
-            type="text"
-            placeholder="skatername"
-            maxlength="24"
-            autocomplete="username"
-          >
-        </div>
-
-        <div class="field">
-          <label>EMAIL</label>
-          <input
-            id="signupEmail"
-            type="email"
-            placeholder="you@email.com"
-            autocomplete="email"
-          >
-        </div>
-
-        <div class="field">
-          <label>PASSWORD</label>
-          <input
-            id="signupPassword"
-            type="password"
-            placeholder="at least 6 characters"
-            autocomplete="new-password"
-          >
-        </div>
-
-        <button class="submit" id="signupButton">
-          CREATE ACCOUNT →
-        </button>
-
-      </div>
-
-      <div id="message" class="message"></div>
-
-    </section>
-
-    <a href="index.html" class="back">
-      ← BACK TO Y2KSK8DOCU
-    </a>
+<a href="index.html" class="back">
+  ← BACK TO Y2KSK8DOCU
+</a>
+```
 
   </main>
 
-
   <!-- Supabase library -->
+
   <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
 
   <!-- Your Supabase connection -->
-  <script src="supabase.js"></script>
 
+  <script src="supabase.js"></script>
 
   <script>
 
@@ -433,7 +435,7 @@
       loginButton.textContent = "SIGNING IN...";
 
 
-      const { data, error } =
+      const { error } =
         await supabaseClient.auth.signInWithPassword({
           email,
           password
@@ -451,7 +453,10 @@
       }
 
 
-      showMessage("You're in. Loading your archive...", "success");
+      showMessage(
+        "You're in. Loading your archive...",
+        "success"
+      );
 
       window.location.href = "dashboard.html";
 
@@ -511,12 +516,19 @@
       signupButton.textContent = "CREATING...";
 
 
-      // Create the Supabase authentication account
+      // Create the Supabase authentication account.
+      // The username is saved in user metadata so we can
+      // create the profile after email verification/login.
 
       const { data, error } =
         await supabaseClient.auth.signUp({
           email,
-          password
+          password,
+          options: {
+            data: {
+              username: username
+            }
+          }
         });
 
 
@@ -531,9 +543,14 @@
       }
 
 
-      // Create the user's profile
+      // If Supabase gives us a session immediately,
+      // create the profile now.
+      //
+      // If email confirmation is required, there may be
+      // no session yet. In that case we wait until the
+      // user verifies their email and signs in.
 
-      if (data.user) {
+      if (data.session && data.user) {
 
         const { error: profileError } =
           await supabaseClient
@@ -556,18 +573,21 @@
 
           return;
         }
+
       }
 
 
+      // Email confirmation is ON, so don't redirect
+      // to the dashboard yet.
+
       showMessage(
-        "Account created. Welcome to the archive.",
+        "Account created. Check your email to verify your account, then sign in.",
         "success"
       );
 
 
-      setTimeout(() => {
-        window.location.href = "dashboard.html";
-      }, 1000);
+      signupButton.disabled = false;
+      signupButton.textContent = "CREATE ACCOUNT →";
 
     });
 
@@ -599,4 +619,3 @@
 
 </body>
 </html>
-```
