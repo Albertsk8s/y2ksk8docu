@@ -3,14 +3,25 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-
-  <title>My Tricks — y2ksk8docu</title>
+  <title>Y2KSK8DOCU — Dashboard</title>
 
   <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
   <script src="./supabase.js"></script>
 
   <style>
-    @import url('https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Permanent+Marker&family=Roboto+Mono:wght@400;500;700&display=swap');
+    @import url('https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Inter:wght@400;500;600;700;800;900&family=Permanent+Marker&display=swap');
+
+    :root {
+      --red: #ff1e1e;
+      --red-dark: #a80000;
+      --black: #050505;
+      --black-2: #0d0d0d;
+      --black-3: #151515;
+      --white: #f5f5f5;
+      --gray: #999;
+      --line: rgba(255,255,255,.13);
+      --green: #36ff88;
+    }
 
     * {
       box-sizing: border-box;
@@ -19,13 +30,13 @@
     }
 
     body {
-      background:
-        radial-gradient(circle at 20% 20%, rgba(180, 0, 0, 0.14), transparent 30%),
-        radial-gradient(circle at 80% 80%, rgba(255, 0, 0, 0.08), transparent 30%),
-        #070707;
-      color: #f3f3f3;
-      font-family: "Roboto Mono", monospace;
       min-height: 100vh;
+      background:
+        radial-gradient(circle at 10% 10%, rgba(255,0,0,.08), transparent 30%),
+        radial-gradient(circle at 90% 90%, rgba(255,0,0,.06), transparent 30%),
+        var(--black);
+      color: var(--white);
+      font-family: Inter, Arial, sans-serif;
     }
 
     body::before {
@@ -33,15 +44,15 @@
       position: fixed;
       inset: 0;
       pointer-events: none;
-      opacity: 0.08;
+      opacity: .08;
       background-image:
         repeating-linear-gradient(
           0deg,
           transparent,
           transparent 3px,
-          rgba(255,255,255,0.05) 4px
+          #fff 4px
         );
-      z-index: 999;
+      mix-blend-mode: overlay;
     }
 
     a {
@@ -60,644 +71,605 @@
       cursor: pointer;
     }
 
-    header {
-      width: 100%;
-      border-bottom: 1px solid #242424;
-      background: rgba(5, 5, 5, 0.94);
-      position: sticky;
-      top: 0;
-      z-index: 100;
-      backdrop-filter: blur(10px);
-    }
-
-    .nav {
-      max-width: 1400px;
-      margin: auto;
-      min-height: 82px;
-      padding: 18px 28px;
+    .site-header {
+      height: 78px;
+      border-bottom: 1px solid var(--line);
       display: flex;
       align-items: center;
       justify-content: space-between;
-      gap: 25px;
+      padding: 0 5vw;
+      position: sticky;
+      top: 0;
+      z-index: 20;
+      background: rgba(5,5,5,.92);
+      backdrop-filter: blur(15px);
     }
 
     .logo {
-      font-family: "Permanent Marker", cursive;
-      font-size: 27px;
-      color: #ff1616;
-      text-shadow:
-        2px 2px 0 #650000,
-        0 0 14px rgba(255, 0, 0, 0.3);
-      transform: rotate(-2deg);
-      white-space: nowrap;
+      font-family: "Bebas Neue", sans-serif;
+      font-size: 31px;
+      letter-spacing: 2px;
+      color: var(--white);
     }
 
-    .nav-right {
+    .logo span {
+      color: var(--red);
+    }
+
+    .nav {
       display: flex;
       align-items: center;
-      justify-content: flex-end;
-      gap: 18px;
-      flex-wrap: wrap;
-    }
-
-    .user-name {
-      color: #999;
-      font-size: 12px;
+      gap: 26px;
     }
 
     .nav-link {
+      color: #aaa;
       font-size: 12px;
-      font-weight: 700;
-      letter-spacing: 1px;
-      color: #ddd;
-      transition: 0.2s ease;
+      font-weight: 800;
+      letter-spacing: 1.5px;
+      transition: .2s;
     }
 
     .nav-link:hover {
-      color: #ff1717;
+      color: var(--red);
     }
 
-    .sign-out {
-      border: 1px solid #3a3a3a;
-      background: #111;
-      color: #ddd;
-      padding: 9px 14px;
-      font-size: 11px;
+    .user-name {
+      color: var(--white);
+      font-size: 12px;
+      font-weight: 800;
       letter-spacing: 1px;
-      transition: 0.2s ease;
     }
 
-    .sign-out:hover {
-      border-color: #ff1b1b;
-      color: #ff1b1b;
+    .page {
+      width: min(1200px, 90%);
+      margin: 0 auto;
+      padding: 55px 0 90px;
     }
 
-    main {
-      max-width: 1400px;
-      margin: auto;
-      padding: 65px 28px 100px;
-    }
-
-    .top-section {
+    .top {
       display: flex;
       justify-content: space-between;
-      align-items: flex-end;
       gap: 30px;
-      margin-bottom: 45px;
+      align-items: flex-end;
+      margin-bottom: 42px;
     }
 
     .eyebrow {
-      color: #ff1818;
+      color: var(--red);
       font-size: 11px;
-      font-weight: 700;
-      letter-spacing: 3px;
-      margin-bottom: 10px;
+      font-weight: 900;
+      letter-spacing: 4px;
+      margin-bottom: 8px;
     }
 
     h1 {
       font-family: "Bebas Neue", sans-serif;
-      font-size: clamp(60px, 9vw, 125px);
-      line-height: 0.82;
+      font-size: clamp(55px, 8vw, 92px);
+      line-height: .85;
       letter-spacing: 2px;
-      text-transform: uppercase;
-      color: #f4f4f4;
-      text-shadow: 4px 4px 0 #760000;
     }
 
-    .top-buttons {
+    .top p {
+      margin-top: 14px;
+      color: var(--gray);
+      max-width: 560px;
+      line-height: 1.6;
+      font-size: 14px;
+    }
+
+    .actions {
       display: flex;
       gap: 10px;
       flex-wrap: wrap;
-      justify-content: flex-end;
     }
 
-    .add-button,
-    .session-button {
-      border: none;
-      color: white;
-      padding: 16px 25px;
-      font-weight: 700;
-      font-size: 13px;
-      letter-spacing: 1px;
-      box-shadow: 5px 5px 0 #520000;
-      transition: 0.2s ease;
+    .btn {
+      border: 1px solid var(--red);
+      background: var(--red);
+      color: #fff;
+      padding: 14px 18px;
+      font-weight: 900;
+      font-size: 12px;
+      letter-spacing: 1.3px;
+      text-transform: uppercase;
+      transition: .2s;
     }
 
-    .add-button {
-      background: #e50909;
+    .btn:hover {
+      background: #fff;
+      border-color: #fff;
+      color: #000;
+      transform: translateY(-2px);
     }
 
-    .session-button {
-      background: #242424;
-      border: 1px solid #444;
+    .btn.secondary {
+      background: transparent;
+      color: var(--white);
+      border-color: var(--line);
     }
 
-    .add-button:hover,
-    .session-button:hover {
-      transform: translate(-2px, -2px);
-      box-shadow: 7px 7px 0 #520000;
-    }
-
-    .add-button:hover {
-      background: #ff1717;
-    }
-
-    .session-button:hover {
-      border-color: #ff1717;
-      color: #ff1717;
+    .btn.secondary:hover {
+      border-color: var(--red);
+      color: var(--red);
+      background: transparent;
     }
 
     .stats {
       display: grid;
-      grid-template-columns: repeat(3, 1fr);
-      gap: 14px;
+      grid-template-columns: repeat(4, 1fr);
+      border-top: 1px solid var(--line);
+      border-bottom: 1px solid var(--line);
       margin-bottom: 55px;
     }
 
     .stat {
-      background: #101010;
-      border: 1px solid #262626;
-      padding: 25px;
-      position: relative;
-      overflow: hidden;
+      padding: 25px 20px;
+      border-right: 1px solid var(--line);
     }
 
-    .stat::after {
-      content: "";
-      position: absolute;
-      width: 70px;
-      height: 70px;
-      right: -30px;
-      bottom: -30px;
-      border: 1px solid #3a0000;
-      transform: rotate(45deg);
+    .stat:last-child {
+      border-right: none;
+    }
+
+    .stat-number {
+      font-family: "Bebas Neue", sans-serif;
+      font-size: 48px;
+      color: var(--red);
+      line-height: 1;
     }
 
     .stat-label {
-      color: #777;
+      margin-top: 7px;
+      color: #888;
       font-size: 10px;
       letter-spacing: 2px;
-      margin-bottom: 12px;
+      font-weight: 900;
     }
 
-    .stat-value {
-      font-family: "Bebas Neue", sans-serif;
-      font-size: 45px;
-      color: #ff1b1b;
-    }
-
-    .archive-heading {
+    .section-head {
       display: flex;
       justify-content: space-between;
       align-items: center;
-      border-bottom: 1px solid #292929;
-      padding-bottom: 14px;
       margin-bottom: 20px;
     }
 
-    .archive-heading h2 {
+    .section-head h2 {
       font-family: "Bebas Neue", sans-serif;
-      font-size: 36px;
+      font-size: 38px;
       letter-spacing: 1px;
     }
 
-    .archive-heading span {
-      color: #666;
-      font-size: 10px;
+    .section-head span {
+      color: #777;
+      font-size: 11px;
       letter-spacing: 2px;
+      font-weight: 800;
     }
 
-    .trick-grid {
+    .tricks {
       display: grid;
       grid-template-columns: repeat(3, 1fr);
       gap: 16px;
     }
 
     .trick-card {
-      background: #0f0f0f;
-      border: 1px solid #292929;
-      padding: 25px;
+      background: var(--black-2);
+      border: 1px solid var(--line);
+      padding: 22px;
+      min-height: 220px;
       position: relative;
-      transition: 0.2s ease;
+      overflow: hidden;
+      transition: .2s;
     }
 
     .trick-card:hover {
-      border-color: #7c1010;
+      border-color: var(--red);
       transform: translateY(-3px);
     }
 
-    .trick-category {
-      color: #ff1717;
+    .trick-card::after {
+      content: "";
+      position: absolute;
+      right: -30px;
+      bottom: -55px;
+      width: 130px;
+      height: 130px;
+      border: 2px solid rgba(255,30,30,.12);
+      transform: rotate(25deg);
+    }
+
+    .category {
+      color: var(--red);
       font-size: 10px;
       letter-spacing: 2px;
+      font-weight: 900;
       text-transform: uppercase;
-      margin-bottom: 12px;
+      margin-bottom: 10px;
     }
 
     .trick-name {
       font-family: "Bebas Neue", sans-serif;
-      font-size: 38px;
+      font-size: 34px;
       letter-spacing: 1px;
-      margin-bottom: 20px;
-      line-height: 0.95;
+      margin-bottom: 16px;
     }
 
-    .confidence-label {
+    .confidence {
       display: flex;
-      justify-content: space-between;
+      gap: 5px;
+      margin-bottom: 17px;
+    }
+
+    .confidence span {
+      height: 8px;
+      flex: 1;
+      background: #292929;
+    }
+
+    .confidence span.active {
+      background: var(--red);
+    }
+
+    .confidence-text {
       color: #777;
       font-size: 10px;
-      margin-bottom: 8px;
-      letter-spacing: 1px;
+      letter-spacing: 1.5px;
+      font-weight: 800;
+      margin-bottom: 17px;
     }
 
-    .confidence-bar {
-      height: 7px;
-      width: 100%;
-      background: #242424;
-      overflow: hidden;
-      margin-bottom: 20px;
-    }
-
-    .confidence-fill {
-      height: 100%;
-      background: #e50909;
-    }
-
-    .trick-notes {
+    .notes {
       color: #999;
-      font-size: 11px;
-      line-height: 1.7;
-      min-height: 42px;
-      margin-bottom: 22px;
+      font-size: 12px;
+      line-height: 1.5;
+      min-height: 38px;
+    }
+
+    .card-footer {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-top: 22px;
     }
 
     .visibility {
-      display: inline-block;
-      padding: 5px 8px;
       font-size: 9px;
-      letter-spacing: 1px;
-      border: 1px solid #333;
-      color: #888;
-      margin-bottom: 18px;
+      letter-spacing: 1.5px;
+      font-weight: 900;
+      color: #777;
     }
 
-    .card-actions {
+    .card-links {
       display: flex;
-      gap: 8px;
-      flex-wrap: wrap;
+      gap: 12px;
     }
 
-    .card-button {
-      border: 1px solid #333;
-      background: #151515;
-      color: #ddd;
-      padding: 9px 12px;
+    .card-link {
       font-size: 10px;
       letter-spacing: 1px;
-      transition: 0.2s ease;
-    }
-
-    .card-button:hover {
-      border-color: #ff1717;
-      color: #ff1717;
-    }
-
-    .card-button.primary {
-      background: #b90000;
-      border-color: #b90000;
-      color: white;
-    }
-
-    .card-button.primary:hover {
-      background: #e50909;
-      border-color: #e50909;
-      color: white;
+      font-weight: 900;
+      color: var(--red);
     }
 
     .empty {
       border: 1px dashed #333;
-      padding: 70px 25px;
+      padding: 50px;
       text-align: center;
       color: #777;
+      grid-column: 1 / -1;
     }
 
     .empty h3 {
-      font-family: "Bebas Neue", sans-serif;
       color: #ddd;
-      font-size: 42px;
-      margin-bottom: 10px;
+      font-family: "Bebas Neue", sans-serif;
+      font-size: 32px;
+      margin-bottom: 8px;
     }
 
-    .empty p {
-      font-size: 11px;
-      margin-bottom: 25px;
-    }
+    /* MODAL */
 
     .modal-backdrop {
+      display: none;
       position: fixed;
       inset: 0;
-      background: rgba(0, 0, 0, 0.82);
-      display: none;
+      z-index: 100;
+      background: rgba(0,0,0,.82);
+      backdrop-filter: blur(8px);
       align-items: center;
       justify-content: center;
       padding: 20px;
-      z-index: 500;
-      backdrop-filter: blur(6px);
     }
 
-    .modal-backdrop.show {
+    .modal-backdrop.open {
       display: flex;
     }
 
     .modal {
-      width: min(600px, 100%);
-      max-height: 90vh;
+      width: min(620px, 100%);
+      max-height: 92vh;
       overflow-y: auto;
-      background: #0d0d0d;
-      border: 1px solid #3c3c3c;
-      box-shadow: 12px 12px 0 #500000;
-      padding: 32px;
+      background: #090909;
+      border: 1px solid #333;
+      box-shadow: 0 25px 80px rgba(0,0,0,.7);
+      padding: 28px;
     }
 
-    .modal h2 {
-      font-family: "Bebas Neue", sans-serif;
-      font-size: 48px;
-      margin-bottom: 5px;
-    }
-
-    .modal-subtitle {
-      color: #777;
-      font-size: 10px;
-      letter-spacing: 1px;
+    .modal-head {
+      display: flex;
+      justify-content: space-between;
+      align-items: flex-start;
       margin-bottom: 28px;
     }
 
-    .form-group {
-      margin-bottom: 20px;
+    .modal-title {
+      font-family: "Bebas Neue", sans-serif;
+      font-size: 42px;
+      letter-spacing: 1px;
     }
 
-    label {
-      display: block;
-      color: #999;
+    .modal-sub {
+      color: #777;
       font-size: 10px;
-      letter-spacing: 1.5px;
+      letter-spacing: 2px;
+      margin-top: 4px;
+    }
+
+    .close {
+      background: none;
+      border: 0;
+      color: #777;
+      font-size: 25px;
+    }
+
+    .close:hover {
+      color: var(--red);
+    }
+
+    .field {
+      margin-bottom: 19px;
+    }
+
+    .field label {
+      display: block;
+      color: #aaa;
+      font-size: 10px;
+      font-weight: 900;
+      letter-spacing: 1.7px;
       margin-bottom: 8px;
       text-transform: uppercase;
     }
 
-    input,
-    textarea,
-    select {
+    .field input,
+    .field textarea,
+    .field select {
       width: 100%;
-      background: #151515;
-      border: 1px solid #333;
-      color: white;
+      background: #111;
+      color: #fff;
+      border: 1px solid #292929;
       padding: 13px;
       outline: none;
       border-radius: 0;
     }
 
-    input:focus,
-    textarea:focus,
-    select:focus {
-      border-color: #d20b0b;
+    .field input:focus,
+    .field textarea:focus,
+    .field select:focus {
+      border-color: var(--red);
     }
 
-    textarea {
-      min-height: 110px;
+    .field textarea {
+      min-height: 95px;
       resize: vertical;
     }
 
-    .confidence-options {
+    .radio-line {
+      display: flex;
+      gap: 10px;
+    }
+
+    .radio-option {
+      flex: 1;
+      border: 1px solid #292929;
+      padding: 13px;
+      text-align: center;
+      color: #777;
+      font-size: 11px;
+      font-weight: 900;
+      cursor: pointer;
+      transition: .2s;
+    }
+
+    .radio-option input {
+      display: none;
+    }
+
+    .radio-option.selected {
+      border-color: var(--red);
+      color: #fff;
+      background: rgba(255,30,30,.08);
+    }
+
+    .confidence-picker {
       display: grid;
       grid-template-columns: repeat(5, 1fr);
       gap: 7px;
     }
 
-    .confidence-option {
-      position: relative;
+    .confidence-btn {
+      padding: 12px 5px;
+      background: #111;
+      border: 1px solid #292929;
+      color: #777;
+      font-weight: 900;
     }
 
-    .confidence-option input {
-      position: absolute;
-      opacity: 0;
-      pointer-events: none;
+    .confidence-btn.active {
+      background: var(--red);
+      border-color: var(--red);
+      color: #fff;
     }
 
-    .confidence-option label {
-      border: 1px solid #333;
-      background: #151515;
-      padding: 13px 5px;
+    .file-box {
+      border: 1px dashed #333;
+      padding: 17px;
       text-align: center;
-      color: #888;
-      cursor: pointer;
-      margin: 0;
-      font-size: 13px;
     }
 
-    .confidence-option input:checked + label {
-      background: #b60000;
-      border-color: #ff1717;
-      color: white;
+    .file-box input {
+      border: 0;
+      padding: 0;
+      background: transparent;
     }
 
-    .file-note {
-      color: #666;
-      font-size: 9px;
+    .file-name {
+      color: #777;
+      font-size: 10px;
+      margin-top: 8px;
+    }
+
+    .modal-actions {
+      display: flex;
+      gap: 10px;
+      margin-top: 28px;
+    }
+
+    .modal-actions .btn {
+      flex: 1;
+    }
+
+    .loading {
+      color: #777;
+      padding: 35px;
+      text-align: center;
+      letter-spacing: 2px;
+      font-size: 11px;
+    }
+
+    .error {
+      color: var(--red);
+      font-size: 12px;
+      margin-top: 10px;
       line-height: 1.5;
-      margin-top: 7px;
     }
 
-    .trick-selector {
-      border: 1px solid #333;
-      background: #090909;
+    .success {
+      color: var(--green);
+      font-size: 12px;
+      margin-top: 10px;
+    }
+
+    /* SESSION TRICK LIST */
+
+    .trick-list {
+      border: 1px solid #252525;
       max-height: 240px;
       overflow-y: auto;
     }
 
     .trick-choice {
-      position: relative;
-      border-bottom: 1px solid #242424;
+      display: flex;
+      align-items: center;
+      gap: 13px;
+      padding: 14px;
+      border-bottom: 1px solid #202020;
+      cursor: pointer;
+      transition: .15s;
     }
 
     .trick-choice:last-child {
-      border-bottom: none;
+      border-bottom: 0;
+    }
+
+    .trick-choice:hover {
+      background: #151515;
+    }
+
+    .trick-choice.selected {
+      background: rgba(255,30,30,.09);
     }
 
     .trick-choice input {
-      position: absolute;
-      opacity: 0;
-      pointer-events: none;
+      accent-color: var(--red);
     }
 
-    .trick-choice label {
-      display: flex;
-      align-items: center;
-      gap: 14px;
-      padding: 15px 16px;
-      margin: 0;
-      color: #bbb;
-      cursor: pointer;
-      transition: 0.15s ease;
-    }
-
-    .trick-choice label::before {
-      content: "○";
-      color: #666;
-      font-size: 19px;
-      line-height: 1;
-    }
-
-    .trick-choice input:checked + label {
-      background: #240000;
-      color: white;
-    }
-
-    .trick-choice input:checked + label::before {
-      content: "●";
-      color: #ff1717;
-    }
-
-    .trick-choice label:hover {
-      background: #151515;
-      color: white;
+    .trick-choice-name {
+      font-family: "Bebas Neue", sans-serif;
+      font-size: 21px;
     }
 
     .trick-choice-category {
       margin-left: auto;
       color: #666;
-      font-size: 8px;
+      font-size: 9px;
       letter-spacing: 1px;
+      text-transform: uppercase;
     }
 
-    .no-tricks-message {
-      border: 1px dashed #333;
-      padding: 20px;
-      color: #666;
-      text-align: center;
-      font-size: 10px;
-      line-height: 1.6;
-    }
-
-    .modal-buttons {
-      display: flex;
-      gap: 10px;
-      justify-content: flex-end;
-      margin-top: 30px;
-    }
-
-    .modal-button {
-      padding: 12px 18px;
-      border: 1px solid #333;
-      background: #151515;
-      color: #ddd;
-      font-size: 11px;
-      letter-spacing: 1px;
-    }
-
-    .modal-button:hover {
-      border-color: #aaa;
-    }
-
-    .modal-button.save {
-      background: #d30909;
-      border-color: #d30909;
-      color: white;
-    }
-
-    .modal-button.save:hover {
-      background: #ff1717;
-    }
-
-    .error {
-      color: #ff4444;
-      font-size: 11px;
-      margin-top: 12px;
-      display: none;
-      line-height: 1.5;
-    }
-
-    .success {
-      color: #62ff87;
-      font-size: 11px;
-      margin-top: 12px;
-      display: none;
-      line-height: 1.5;
-    }
-
-    @media (max-width: 950px) {
-      .trick-grid {
+    @media (max-width: 850px) {
+      .tricks {
         grid-template-columns: repeat(2, 1fr);
-      }
-    }
-
-    @media (max-width: 700px) {
-      .nav {
-        align-items: flex-start;
-        flex-direction: column;
-      }
-
-      .nav-right {
-        width: 100%;
-        justify-content: flex-start;
-      }
-
-      main {
-        padding: 45px 18px 80px;
-      }
-
-      .top-section {
-        flex-direction: column;
-        align-items: flex-start;
-      }
-
-      .top-buttons {
-        width: 100%;
-        justify-content: flex-start;
       }
 
       .stats {
-        grid-template-columns: 1fr;
+        grid-template-columns: repeat(2, 1fr);
       }
 
-      .trick-grid {
-        grid-template-columns: 1fr;
+      .stat:nth-child(2) {
+        border-right: none;
       }
 
-      h1 {
-        font-size: 75px;
+      .stat:nth-child(-n+2) {
+        border-bottom: 1px solid var(--line);
+      }
+
+      .top {
+        align-items: flex-start;
+        flex-direction: column;
       }
     }
 
-    @media (max-width: 450px) {
-      .nav-right {
-        gap: 11px;
+    @media (max-width: 600px) {
+      .site-header {
+        height: auto;
+        min-height: 70px;
+        padding: 15px 5%;
+        align-items: flex-start;
+      }
+
+      .nav {
+        gap: 12px;
+        flex-wrap: wrap;
+        justify-content: flex-end;
       }
 
       .user-name {
-        width: 100%;
+        display: none;
+      }
+
+      .tricks {
+        grid-template-columns: 1fr;
+      }
+
+      .stats {
+        grid-template-columns: 1fr 1fr;
+      }
+
+      .stat {
+        padding: 20px 12px;
+      }
+
+      .stat-number {
+        font-size: 39px;
+      }
+
+      .page {
+        width: 92%;
+        padding-top: 35px;
       }
 
       .modal {
-        padding: 22px;
-      }
-
-      .modal-buttons {
-        flex-direction: column;
-      }
-
-      .modal-button {
-        width: 100%;
-      }
-
-      .top-buttons {
-        flex-direction: column;
-      }
-
-      .add-button,
-      .session-button {
-        width: 100%;
+        padding: 20px;
       }
     }
   </style>
@@ -705,491 +677,433 @@
 
 <body>
 
-<header>
+<header class="site-header">
+  <a href="./index.html" class="logo">
+    Y2K<span>SK8</span>DOCU
+  </a>
+
   <nav class="nav">
-
-    <a href="./index.html" class="logo">
-      y2ksk8docu
-    </a>
-
-    <div class="nav-right">
-
-      <span id="userName" class="user-name">
-        LOADING...
-      </span>
-
-      <a href="./explore.html" class="nav-link">
-        EXPLORE
-      </a>
-
-      <a href="./account.html" class="nav-link">
-        ACCOUNT
-      </a>
-
-      <button id="signOutButton" class="sign-out">
-        SIGN OUT
-      </button>
-
-    </div>
-
+    <span id="userName" class="user-name">LOADING...</span>
+    <a href="./messages.html" class="nav-link">MESSAGES</a>
+    <a href="./explore.html" class="nav-link">EXPLORE</a>
+    <a href="./account.html" class="nav-link">ACCOUNT</a>
+    <button id="signOutBtn" class="nav-link" style="background:none;border:0;">SIGN OUT</button>
   </nav>
 </header>
 
-<main>
+<main class="page">
 
-  <section class="top-section">
-
+  <section class="top">
     <div>
-      <div class="eyebrow">
-        YOUR SKATE ARCHIVE
-      </div>
-
-      <h1>
-        MY<br>
-        TRICKS.
-      </h1>
+      <div class="eyebrow">YOUR SKATE ARCHIVE</div>
+      <h1>DASHBOARD</h1>
+      <p>
+        Track tricks, log progression, save clips, and build your personal
+        skate history one session at a time.
+      </p>
     </div>
 
-    <div class="top-buttons">
-
-      <button id="newSessionButton" class="session-button">
-        + NEW SESSION
-      </button>
-
-      <button id="addTrickButton" class="add-button">
-        + ADD TRICK
-      </button>
-
+    <div class="actions">
+      <button class="btn secondary" id="newSessionBtn">+ NEW SESSION</button>
+      <button class="btn" id="addTrickBtn">+ ADD TRICK</button>
     </div>
-
   </section>
 
   <section class="stats">
-
     <div class="stat">
-      <div class="stat-label">
-        TRICKS LOGGED
-      </div>
-
-      <div id="tricksCount" class="stat-value">
-        0
-      </div>
+      <div class="stat-number" id="trickCount">0</div>
+      <div class="stat-label">TRICKS</div>
     </div>
 
     <div class="stat">
-      <div class="stat-label">
-        AVERAGE CONFIDENCE
-      </div>
-
-      <div id="averageConfidence" class="stat-value">
-        0.0
-      </div>
+      <div class="stat-number" id="sessionCount">0</div>
+      <div class="stat-label">SESSIONS</div>
     </div>
 
     <div class="stat">
-      <div class="stat-label">
-        PUBLIC TRICKS
-      </div>
-
-      <div id="publicCount" class="stat-value">
-        0
-      </div>
+      <div class="stat-number" id="clipCount">0</div>
+      <div class="stat-label">CLIPS</div>
     </div>
 
+    <div class="stat">
+      <div class="stat-number" id="avgConfidence">0</div>
+      <div class="stat-label">AVG CONFIDENCE</div>
+    </div>
   </section>
 
   <section>
-
-    <div class="archive-heading">
-
-      <h2>
-        TRICK ARCHIVE
-      </h2>
-
-      <span id="archiveStatus">
-        LOADING...
-      </span>
-
+    <div class="section-head">
+      <h2>TRICK ARCHIVE</h2>
+      <span id="archiveStatus">LOADING...</span>
     </div>
 
-    <div id="trickGrid" class="trick-grid"></div>
-
+    <div id="trickGrid" class="tricks">
+      <div class="loading">LOADING ARCHIVE...</div>
+    </div>
   </section>
 
 </main>
 
 
+<!-- ========================================================= -->
 <!-- ADD / EDIT TRICK MODAL -->
+<!-- ========================================================= -->
 
-<div id="modalBackdrop" class="modal-backdrop">
-
+<div class="modal-backdrop" id="trickModal">
   <div class="modal">
 
-    <h2 id="modalTitle">
-      ADD TRICK
-    </h2>
+    <div class="modal-head">
+      <div>
+        <div class="modal-title" id="trickModalTitle">ADD TRICK</div>
+        <div class="modal-sub">BUILD YOUR ARCHIVE</div>
+      </div>
 
-    <div class="modal-subtitle">
-      LOG IT. REMEMBER IT. GET BETTER.
+      <button class="close" id="closeTrickModal">&times;</button>
     </div>
 
     <form id="trickForm">
 
-      <div class="form-group">
+      <input type="hidden" id="editingTrickId" />
 
-        <label for="trickName">
-          Trick Name
-        </label>
-
+      <div class="field">
+        <label>Trick Name</label>
         <input
           id="trickName"
           type="text"
-          placeholder="e.g. Kickflip"
+          placeholder="KICKFLIP"
+          maxlength="100"
           required
         />
-
       </div>
 
-      <div class="form-group">
-
-        <label for="trickCategory">
-          Category
-        </label>
-
+      <div class="field">
+        <label>Category</label>
         <input
           id="trickCategory"
           type="text"
-          placeholder="e.g. Flip / Street / Grind"
+          placeholder="FLATGROUND / GRIND / FLIP / ETC."
+          maxlength="60"
         />
-
       </div>
 
-      <div class="form-group">
+      <div class="field">
+        <label>Confidence</label>
 
-        <label>
-          Confidence
-        </label>
-
-        <div class="confidence-options">
-
-          <div class="confidence-option">
-            <input type="radio" name="confidence" id="confidence1" value="1" />
-            <label for="confidence1">1</label>
-          </div>
-
-          <div class="confidence-option">
-            <input type="radio" name="confidence" id="confidence2" value="2" />
-            <label for="confidence2">2</label>
-          </div>
-
-          <div class="confidence-option">
-            <input type="radio" name="confidence" id="confidence3" value="3" />
-            <label for="confidence3">3</label>
-          </div>
-
-          <div class="confidence-option">
-            <input type="radio" name="confidence" id="confidence4" value="4" />
-            <label for="confidence4">4</label>
-          </div>
-
-          <div class="confidence-option">
-            <input type="radio" name="confidence" id="confidence5" value="5" />
-            <label for="confidence5">5</label>
-          </div>
-
+        <div class="confidence-picker" id="trickConfidencePicker">
+          <button type="button" class="confidence-btn" data-value="1">1</button>
+          <button type="button" class="confidence-btn" data-value="2">2</button>
+          <button type="button" class="confidence-btn" data-value="3">3</button>
+          <button type="button" class="confidence-btn" data-value="4">4</button>
+          <button type="button" class="confidence-btn" data-value="5">5</button>
         </div>
-
       </div>
 
-      <div class="form-group">
-
-        <label for="trickNotes">
-          Notes
-        </label>
-
+      <div class="field">
+        <label>Notes</label>
         <textarea
           id="trickNotes"
-          placeholder="How does it feel? What needs work?"
+          placeholder="WHAT DO YOU WANT TO IMPROVE?"
         ></textarea>
-
       </div>
 
-      <!-- NEW: OPTIONAL FIRST CLIP -->
+      <div id="firstClipFields">
 
-      <div class="form-group" id="addTrickClipGroup">
+        <div class="field">
+          <label>First Clip — Optional</label>
 
-        <label for="trickVideoFile">
-          Add Clip
-        </label>
+          <div class="file-box">
+            <input id="trickVideo" type="file" accept="video/*" />
+            <div id="trickFileName" class="file-name">
+              NO VIDEO SELECTED
+            </div>
+          </div>
+        </div>
 
-        <input
-          type="file"
-          id="trickVideoFile"
-          accept="video/*"
-        />
+        <div class="field">
+          <label>Clip Visibility</label>
 
-        <div class="file-note">
-          OPTIONAL — THIS CLIP WILL BECOME THE FIRST SESSION FOR THIS TRICK.
+          <div class="radio-line">
+            <label class="radio-option selected" id="trickClipPrivate">
+              <input
+                type="radio"
+                name="trickClipVisibility"
+                value="private"
+                checked
+              />
+              PRIVATE
+            </label>
+
+            <label class="radio-option" id="trickClipPublic">
+              <input
+                type="radio"
+                name="trickClipVisibility"
+                value="public"
+              />
+              PUBLIC
+            </label>
+          </div>
         </div>
 
       </div>
 
-      <div class="form-group">
+      <div class="field">
+        <label>Trick Visibility</label>
 
-        <label for="trickVisibility">
-          Trick Visibility
-        </label>
+        <div class="radio-line">
+          <label class="radio-option selected" id="trickPrivate">
+            <input
+              type="radio"
+              name="trickVisibility"
+              value="private"
+              checked
+            />
+            PRIVATE
+          </label>
 
-        <select id="trickVisibility">
-
-          <option value="private">
-            PRIVATE — ONLY YOU
-          </option>
-
-          <option value="public">
-            PUBLIC — SHOW THE SKATE WORLD
-          </option>
-
-        </select>
-
+          <label class="radio-option" id="trickPublic">
+            <input
+              type="radio"
+              name="trickVisibility"
+              value="public"
+            />
+            PUBLIC
+          </label>
+        </div>
       </div>
 
-      <div class="form-group" id="clipVisibilityGroup">
+      <div id="trickFormMessage"></div>
 
-        <label for="clipVisibility">
-          Clip Visibility
-        </label>
-
-        <select id="clipVisibility">
-
-          <option value="private">
-            PRIVATE — ONLY YOU
-          </option>
-
-          <option value="public">
-            PUBLIC — EVERYONE
-          </option>
-
-        </select>
-
-      </div>
-
-      <div id="formError" class="error"></div>
-
-      <div class="modal-buttons">
-
-        <button
-          type="button"
-          id="cancelButton"
-          class="modal-button"
-        >
+      <div class="modal-actions">
+        <button type="button" class="btn secondary" id="cancelTrickBtn">
           CANCEL
         </button>
 
-        <button
-          type="submit"
-          class="modal-button save"
-        >
+        <button type="submit" class="btn" id="saveTrickBtn">
           SAVE TRICK
         </button>
-
       </div>
 
     </form>
-
   </div>
-
 </div>
 
 
+<!-- ========================================================= -->
 <!-- NEW SESSION MODAL -->
+<!-- ========================================================= -->
 
-<div id="sessionModalBackdrop" class="modal-backdrop">
-
+<div class="modal-backdrop" id="sessionModal">
   <div class="modal">
 
-    <h2>
-      NEW SESSION
-    </h2>
+    <div class="modal-head">
+      <div>
+        <div class="modal-title">NEW SESSION</div>
+        <div class="modal-sub">LOG ANOTHER ATTEMPT</div>
+      </div>
 
-    <div class="modal-subtitle">
-      PICK THE TRICK. LOG THE SESSION. KEEP PROGRESSING.
+      <button class="close" id="closeSessionModal">&times;</button>
     </div>
 
     <form id="sessionForm">
 
-      <div class="form-group">
+      <div class="field">
+        <label>Select A Trick</label>
 
-        <label>
-          Select A Trick
-        </label>
-
-        <div id="trickSelector" class="trick-selector"></div>
-
-      </div>
-
-      <div class="form-group">
-
-        <label>
-          Confidence
-        </label>
-
-        <div class="confidence-options">
-
-          <div class="confidence-option">
-            <input type="radio" name="sessionConfidence" id="sessionConfidence1" value="1" />
-            <label for="sessionConfidence1">1</label>
-          </div>
-
-          <div class="confidence-option">
-            <input type="radio" name="sessionConfidence" id="sessionConfidence2" value="2" />
-            <label for="sessionConfidence2">2</label>
-          </div>
-
-          <div class="confidence-option">
-            <input type="radio" name="sessionConfidence" id="sessionConfidence3" value="3" />
-            <label for="sessionConfidence3">3</label>
-          </div>
-
-          <div class="confidence-option">
-            <input type="radio" name="sessionConfidence" id="sessionConfidence4" value="4" />
-            <label for="sessionConfidence4">4</label>
-          </div>
-
-          <div class="confidence-option">
-            <input type="radio" name="sessionConfidence" id="sessionConfidence5" value="5" />
-            <label for="sessionConfidence5">5</label>
-          </div>
-
+        <div id="sessionTrickList" class="trick-list">
+          <div class="loading">LOADING TRICKS...</div>
         </div>
-
       </div>
 
-      <div class="form-group">
+      <div class="field">
+        <label>Confidence</label>
 
-        <label for="sessionNotes">
-          Session Notes
-        </label>
+        <div class="confidence-picker" id="sessionConfidencePicker">
+          <button type="button" class="confidence-btn" data-value="1">1</button>
+          <button type="button" class="confidence-btn" data-value="2">2</button>
+          <button type="button" class="confidence-btn" data-value="3">3</button>
+          <button type="button" class="confidence-btn" data-value="4">4</button>
+          <button type="button" class="confidence-btn" data-value="5">5</button>
+        </div>
+      </div>
+
+      <div class="field">
+        <label>Session Notes</label>
 
         <textarea
           id="sessionNotes"
-          placeholder="What happened during this session?"
+          placeholder="WHAT HAPPENED TODAY?"
         ></textarea>
-
       </div>
 
-      <div class="form-group">
+      <div class="field">
+        <label>Clip — Optional</label>
 
-        <label for="sessionVideoFile">
-          Clip
-        </label>
-
-        <input
-          type="file"
-          id="sessionVideoFile"
-          accept="video/*"
-        />
-
-        <div class="file-note">
-          OPTIONAL — ADD A CLIP FROM THIS SESSION.
+        <div class="file-box">
+          <input id="sessionVideo" type="file" accept="video/*" />
+          <div id="sessionFileName" class="file-name">
+            NO VIDEO SELECTED
+          </div>
         </div>
-
       </div>
 
-      <div class="form-group">
+      <div class="field">
+        <label>Clip Visibility</label>
 
-        <label for="sessionVisibility">
-          Clip Visibility
-        </label>
+        <div class="radio-line">
+          <label class="radio-option selected" id="sessionClipPrivate">
+            <input
+              type="radio"
+              name="sessionClipVisibility"
+              value="private"
+              checked
+            />
+            PRIVATE
+          </label>
 
-        <select id="sessionVisibility">
-
-          <option value="private">
-            PRIVATE — ONLY YOU
-          </option>
-
-          <option value="public">
-            PUBLIC — EVERYONE
-          </option>
-
-        </select>
-
+          <label class="radio-option" id="sessionClipPublic">
+            <input
+              type="radio"
+              name="sessionClipVisibility"
+              value="public"
+            />
+            PUBLIC
+          </label>
+        </div>
       </div>
 
-      <div id="sessionFormError" class="error"></div>
+      <div id="sessionFormMessage"></div>
 
-      <div id="sessionFormSuccess" class="success"></div>
-
-      <div class="modal-buttons">
-
-        <button
-          type="button"
-          id="sessionCancelButton"
-          class="modal-button"
-        >
+      <div class="modal-actions">
+        <button type="button" class="btn secondary" id="cancelSessionBtn">
           CANCEL
         </button>
 
-        <button
-          type="submit"
-          id="sessionSubmitButton"
-          class="modal-button save"
-        >
+        <button type="submit" class="btn" id="saveSessionBtn">
           LOG SESSION
         </button>
-
       </div>
 
     </form>
-
   </div>
-
 </div>
 
 
 <script>
-
   const client = window.supabaseClient;
 
   let currentUser = null;
-  let editingTrickId = null;
   let tricks = [];
 
+  let trickConfidence = 1;
+  let sessionConfidence = 1;
 
-  /*
-    ----------------------------------------
-    AUTH
-    ----------------------------------------
-  */
 
-  async function checkAuth() {
+  /* =========================================================
+     AUTH
+  ========================================================= */
 
+  async function requireUser() {
     const {
-      data: { session },
+      data: { user },
       error
-    } = await client.auth.getSession();
+    } = await client.auth.getUser();
 
-    if (error || !session) {
-
+    if (error || !user) {
       window.location.href = "./auth.html";
-      return false;
-
+      return null;
     }
 
-    currentUser = session.user;
-
-    return true;
+    currentUser = user;
+    return user;
   }
 
 
-  /*
-    ----------------------------------------
-    PROFILE
-    ----------------------------------------
-  */
+  /* =========================================================
+     HELPERS
+  ========================================================= */
+
+  function escapeHTML(value) {
+    return String(value ?? "")
+      .replace(/&/g, "&amp;")
+      .replace(/</g, "&lt;")
+      .replace(/>/g, "&gt;")
+      .replace(/"/g, "&quot;")
+      .replace(/'/g, "&#039;");
+  }
+
+
+  function selectedRadio(name) {
+    const radio = document.querySelector(
+      `input[name="${name}"]:checked`
+    );
+
+    return radio ? radio.value : null;
+  }
+
+
+  function setRadioVisual(name) {
+    document.querySelectorAll(
+      `input[name="${name}"]`
+    ).forEach(input => {
+      const parent = input.closest(".radio-option");
+
+      if (!parent) return;
+
+      parent.classList.toggle(
+        "selected",
+        input.checked
+      );
+    });
+  }
+
+
+  function setConfidence(pickerId, value) {
+    document
+      .querySelectorAll(`#${pickerId} .confidence-btn`)
+      .forEach(button => {
+        button.classList.toggle(
+          "active",
+          Number(button.dataset.value) === Number(value)
+        );
+      });
+  }
+
+
+  function showMessage(elementId, message, type = "error") {
+    const element = document.getElementById(elementId);
+
+    element.innerHTML = `
+      <div class="${type}">
+        ${escapeHTML(message)}
+      </div>
+    `;
+  }
+
+
+  function clearMessage(elementId) {
+    document.getElementById(elementId).innerHTML = "";
+  }
+
+
+  function closeModal(id) {
+    document
+      .getElementById(id)
+      .classList.remove("open");
+  }
+
+
+  function openModal(id) {
+    document
+      .getElementById(id)
+      .classList.add("open");
+  }
+
+
+  /* =========================================================
+     PROFILE
+  ========================================================= */
 
   async function loadProfile() {
-
     const { data, error } = await client
       .from("profiles")
       .select("username, display_name")
@@ -1197,131 +1111,117 @@
       .maybeSingle();
 
     if (error) {
-
-      console.error("Profile error:", error);
-
-      document.getElementById("userName").textContent =
-        currentUser.email || "SKATER";
-
+      console.error(error);
       return;
     }
 
     if (data) {
-
       document.getElementById("userName").textContent =
-        "@" + data.username;
-
-    } else {
-
-      document.getElementById("userName").textContent =
-        currentUser.email || "SKATER";
-
+        data.display_name ||
+        data.username ||
+        "SKATER";
     }
   }
 
 
-  /*
-    ----------------------------------------
-    LOAD TRICKS
-    ----------------------------------------
-  */
+  /* =========================================================
+     LOAD DASHBOARD
+  ========================================================= */
 
-  async function loadTricks() {
-
-    document.getElementById("archiveStatus").textContent =
-      "LOADING...";
+  async function loadDashboard() {
 
     const { data, error } = await client
       .from("tricks")
       .select("*")
       .eq("user_id", currentUser.id)
-      .order("created_at", { ascending: false });
+      .order("created_at", {
+        ascending: false
+      });
 
     if (error) {
+      console.error(error);
 
-      console.error("Tricks error:", error);
-
-      document.getElementById("archiveStatus").textContent =
-        "ERROR";
-
-      showFormError(
-        "Could not load your tricks."
-      );
+      document.getElementById("trickGrid").innerHTML = `
+        <div class="empty">
+          <h3>COULDN'T LOAD ARCHIVE</h3>
+          <p>${escapeHTML(error.message)}</p>
+        </div>
+      `;
 
       return;
     }
 
     tricks = data || [];
 
-    renderStats();
+    await loadStats();
     renderTricks();
-    renderTrickSelector();
+    renderSessionTricks();
+  }
+
+
+  /* =========================================================
+     STATS
+  ========================================================= */
+
+  async function loadStats() {
+
+    const [
+      sessionsResult,
+      videosResult
+    ] = await Promise.all([
+      client
+        .from("sessions")
+        .select("id, confidence")
+        .eq("user_id", currentUser.id),
+
+      client
+        .from("videos")
+        .select("id")
+        .eq("user_id", currentUser.id)
+    ]);
+
+    if (sessionsResult.error) {
+      console.error(sessionsResult.error);
+    }
+
+    if (videosResult.error) {
+      console.error(videosResult.error);
+    }
+
+    const sessions = sessionsResult.data || [];
+    const videos = videosResult.data || [];
+
+    const avg =
+      sessions.length
+        ? (
+            sessions.reduce(
+              (sum, session) =>
+                sum + Number(session.confidence || 0),
+              0
+            ) / sessions.length
+          ).toFixed(1)
+        : "0";
+
+    document.getElementById("trickCount").textContent =
+      tricks.length;
+
+    document.getElementById("sessionCount").textContent =
+      sessions.length;
+
+    document.getElementById("clipCount").textContent =
+      videos.length;
+
+    document.getElementById("avgConfidence").textContent =
+      avg;
 
     document.getElementById("archiveStatus").textContent =
       `${tricks.length} TRICK${tricks.length === 1 ? "" : "S"}`;
   }
 
 
-  /*
-    ----------------------------------------
-    STATS
-    ----------------------------------------
-  */
-
-  function renderStats() {
-
-    const total = tricks.length;
-
-    const publicTotal = tricks.filter(
-      trick => trick.visibility === "public"
-    ).length;
-
-    const average =
-      total === 0
-        ? 0
-        : tricks.reduce(
-            (sum, trick) =>
-              sum + Number(trick.confidence || 0),
-            0
-          ) / total;
-
-    document.getElementById("tricksCount").textContent =
-      total;
-
-    document.getElementById("publicCount").textContent =
-      publicTotal;
-
-    document.getElementById("averageConfidence").textContent =
-      average.toFixed(1);
-  }
-
-
-  /*
-    ----------------------------------------
-    ESCAPE HTML
-    ----------------------------------------
-  */
-
-  function escapeHtml(value) {
-
-    if (value === null || value === undefined) {
-      return "";
-    }
-
-    return String(value)
-      .replaceAll("&", "&amp;")
-      .replaceAll("<", "&lt;")
-      .replaceAll(">", "&gt;")
-      .replaceAll('"', "&quot;")
-      .replaceAll("'", "&#039;");
-  }
-
-
-  /*
-    ----------------------------------------
-    RENDER TRICKS
-    ----------------------------------------
-  */
+  /* =========================================================
+     RENDER TRICKS
+  ========================================================= */
 
   function renderTricks() {
 
@@ -1331,229 +1231,204 @@
     if (!tricks.length) {
 
       grid.innerHTML = `
-        <div class="empty" style="grid-column: 1 / -1;">
-
-          <h3>NO TRICKS YET.</h3>
-
+        <div class="empty">
+          <h3>NO TRICKS YET</h3>
           <p>
-            Start building your skate archive.
+            Start your archive by adding the first trick
+            you're working on.
           </p>
-
-          <button
-            class="add-button"
-            onclick="openAddModal()"
-          >
+          <br>
+          <button class="btn" onclick="openAddTrick()">
             + ADD YOUR FIRST TRICK
           </button>
-
         </div>
       `;
 
       return;
     }
 
+    grid.innerHTML = tricks.map(trick => {
 
-    grid.innerHTML =
-      tricks.map(trick => {
+      const confidence =
+        Number(trick.confidence || 1);
 
-        const confidence =
-          Number(trick.confidence || 1);
+      const bars = [1,2,3,4,5]
+        .map(number => `
+          <span class="${number <= confidence ? "active" : ""}">
+          </span>
+        `)
+        .join("");
 
-        const percentage =
-          (confidence / 5) * 100;
+      const category =
+        trick.category || "SKATE";
 
-        const visibility =
-          trick.visibility === "public"
-            ? "PUBLIC"
-            : "PRIVATE";
+      const notes =
+        trick.notes || "NO NOTES YET.";
 
-        return `
+      return `
+        <article class="trick-card">
 
-          <article class="trick-card">
+          <div class="category">
+            ${escapeHTML(category)}
+          </div>
 
-            <div class="trick-category">
-              ${escapeHtml(
-                trick.category || "UNCATEGORIZED"
-              )}
-            </div>
+          <div class="trick-name">
+            ${escapeHTML(trick.name)}
+          </div>
 
-            <div class="trick-name">
-              ${escapeHtml(trick.name)}
-            </div>
+          <div class="confidence">
+            ${bars}
+          </div>
 
-            <div class="confidence-label">
-              <span>CONFIDENCE</span>
-              <span>${confidence}/5</span>
-            </div>
+          <div class="confidence-text">
+            CONFIDENCE ${confidence}/5
+          </div>
 
-            <div class="confidence-bar">
-              <div
-                class="confidence-fill"
-                style="width:${percentage}%"
-              ></div>
-            </div>
+          <div class="notes">
+            ${escapeHTML(notes)}
+          </div>
 
-            <div class="trick-notes">
-              ${
-                escapeHtml(
-                  trick.notes || "No notes yet."
-                )
-              }
-            </div>
+          <div class="card-footer">
 
             <div class="visibility">
-              ${visibility}
+              ${trick.visibility === "public"
+                ? "PUBLIC"
+                : "PRIVATE"}
             </div>
 
-            <div class="card-actions">
-
+            <div class="card-links">
               <a
-                class="card-button primary"
+                class="card-link"
                 href="./trick.html?id=${encodeURIComponent(trick.id)}"
               >
-                OPEN / CLIPS
+                OPEN
               </a>
 
               <button
-                class="card-button"
-                onclick="openEditModal('${trick.id}')"
+                class="card-link"
+                style="background:none;border:0;"
+                onclick="editTrick('${trick.id}')"
               >
                 EDIT
               </button>
 
               <button
-                class="card-button"
+                class="card-link"
+                style="background:none;border:0;"
                 onclick="deleteTrick('${trick.id}')"
               >
                 DELETE
               </button>
-
             </div>
 
-          </article>
+          </div>
 
-        `;
-
-      }).join("");
+        </article>
+      `;
+    }).join("");
   }
 
 
-  /*
-    ----------------------------------------
-    TRICK SELECTOR
-    ----------------------------------------
-  */
+  /* =========================================================
+     SESSION TRICK LIST
+  ========================================================= */
 
-  function renderTrickSelector() {
+  function renderSessionTricks() {
 
-    const selector =
-      document.getElementById("trickSelector");
+    const list =
+      document.getElementById("sessionTrickList");
 
     if (!tricks.length) {
 
-      selector.innerHTML = `
-        <div class="no-tricks-message">
-          NO TRICKS YET.<br><br>
-          CREATE A TRICK FIRST, THEN LOG A SESSION.
+      list.innerHTML = `
+        <div class="loading">
+          ADD A TRICK FIRST.
         </div>
       `;
 
       return;
     }
 
-    selector.innerHTML =
-      tricks.map(trick => {
+    list.innerHTML = tricks.map((trick, index) => {
 
-        const safeId =
-          "sessionTrick_" + trick.id;
+      return `
+        <label class="trick-choice">
 
-        return `
-          <div class="trick-choice">
+          <input
+            type="radio"
+            name="sessionTrick"
+            value="${escapeHTML(trick.id)}"
+            ${index === 0 ? "checked" : ""}
+          >
 
-            <input
-              type="radio"
-              name="sessionTrick"
-              id="${safeId}"
-              value="${escapeHtml(trick.id)}"
-            />
+          <span class="trick-choice-name">
+            ${escapeHTML(trick.name)}
+          </span>
 
-            <label for="${safeId}">
+          <span class="trick-choice-category">
+            ${escapeHTML(trick.category || "SKATE")}
+          </span>
 
-              <span>
-                ${escapeHtml(trick.name)}
-              </span>
-
-              <span class="trick-choice-category">
-                ${escapeHtml(
-                  trick.category || "SKATE"
-                )}
-              </span>
-
-            </label>
-
-          </div>
-        `;
-
-      }).join("");
+        </label>
+      `;
+    }).join("");
   }
 
 
-  /*
-    ----------------------------------------
-    ADD TRICK MODAL
-    ----------------------------------------
-  */
+  /* =========================================================
+     ADD TRICK
+  ========================================================= */
 
-  function openAddModal() {
+  function openAddTrick() {
 
-    editingTrickId = null;
-
-    document.getElementById("modalTitle").textContent =
+    document.getElementById("trickModalTitle").textContent =
       "ADD TRICK";
+
+    document.getElementById("editingTrickId").value = "";
 
     document.getElementById("trickForm").reset();
 
-    document.getElementById("confidence1").checked = true;
+    trickConfidence = 1;
 
-    document.getElementById("trickVisibility").value =
-      "private";
+    setConfidence(
+      "trickConfidencePicker",
+      trickConfidence
+    );
 
-    document.getElementById("clipVisibility").value =
-      "private";
+    setRadioVisual("trickVisibility");
+    setRadioVisual("trickClipVisibility");
 
-    document.getElementById("addTrickClipGroup").style.display =
+    document.getElementById("firstClipFields").style.display =
       "block";
 
-    document.getElementById("clipVisibilityGroup").style.display =
-      "block";
+    document.getElementById("saveTrickBtn").textContent =
+      "SAVE TRICK";
 
-    document.getElementById("formError").style.display =
-      "none";
+    document.getElementById("trickFileName").textContent =
+      "NO VIDEO SELECTED";
 
-    document.getElementById("modalBackdrop")
-      .classList.add("show");
+    clearMessage("trickFormMessage");
+
+    openModal("trickModal");
   }
 
 
-  /*
-    ----------------------------------------
-    EDIT TRICK MODAL
-    ----------------------------------------
-  */
+  /* =========================================================
+     EDIT TRICK
+  ========================================================= */
 
-  function openEditModal(id) {
+  function editTrick(id) {
 
     const trick =
       tricks.find(item => item.id === id);
 
-    if (!trick) {
-      return;
-    }
+    if (!trick) return;
 
-    editingTrickId = id;
-
-    document.getElementById("modalTitle").textContent =
+    document.getElementById("trickModalTitle").textContent =
       "EDIT TRICK";
+
+    document.getElementById("editingTrickId").value =
+      trick.id;
 
     document.getElementById("trickName").value =
       trick.name || "";
@@ -1564,910 +1439,796 @@
     document.getElementById("trickNotes").value =
       trick.notes || "";
 
-    document.getElementById("trickVisibility").value =
-      trick.visibility || "private";
-
-    const confidenceInput =
-      document.querySelector(
-        `input[name="confidence"][value="${trick.confidence}"]`
-      );
-
-    if (confidenceInput) {
-      confidenceInput.checked = true;
-    }
-
-    /*
-      We don't allow replacing/adding a clip
-      through EDIT TRICK here.
-
-      Clips belong to sessions.
-    */
-
-    document.getElementById("addTrickClipGroup").style.display =
-      "none";
-
-    document.getElementById("clipVisibilityGroup").style.display =
-      "none";
-
-    document.getElementById("formError").style.display =
-      "none";
-
-    document.getElementById("modalBackdrop")
-      .classList.add("show");
-  }
-
-
-  function closeModal() {
-
-    document.getElementById("modalBackdrop")
-      .classList.remove("show");
-
-    editingTrickId = null;
-  }
-
-
-  /*
-    ----------------------------------------
-    VIDEO UPLOAD
-    ----------------------------------------
-  */
-
-  async function uploadVideo(file, visibility) {
-
-    if (!file) {
-      return null;
-    }
-
-    const originalName =
-      file.name || "clip.mp4";
-
-    const safeName =
-      originalName
-        .replace(/[^a-zA-Z0-9._-]/g, "-")
-        .replace(/-+/g, "-")
-        .substring(0, 120);
-
-    const uniqueName =
-      crypto.randomUUID() + "-" + safeName;
-
-    const bucket =
-      visibility === "public"
-        ? "public-videos"
-        : "videos";
-
-    const storagePath =
-      currentUser.id +
-      "/" +
-      uniqueName;
-
-    const {
-      error
-    } = await client
-      .storage
-      .from(bucket)
-      .upload(
-        storagePath,
-        file,
-        {
-          cacheControl: "3600",
-          upsert: false,
-          contentType:
-            file.type || "video/mp4"
-        }
-      );
-
-    if (error) {
-      throw error;
-    }
-
-    return {
-      bucket,
-      storagePath
-    };
-  }
-
-
-  /*
-    ----------------------------------------
-    ADD / EDIT FORM
-    ----------------------------------------
-  */
-
-  document
-    .getElementById("trickForm")
-    .addEventListener(
-      "submit",
-      async function(event) {
-
-        event.preventDefault();
-
-        const name =
-          document
-            .getElementById("trickName")
-            .value
-            .trim();
-
-        const category =
-          document
-            .getElementById("trickCategory")
-            .value
-            .trim();
-
-        const notes =
-          document
-            .getElementById("trickNotes")
-            .value
-            .trim();
-
-        const visibility =
-          document
-            .getElementById("trickVisibility")
-            .value;
-
-        const clipVisibility =
-          document
-            .getElementById("clipVisibility")
-            .value;
-
-        const confidenceInput =
-          document.querySelector(
-            'input[name="confidence"]:checked'
-          );
-
-        const confidence =
-          confidenceInput
-            ? Number(confidenceInput.value)
-            : 1;
-
-        const videoFile =
-          document
-            .getElementById("trickVideoFile")
-            .files[0];
-
-        if (!name) {
-
-          showFormError(
-            "Give the trick a name."
-          );
-
-          return;
-        }
-
-        const saveButton =
-          document.querySelector(
-            '#trickForm button[type="submit"]'
-          );
-
-        saveButton.disabled = true;
-        saveButton.textContent = "SAVING...";
-
-        let uploadedVideo = null;
-        let createdTrickId = null;
-        let createdSessionId = null;
-
-        try {
-
-          /*
-            --------------------------------
-            EDIT EXISTING TRICK
-            --------------------------------
-          */
-
-          if (editingTrickId) {
-
-            const { error } =
-              await client
-                .from("tricks")
-                .update({
-                  name,
-                  category: category || null,
-                  confidence,
-                  notes: notes || null,
-                  visibility,
-                  updated_at:
-                    new Date().toISOString()
-                })
-                .eq("id", editingTrickId)
-                .eq("user_id", currentUser.id);
-
-            if (error) {
-              throw error;
-            }
-
-          } else {
-
-            /*
-              ------------------------------
-              CREATE TRICK
-              ------------------------------
-            */
-
-            const {
-              data: newTrick,
-              error: trickError
-            } = await client
-              .from("tricks")
-              .insert({
-                user_id: currentUser.id,
-                name,
-                category: category || null,
-                confidence,
-                notes: notes || null,
-                visibility
-              })
-              .select()
-              .single();
-
-            if (trickError) {
-              throw trickError;
-            }
-
-            createdTrickId =
-              newTrick.id;
-
-
-            /*
-              ------------------------------
-              CREATE FIRST SESSION
-              ------------------------------
-            */
-
-            const {
-              data: firstSession,
-              error: sessionError
-            } = await client
-              .from("sessions")
-              .insert({
-                trick_id: newTrick.id,
-                user_id: currentUser.id,
-                confidence,
-                notes: notes || null
-              })
-              .select()
-              .single();
-
-            if (sessionError) {
-              throw sessionError;
-            }
-
-            createdSessionId =
-              firstSession.id;
-
-
-            /*
-              ------------------------------
-              OPTIONAL FIRST CLIP
-              ------------------------------
-            */
-
-            if (videoFile) {
-
-              uploadedVideo =
-                await uploadVideo(
-                  videoFile,
-                  clipVisibility
-                );
-
-
-              /*
-                ----------------------------
-                CONNECT CLIP TO SESSION
-                ----------------------------
-              */
-
-              const {
-                error: videoError
-              } = await client
-                .from("videos")
-                .insert({
-                  session_id:
-                    firstSession.id,
-                  user_id:
-                    currentUser.id,
-                  storage_path:
-                    uploadedVideo.storagePath,
-                  visibility:
-                    clipVisibility
-                });
-
-              if (videoError) {
-
-                /*
-                  Clean up storage if the
-                  database record fails.
-                */
-
-                await client
-                  .storage
-                  .from(uploadedVideo.bucket)
-                  .remove([
-                    uploadedVideo.storagePath
-                  ]);
-
-                uploadedVideo = null;
-
-                throw videoError;
-              }
-
-            }
-
-          }
-
-
-          closeModal();
-
-          await loadTricks();
-
-        } catch (error) {
-
-          console.error(
-            "Save trick error:",
-            error
-          );
-
-          /*
-            If the first session/trick process
-            failed after creating the trick,
-            remove the trick. Cascading DB
-            deletion removes its sessions/videos.
-          */
-
-          if (
-            createdTrickId &&
-            !uploadedVideo
-          ) {
-
-            await client
-              .from("tricks")
-              .delete()
-              .eq("id", createdTrickId)
-              .eq("user_id", currentUser.id);
-
-          }
-
-          if (
-            uploadedVideo
-          ) {
-
-            /*
-              If something failed after upload,
-              remove the storage file.
-            */
-
-            await client
-              .storage
-              .from(uploadedVideo.bucket)
-              .remove([
-                uploadedVideo.storagePath
-              ]);
-
-          }
-
-          showFormError(
-            error.message ||
-            "Something went wrong while saving."
-          );
-
-        } finally {
-
-          saveButton.disabled = false;
-          saveButton.textContent =
-            "SAVE TRICK";
-
-        }
-
-      }
+    trickConfidence =
+      Number(trick.confidence || 1);
+
+    setConfidence(
+      "trickConfidencePicker",
+      trickConfidence
     );
 
+    document.querySelector(
+      `input[name="trickVisibility"][value="${trick.visibility || "private"}"]`
+    ).checked = true;
 
-  /*
-    ----------------------------------------
-    NEW SESSION MODAL
-    ----------------------------------------
-  */
+    setRadioVisual("trickVisibility");
 
-  function openSessionModal() {
+    /*
+      Editing a trick does not create another session
+      or replace an existing clip.
+    */
 
-    if (!tricks.length) {
+    document.getElementById("firstClipFields").style.display =
+      "none";
 
-      alert(
-        "Create a trick first before logging a session."
+    document.getElementById("saveTrickBtn").textContent =
+      "SAVE CHANGES";
+
+    clearMessage("trickFormMessage");
+
+    openModal("trickModal");
+  }
+
+
+  /* =========================================================
+     SAVE TRICK
+  ========================================================= */
+
+  async function saveTrick(event) {
+
+    event.preventDefault();
+
+    clearMessage("trickFormMessage");
+
+    const saveButton =
+      document.getElementById("saveTrickBtn");
+
+    saveButton.disabled = true;
+    saveButton.textContent = "SAVING...";
+
+    const editingId =
+      document.getElementById("editingTrickId").value;
+
+    const name =
+      document.getElementById("trickName").value.trim();
+
+    const category =
+      document.getElementById("trickCategory").value.trim();
+
+    const notes =
+      document.getElementById("trickNotes").value.trim();
+
+    const visibility =
+      selectedRadio("trickVisibility");
+
+    const clipVisibility =
+      selectedRadio("trickClipVisibility");
+
+    const videoFile =
+      document.getElementById("trickVideo").files[0];
+
+    if (!name) {
+      showMessage(
+        "trickFormMessage",
+        "ENTER A TRICK NAME."
       );
+
+      saveButton.disabled = false;
+      saveButton.textContent =
+        editingId ? "SAVE CHANGES" : "SAVE TRICK";
 
       return;
     }
 
-    document
-      .getElementById("sessionForm")
-      .reset();
 
-    document.getElementById("sessionConfidence1")
-      .checked = true;
+    /* =======================================================
+       EDIT EXISTING TRICK
+    ======================================================= */
 
-    document.getElementById("sessionVisibility")
-      .value = "private";
+    if (editingId) {
 
-    document.getElementById("sessionFormError")
-      .style.display = "none";
+      const { error } = await client
+        .from("tricks")
+        .update({
+          name,
+          category: category || null,
+          confidence: trickConfidence,
+          notes: notes || null,
+          visibility,
+          updated_at: new Date().toISOString()
+        })
+        .eq("id", editingId)
+        .eq("user_id", currentUser.id);
 
-    document.getElementById("sessionFormSuccess")
-      .style.display = "none";
+      if (error) {
 
-    renderTrickSelector();
+        showMessage(
+          "trickFormMessage",
+          error.message
+        );
 
-    document
-      .getElementById("sessionModalBackdrop")
-      .classList.add("show");
-  }
+        saveButton.disabled = false;
+        saveButton.textContent = "SAVE CHANGES";
 
+        return;
+      }
 
-  function closeSessionModal() {
+      closeModal("trickModal");
 
-    document
-      .getElementById("sessionModalBackdrop")
-      .classList.remove("show");
+      await loadDashboard();
 
-  }
+      saveButton.disabled = false;
+      saveButton.textContent = "SAVE CHANGES";
 
-
-  /*
-    ----------------------------------------
-    NEW SESSION SUBMIT
-    ----------------------------------------
-  */
-
-  document
-    .getElementById("sessionForm")
-    .addEventListener(
-      "submit",
-      async function(event) {
-
-        event.preventDefault();
-
-        const selectedTrick =
-          document.querySelector(
-            'input[name="sessionTrick"]:checked'
-          );
-
-        if (!selectedTrick) {
-
-          showSessionError(
-            "SELECT A TRICK FIRST."
-          );
-
-          return;
-        }
-
-        const confidenceInput =
-          document.querySelector(
-            'input[name="sessionConfidence"]:checked'
-          );
-
-        if (!confidenceInput) {
-
-          showSessionError(
-            "SELECT A CONFIDENCE LEVEL."
-          );
-
-          return;
-        }
-
-        const trickId =
-          selectedTrick.value;
-
-        const confidence =
-          Number(confidenceInput.value);
-
-        const notes =
-          document
-            .getElementById("sessionNotes")
-            .value
-            .trim();
-
-        const videoFile =
-          document
-            .getElementById("sessionVideoFile")
-            .files[0];
-
-        const visibility =
-          document
-            .getElementById("sessionVisibility")
-            .value;
-
-        const submitButton =
-          document
-            .getElementById("sessionSubmitButton");
-
-        submitButton.disabled = true;
-        submitButton.textContent = "SAVING...";
-
-        let uploadedVideo = null;
-        let createdSessionId = null;
-
-        try {
-
-          /*
-            ------------------------------
-            CREATE SESSION
-            ------------------------------
-          */
-
-          const {
-            data: session,
-            error: sessionError
-          } = await client
-            .from("sessions")
-            .insert({
-              trick_id: trickId,
-              user_id: currentUser.id,
-              confidence,
-              notes: notes || null
-            })
-            .select()
-            .single();
-
-          if (sessionError) {
-            throw sessionError;
-          }
-
-          createdSessionId =
-            session.id;
+      return;
+    }
 
 
-          /*
-            ------------------------------
-            OPTIONAL CLIP
-            ------------------------------
-          */
+    /* =======================================================
+       CREATE NEW TRICK
+    ======================================================= */
 
-          if (videoFile) {
+    let createdTrick = null;
+    let createdSession = null;
+    let uploadedPath = null;
 
-            uploadedVideo =
-              await uploadVideo(
-                videoFile,
-                visibility
-              );
+    try {
 
+      /*
+        STEP 1:
+        Create the trick.
+      */
 
-            const {
-              error: videoError
-            } = await client
-              .from("videos")
-              .insert({
-                session_id:
-                  session.id,
-                user_id:
-                  currentUser.id,
-                storage_path:
-                  uploadedVideo.storagePath,
-                visibility
-              });
+      const { data: trickData, error: trickError } =
+        await client
+          .from("tricks")
+          .insert({
+            user_id: currentUser.id,
+            name,
+            category: category || null,
+            confidence: trickConfidence,
+            notes: notes || null,
+            visibility
+          })
+          .select()
+          .single();
 
-            if (videoError) {
+      if (trickError) {
+        throw trickError;
+      }
 
-              await client
-                .storage
-                .from(uploadedVideo.bucket)
-                .remove([
-                  uploadedVideo.storagePath
-                ]);
-
-              uploadedVideo = null;
-
-              throw videoError;
-            }
-
-          }
+      createdTrick = trickData;
 
 
-          /*
-            ------------------------------
-            UPDATE TRICK CONFIDENCE
-            ------------------------------
-          */
+      /*
+        STEP 2:
+        Create the first session so the initial clip
+        has somewhere to attach.
+      */
 
-          const {
-            error: trickUpdateError
-          } = await client
-            .from("tricks")
-            .update({
-              confidence,
-              updated_at:
-                new Date().toISOString()
-            })
-            .eq("id", trickId)
-            .eq("user_id", currentUser.id);
+      const { data: sessionData, error: sessionError } =
+        await client
+          .from("sessions")
+          .insert({
+            trick_id: createdTrick.id,
+            user_id: currentUser.id,
+            confidence: trickConfidence,
+            notes: notes || null
+          })
+          .select()
+          .single();
 
-          if (trickUpdateError) {
+      if (sessionError) {
+        throw sessionError;
+      }
 
-            console.warn(
-              "Could not update trick confidence:",
-              trickUpdateError
+      createdSession = sessionData;
+
+
+      /*
+        STEP 3:
+        Upload optional first clip.
+      */
+
+      if (videoFile) {
+
+        const bucket =
+          clipVisibility === "public"
+            ? "public-videos"
+            : "videos";
+
+        const extension =
+          videoFile.name.includes(".")
+            ? videoFile.name.split(".").pop()
+            : "mp4";
+
+        const filePath =
+          `${currentUser.id}/${crypto.randomUUID()}.${extension}`;
+
+        const { error: uploadError } =
+          await client.storage
+            .from(bucket)
+            .upload(
+              filePath,
+              videoFile,
+              {
+                cacheControl: "3600",
+                upsert: false,
+                contentType:
+                  videoFile.type || "video/mp4"
+              }
             );
 
-          }
-
-
-          showSessionSuccess(
-            "SESSION LOGGED SUCCESSFULLY."
-          );
-
-          await loadTricks();
-
-
-          /*
-            Keep the success message briefly,
-            then close the modal.
-          */
-
-          setTimeout(
-            closeSessionModal,
-            600
-          );
-
-        } catch (error) {
-
-          console.error(
-            "Session error:",
-            error
-          );
-
-          if (createdSessionId) {
-
-            await client
-              .from("sessions")
-              .delete()
-              .eq("id", createdSessionId)
-              .eq("user_id", currentUser.id);
-
-          }
-
-          if (uploadedVideo) {
-
-            await client
-              .storage
-              .from(uploadedVideo.bucket)
-              .remove([
-                uploadedVideo.storagePath
-              ]);
-
-          }
-
-          showSessionError(
-            error.message ||
-            "Something went wrong while logging the session."
-          );
-
-        } finally {
-
-          submitButton.disabled = false;
-          submitButton.textContent =
-            "LOG SESSION";
-
+        if (uploadError) {
+          throw uploadError;
         }
 
+        uploadedPath = {
+          bucket,
+          path: filePath
+        };
+
+
+        /*
+          STEP 4:
+          Create video database row.
+        */
+
+        const { error: videoError } =
+          await client
+            .from("videos")
+            .insert({
+              session_id: createdSession.id,
+              user_id: currentUser.id,
+              storage_path: filePath,
+              visibility: clipVisibility
+            });
+
+        if (videoError) {
+          throw videoError;
+        }
       }
-    );
 
 
-  /*
-    ----------------------------------------
-    DELETE TRICK
-    ----------------------------------------
-  */
+      closeModal("trickModal");
+
+      document.getElementById("trickForm").reset();
+
+      await loadDashboard();
+
+    } catch (error) {
+
+      console.error(error);
+
+      /*
+        Clean up uploaded storage if DB creation failed.
+      */
+
+      if (uploadedPath) {
+        await client.storage
+          .from(uploadedPath.bucket)
+          .remove([uploadedPath.path]);
+      }
+
+      /*
+        Clean up session.
+      */
+
+      if (createdSession) {
+        await client
+          .from("sessions")
+          .delete()
+          .eq("id", createdSession.id)
+          .eq("user_id", currentUser.id);
+      }
+
+      /*
+        Clean up trick.
+      */
+
+      if (createdTrick) {
+        await client
+          .from("tricks")
+          .delete()
+          .eq("id", createdTrick.id)
+          .eq("user_id", currentUser.id);
+      }
+
+      showMessage(
+        "trickFormMessage",
+        error.message || "Something went wrong."
+      );
+    }
+
+    saveButton.disabled = false;
+    saveButton.textContent = "SAVE TRICK";
+  }
+
+
+  /* =========================================================
+     DELETE TRICK
+  ========================================================= */
 
   async function deleteTrick(id) {
 
     const trick =
       tricks.find(item => item.id === id);
 
-    if (!trick) {
-      return;
-    }
+    if (!trick) return;
 
     const confirmed =
       confirm(
-        `Delete "${trick.name}"?\n\nThis will remove the trick and its progression history.`
+        `Delete "${trick.name}"?\n\nThis will delete the trick and its logged sessions.`
       );
 
-    if (!confirmed) {
-      return;
-    }
+    if (!confirmed) return;
 
-    const { error } =
-      await client
-        .from("tricks")
-        .delete()
-        .eq("id", id)
-        .eq("user_id", currentUser.id);
+    const { error } = await client
+      .from("tricks")
+      .delete()
+      .eq("id", id)
+      .eq("user_id", currentUser.id);
 
     if (error) {
+      alert(error.message);
+      return;
+    }
 
-      console.error(
-        "Delete error:",
-        error
+    await loadDashboard();
+  }
+
+
+  /* =========================================================
+     OPEN NEW SESSION
+  ========================================================= */
+
+  function openNewSession() {
+
+    document.getElementById("sessionForm").reset();
+
+    sessionConfidence = 1;
+
+    setConfidence(
+      "sessionConfidencePicker",
+      sessionConfidence
+    );
+
+    setRadioVisual("sessionClipVisibility");
+
+    document.getElementById("sessionFileName").textContent =
+      "NO VIDEO SELECTED";
+
+    clearMessage("sessionFormMessage");
+
+    renderSessionTricks();
+
+    openModal("sessionModal");
+  }
+
+
+  /* =========================================================
+     SAVE SESSION
+  ========================================================= */
+
+  async function saveSession(event) {
+
+    event.preventDefault();
+
+    clearMessage("sessionFormMessage");
+
+    const saveButton =
+      document.getElementById("saveSessionBtn");
+
+    saveButton.disabled = true;
+    saveButton.textContent = "LOGGING...";
+
+
+    const selectedTrick =
+      document.querySelector(
+        'input[name="sessionTrick"]:checked'
       );
 
-      alert(
-        "Could not delete this trick."
+    if (!selectedTrick) {
+
+      showMessage(
+        "sessionFormMessage",
+        "SELECT A TRICK FIRST."
       );
+
+      saveButton.disabled = false;
+      saveButton.textContent = "LOG SESSION";
 
       return;
     }
 
-    await loadTricks();
-  }
+
+    const trickId =
+      selectedTrick.value;
+
+    const notes =
+      document.getElementById("sessionNotes")
+        .value
+        .trim();
+
+    const videoFile =
+      document.getElementById("sessionVideo")
+        .files[0];
+
+    const clipVisibility =
+      selectedRadio("sessionClipVisibility");
 
 
-  /*
-    ----------------------------------------
-    ERROR HELPERS
-    ----------------------------------------
-  */
+    let createdSession = null;
+    let uploadedPath = null;
 
-  function showFormError(message) {
+    try {
 
-    const error =
-      document.getElementById("formError");
+      /*
+        STEP 1:
+        Create session.
+      */
 
-    error.textContent = message;
-    error.style.display = "block";
-  }
+      const { data: sessionData, error: sessionError } =
+        await client
+          .from("sessions")
+          .insert({
+            trick_id: trickId,
+            user_id: currentUser.id,
+            confidence: sessionConfidence,
+            notes: notes || null
+          })
+          .select()
+          .single();
 
+      if (sessionError) {
+        throw sessionError;
+      }
 
-  function showSessionError(message) {
-
-    const error =
-      document.getElementById("sessionFormError");
-
-    error.textContent = message;
-    error.style.display = "block";
-  }
-
-
-  function showSessionSuccess(message) {
-
-    const success =
-      document.getElementById("sessionFormSuccess");
-
-    success.textContent = message;
-    success.style.display = "block";
-  }
+      createdSession = sessionData;
 
 
-  /*
-    ----------------------------------------
-    BUTTONS
-    ----------------------------------------
-  */
+      /*
+        STEP 2:
+        Upload optional clip.
+      */
 
-  document
-    .getElementById("addTrickButton")
-    .addEventListener(
-      "click",
-      openAddModal
-    );
+      if (videoFile) {
 
+        const bucket =
+          clipVisibility === "public"
+            ? "public-videos"
+            : "videos";
 
-  document
-    .getElementById("newSessionButton")
-    .addEventListener(
-      "click",
-      openSessionModal
-    );
+        const extension =
+          videoFile.name.includes(".")
+            ? videoFile.name.split(".").pop()
+            : "mp4";
 
+        const filePath =
+          `${currentUser.id}/${crypto.randomUUID()}.${extension}`;
 
-  document
-    .getElementById("cancelButton")
-    .addEventListener(
-      "click",
-      closeModal
-    );
+        const { error: uploadError } =
+          await client.storage
+            .from(bucket)
+            .upload(
+              filePath,
+              videoFile,
+              {
+                cacheControl: "3600",
+                upsert: false,
+                contentType:
+                  videoFile.type || "video/mp4"
+              }
+            );
 
-
-  document
-    .getElementById("sessionCancelButton")
-    .addEventListener(
-      "click",
-      closeSessionModal
-    );
-
-
-  document
-    .getElementById("modalBackdrop")
-    .addEventListener(
-      "click",
-      function(event) {
-
-        if (
-          event.target ===
-          document.getElementById("modalBackdrop")
-        ) {
-
-          closeModal();
-
+        if (uploadError) {
+          throw uploadError;
         }
 
-      }
-    );
+        uploadedPath = {
+          bucket,
+          path: filePath
+        };
 
 
-  document
-    .getElementById("sessionModalBackdrop")
-    .addEventListener(
-      "click",
-      function(event) {
+        /*
+          STEP 3:
+          Save video record.
+        */
 
-        if (
-          event.target ===
-          document.getElementById(
-            "sessionModalBackdrop"
-          )
-        ) {
+        const { error: videoError } =
+          await client
+            .from("videos")
+            .insert({
+              session_id: createdSession.id,
+              user_id: currentUser.id,
+              storage_path: filePath,
+              visibility: clipVisibility
+            });
 
-          closeSessionModal();
-
+        if (videoError) {
+          throw videoError;
         }
-
       }
-    );
 
 
-  /*
-    ----------------------------------------
-    SIGN OUT
-    ----------------------------------------
-  */
+      /*
+        STEP 4:
+        Update current trick confidence.
+      */
 
-  document
-    .getElementById("signOutButton")
-    .addEventListener(
-      "click",
-      async function() {
+      const { error: trickUpdateError } =
+        await client
+          .from("tricks")
+          .update({
+            confidence: sessionConfidence,
+            updated_at: new Date().toISOString()
+          })
+          .eq("id", trickId)
+          .eq("user_id", currentUser.id);
 
-        const { error } =
-          await client.auth.signOut();
-
-        if (error) {
-
-          console.error(
-            "Sign out error:",
-            error
-          );
-
-          return;
-        }
-
-        window.location.href =
-          "./auth.html";
-
+      if (trickUpdateError) {
+        throw trickUpdateError;
       }
-    );
 
 
-  /*
-    ----------------------------------------
-    START
-    ----------------------------------------
-  */
+      closeModal("sessionModal");
 
-  async function startDashboard() {
+      document.getElementById("sessionForm").reset();
 
-    const authenticated =
-      await checkAuth();
+      await loadDashboard();
 
-    if (!authenticated) {
-      return;
+    } catch (error) {
+
+      console.error(error);
+
+      /*
+        Remove uploaded file if anything failed.
+      */
+
+      if (uploadedPath) {
+        await client.storage
+          .from(uploadedPath.bucket)
+          .remove([uploadedPath.path]);
+      }
+
+      /*
+        Remove session if it was created.
+      */
+
+      if (createdSession) {
+        await client
+          .from("sessions")
+          .delete()
+          .eq("id", createdSession.id)
+          .eq("user_id", currentUser.id);
+      }
+
+      showMessage(
+        "sessionFormMessage",
+        error.message || "Something went wrong."
+      );
     }
+
+    saveButton.disabled = false;
+    saveButton.textContent = "LOG SESSION";
+  }
+
+
+  /* =========================================================
+     CONFIDENCE PICKERS
+  ========================================================= */
+
+  document
+    .querySelectorAll("#trickConfidencePicker .confidence-btn")
+    .forEach(button => {
+
+      button.addEventListener("click", () => {
+
+        trickConfidence =
+          Number(button.dataset.value);
+
+        setConfidence(
+          "trickConfidencePicker",
+          trickConfidence
+        );
+      });
+    });
+
+
+  document
+    .querySelectorAll("#sessionConfidencePicker .confidence-btn")
+    .forEach(button => {
+
+      button.addEventListener("click", () => {
+
+        sessionConfidence =
+          Number(button.dataset.value);
+
+        setConfidence(
+          "sessionConfidencePicker",
+          sessionConfidence
+        );
+      });
+    });
+
+
+  /* =========================================================
+     RADIO VISUALS
+  ========================================================= */
+
+  document
+    .querySelectorAll(
+      'input[name="trickVisibility"], input[name="trickClipVisibility"], input[name="sessionClipVisibility"]'
+    )
+    .forEach(input => {
+
+      input.addEventListener("change", () => {
+        setRadioVisual(input.name);
+      });
+    });
+
+
+  /* =========================================================
+     FILE NAMES
+  ========================================================= */
+
+  document
+    .getElementById("trickVideo")
+    .addEventListener("change", event => {
+
+      const file =
+        event.target.files[0];
+
+      document.getElementById("trickFileName")
+        .textContent =
+          file
+            ? file.name
+            : "NO VIDEO SELECTED";
+    });
+
+
+  document
+    .getElementById("sessionVideo")
+    .addEventListener("change", event => {
+
+      const file =
+        event.target.files[0];
+
+      document.getElementById("sessionFileName")
+        .textContent =
+          file
+            ? file.name
+            : "NO VIDEO SELECTED";
+    });
+
+
+  /* =========================================================
+     BUTTONS
+  ========================================================= */
+
+  document
+    .getElementById("addTrickBtn")
+    .addEventListener("click", openAddTrick);
+
+
+  document
+    .getElementById("newSessionBtn")
+    .addEventListener("click", openNewSession);
+
+
+  document
+    .getElementById("closeTrickModal")
+    .addEventListener("click", () => {
+      closeModal("trickModal");
+    });
+
+
+  document
+    .getElementById("cancelTrickBtn")
+    .addEventListener("click", () => {
+      closeModal("trickModal");
+    });
+
+
+  document
+    .getElementById("closeSessionModal")
+    .addEventListener("click", () => {
+      closeModal("sessionModal");
+    });
+
+
+  document
+    .getElementById("cancelSessionBtn")
+    .addEventListener("click", () => {
+      closeModal("sessionModal");
+    });
+
+
+  document
+    .getElementById("trickForm")
+    .addEventListener("submit", saveTrick);
+
+
+  document
+    .getElementById("sessionForm")
+    .addEventListener("submit", saveSession);
+
+
+  document
+    .getElementById("signOutBtn")
+    .addEventListener("click", async () => {
+
+      await client.auth.signOut();
+
+      window.location.href =
+        "./auth.html";
+    });
+
+
+  /* =========================================================
+     CLICK OUTSIDE MODALS
+  ========================================================= */
+
+  document
+    .getElementById("trickModal")
+    .addEventListener("click", event => {
+
+      if (event.target.id === "trickModal") {
+        closeModal("trickModal");
+      }
+    });
+
+
+  document
+    .getElementById("sessionModal")
+    .addEventListener("click", event => {
+
+      if (event.target.id === "sessionModal") {
+        closeModal("sessionModal");
+      }
+    });
+
+
+  /* =========================================================
+     ESC KEY
+  ========================================================= */
+
+  document.addEventListener("keydown", event => {
+
+    if (event.key === "Escape") {
+      closeModal("trickModal");
+      closeModal("sessionModal");
+    }
+  });
+
+
+  /* =========================================================
+     START
+  ========================================================= */
+
+  async function start() {
+
+    const user =
+      await requireUser();
+
+    if (!user) return;
 
     await loadProfile();
+    await loadDashboard();
 
-    await loadTricks();
+    setConfidence(
+      "trickConfidencePicker",
+      1
+    );
 
+    setConfidence(
+      "sessionConfidencePicker",
+      1
+    );
   }
 
-
-  startDashboard();
+  start();
 
 </script>
 
