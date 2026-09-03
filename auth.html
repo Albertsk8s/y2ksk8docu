@@ -1,18 +1,11 @@
 <!DOCTYPE html>
+
 <html lang="en">
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
   <title>y2ksk8docu — Account</title>
-
-  <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-
-  <link
-    href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Creepster&family=Inter:wght@400;500;600;700;800&family=Permanent+Marker&display=swap"
-    rel="stylesheet"
-  >
 
   <style>
     * {
@@ -22,565 +15,587 @@
     }
 
     body {
+      background: #090909;
+      color: #f2f2f2;
+      font-family: Arial, Helvetica, sans-serif;
       min-height: 100vh;
-      background: #050505;
-      color: white;
-      font-family: Inter, sans-serif;
+      overflow-x: hidden;
+    }
+
+    body::before {
+      content: "";
+      position: fixed;
+      inset: 0;
+      pointer-events: none;
+      background:
+        repeating-linear-gradient(
+          0deg,
+          rgba(255,255,255,0.015) 0px,
+          rgba(255,255,255,0.015) 1px,
+          transparent 1px,
+          transparent 4px
+        );
+      z-index: 10;
+    }
+
+    header {
+      height: 78px;
+      border-bottom: 1px solid #292929;
       display: flex;
       align-items: center;
-      justify-content: center;
-      padding: 20px;
-    }
-
-    .container {
-      width: 100%;
-      max-width: 460px;
-    }
-
-    .brand {
-      text-align: center;
-      margin-bottom: 30px;
+      justify-content: space-between;
+      padding: 0 6%;
+      background: rgba(9, 9, 9, 0.96);
     }
 
     .logo {
-      width: 58px;
-      height: 58px;
-      background: #e50914;
-      color: #050505;
-      margin: 0 auto 15px;
+      color: #e00000;
+      text-decoration: none;
+      font-size: 24px;
+      font-weight: 900;
+      letter-spacing: -1px;
+      text-transform: lowercase;
+    }
+
+    .back-link {
+      color: #aaa;
+      text-decoration: none;
+      font-size: 13px;
+      font-weight: 700;
+      letter-spacing: 1px;
+      transition: 0.2s ease;
+    }
+
+    .back-link:hover {
+      color: #e00000;
+    }
+
+    main {
+      min-height: calc(100vh - 78px);
       display: flex;
-      align-items: center;
       justify-content: center;
-      font-family: Creepster, cursive;
-      font-size: 36px;
-      transform: rotate(-5deg);
-      box-shadow: 6px 6px white;
+      align-items: center;
+      padding: 50px 20px;
     }
 
-    .brand-name {
-      font-family: "Bebas Neue", sans-serif;
-      font-size: 38px;
-      letter-spacing: 2px;
-    }
-
-    .tagline {
-      color: #777;
-      font-family: "Permanent Marker", cursive;
-      font-size: 14px;
-    }
-
-    .card {
-      background: #111;
+    .auth-box {
+      width: 100%;
+      max-width: 480px;
       border: 1px solid #292929;
-      border-radius: 22px;
-      padding: 32px;
+      background: #0f0f0f;
+      padding: 42px;
+      box-shadow: 0 20px 70px rgba(0, 0, 0, 0.5);
+    }
+
+    .eyebrow {
+      color: #e00000;
+      font-size: 11px;
+      font-weight: 900;
+      letter-spacing: 3px;
+      margin-bottom: 12px;
     }
 
     h1 {
-      font-family: "Bebas Neue", sans-serif;
-      font-size: 46px;
-      letter-spacing: 1px;
+      font-family: Georgia, "Times New Roman", serif;
+      font-size: clamp(40px, 7vw, 64px);
+      line-height: 0.9;
+      text-transform: uppercase;
+      letter-spacing: -3px;
+      margin-bottom: 14px;
     }
 
-    .line {
-      width: 65px;
-      height: 4px;
-      background: #e50914;
-      margin: 5px 0 22px;
-      transform: skewX(-25deg);
-    }
-
-    .description {
+    .intro {
       color: #888;
       font-size: 14px;
       line-height: 1.6;
-      margin-bottom: 25px;
+      margin-bottom: 30px;
+    }
+
+    .mode-switch {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      border: 1px solid #292929;
+      margin-bottom: 28px;
+    }
+
+    .mode-btn {
+      border: 0;
+      background: transparent;
+      color: #777;
+      padding: 14px;
+      cursor: pointer;
+      font-size: 12px;
+      font-weight: 900;
+      letter-spacing: 1px;
+      transition: 0.2s ease;
+    }
+
+    .mode-btn.active {
+      background: #e00000;
+      color: white;
     }
 
     .field {
-      margin-bottom: 17px;
+      margin-bottom: 18px;
     }
 
     label {
       display: block;
       color: #aaa;
-      font-size: 11px;
-      font-weight: 800;
-      letter-spacing: 1px;
-      margin-bottom: 8px;
+      font-size: 10px;
+      font-weight: 900;
+      letter-spacing: 2px;
       text-transform: uppercase;
+      margin-bottom: 8px;
     }
 
     input {
       width: 100%;
-      padding: 15px;
       background: #080808;
-      border: 1px solid #333;
-      border-radius: 11px;
+      border: 1px solid #303030;
       color: white;
-      font-size: 15px;
+      padding: 15px;
       outline: none;
+      font-size: 14px;
+      transition: 0.2s ease;
     }
 
     input:focus {
-      border-color: #e50914;
+      border-color: #e00000;
+      box-shadow: 0 0 0 2px rgba(224, 0, 0, 0.1);
     }
 
-    button {
+    .username-field {
+      display: none;
+    }
+
+    .submit-btn {
       width: 100%;
-      padding: 16px;
       border: none;
-      border-radius: 11px;
-      background: #e50914;
+      background: #e00000;
       color: white;
-      font-family: "Bebas Neue", sans-serif;
-      font-size: 21px;
-      letter-spacing: 1px;
+      padding: 17px;
       cursor: pointer;
+      font-size: 12px;
+      font-weight: 900;
+      letter-spacing: 2px;
+      text-transform: uppercase;
+      transition: 0.2s ease;
+      margin-top: 8px;
     }
 
-    button:hover {
-      opacity: .9;
+    .submit-btn:hover {
+      background: #ff1717;
+      transform: translateY(-1px);
     }
 
-    button:disabled {
-      opacity: .5;
-      cursor: wait;
-    }
-
-    .switch {
-      text-align: center;
-      color: #777;
-      font-size: 13px;
-      margin-top: 22px;
-    }
-
-    .switch button {
-      width: auto;
-      padding: 0;
-      margin-left: 4px;
-      background: none;
-      color: #e50914;
-      font-family: Inter, sans-serif;
-      font-size: 13px;
-      font-weight: 800;
+    .submit-btn:disabled {
+      opacity: 0.6;
+      cursor: not-allowed;
+      transform: none;
     }
 
     .message {
       display: none;
-      padding: 13px;
-      border-radius: 10px;
-      margin-bottom: 18px;
+      margin-top: 20px;
+      padding: 14px;
+      border: 1px solid #303030;
+      background: #080808;
+      color: #aaa;
       font-size: 13px;
       line-height: 1.5;
     }
 
-    .error {
+    .message.success {
       display: block;
-      color: #ff7378;
-      background: rgba(229, 9, 20, .1);
-      border: 1px solid rgba(229, 9, 20, .3);
+      border-color: #284d28;
+      color: #9bd69b;
     }
 
-    .success {
+    .message.error {
       display: block;
-      color: #8be28b;
-      background: rgba(50, 205, 50, .08);
-      border: 1px solid rgba(50, 205, 50, .25);
+      border-color: #6b2020;
+      color: #ff8585;
     }
 
-    .hidden {
-      display: none;
-    }
-
-    .home {
-      display: block;
+    .small-note {
+      color: #555;
+      font-size: 11px;
+      line-height: 1.5;
       text-align: center;
-      color: #666;
-      text-decoration: none;
-      font-size: 12px;
-      margin-top: 20px;
+      margin-top: 24px;
     }
 
-    .home:hover {
-      color: white;
+    @media (max-width: 600px) {
+      header {
+        padding: 0 20px;
+      }
+
+      .auth-box {
+        padding: 28px 22px;
+      }
+
+      h1 {
+        font-size: 46px;
+      }
     }
   </style>
+
 </head>
 
 <body>
 
-<div class="container">
+  <header>
+    <a href="index.html" class="logo">y2ksk8docu</a>
 
-  <div class="brand">
-    <div class="logo">Y</div>
+```
+<a href="index.html" class="back-link">
+  ← BACK
+</a>
+```
 
-    <div class="brand-name">
-      y2ksk8docu
-    </div>
+  </header>
 
-    <div class="tagline">
-      land it. film it. refine it.
-    </div>
-  </div>
+  <main>
+    <section class="auth-box">
 
+```
+  <div class="eyebrow">SKATE ARCHIVE / 001</div>
 
-  <div class="card">
+  <h1 id="title">SIGN IN.</h1>
 
-    <!-- LOGIN -->
+  <p class="intro" id="intro">
+    Keep track of your tricks, progress, sessions, and clips.
+  </p>
 
-    <div id="loginBox">
-
-      <h1>SIGN IN.</h1>
-
-      <div class="line"></div>
-
-      <p class="description">
-        Get back into your skate archive and keep progressing.
-      </p>
-
-      <div id="loginMessage" class="message"></div>
-
-      <form id="loginForm">
-
-        <div class="field">
-
-          <label>Email</label>
-
-          <input
-            id="loginEmail"
-            type="email"
-            required
-            placeholder="you@email.com"
-          >
-
-        </div>
-
-
-        <div class="field">
-
-          <label>Password</label>
-
-          <input
-            id="loginPassword"
-            type="password"
-            required
-            placeholder="••••••••"
-          >
-
-        </div>
-
-
-        <button
-          id="loginButton"
-          type="submit"
-        >
-          ENTER ARCHIVE →
-        </button>
-
-      </form>
-
-
-      <div class="switch">
-
-        Don't have an account?
-
-        <button
-          id="createButton"
-          type="button"
-        >
-          CREATE
-        </button>
-
-      </div>
-
-    </div>
-
-
-    <!-- CREATE ACCOUNT -->
-
-    <div
-      id="signupBox"
-      class="hidden"
+  <div class="mode-switch">
+    <button
+      type="button"
+      class="mode-btn active"
+      id="loginMode"
     >
+      SIGN IN
+    </button>
 
-      <h1>CREATE.</h1>
-
-      <div class="line"></div>
-
-      <p class="description">
-        Start documenting your skate progression.
-      </p>
-
-      <div
-        id="signupMessage"
-        class="message"
-      ></div>
-
-
-      <form id="signupForm">
-
-        <div class="field">
-
-          <label>Username</label>
-
-          <input
-            id="signupUsername"
-            type="text"
-            minlength="3"
-            maxlength="30"
-            required
-            placeholder="skatername"
-          >
-
-        </div>
-
-
-        <div class="field">
-
-          <label>Email</label>
-
-          <input
-            id="signupEmail"
-            type="email"
-            required
-            placeholder="you@email.com"
-          >
-
-        </div>
-
-
-        <div class="field">
-
-          <label>Password</label>
-
-          <input
-            id="signupPassword"
-            type="password"
-            minlength="6"
-            required
-            placeholder="••••••••"
-          >
-
-        </div>
-
-
-        <button
-          id="signupButton"
-          type="submit"
-        >
-          CREATE ACCOUNT →
-        </button>
-
-      </form>
-
-
-      <div class="switch">
-
-        Already have an account?
-
-        <button
-          id="loginButtonSwitch"
-          type="button"
-        >
-          SIGN IN
-        </button>
-
-      </div>
-
-    </div>
-
+    <button
+      type="button"
+      class="mode-btn"
+      id="signupMode"
+    >
+      CREATE ACCOUNT
+    </button>
   </div>
 
+  <form id="authForm">
 
-  <a
-    class="home"
-    href="index.html"
-  >
-    ← BACK TO HOME
-  </a>
+    <div class="field username-field" id="usernameField">
+      <label for="username">Username</label>
 
-</div>
+      <input
+        type="text"
+        id="username"
+        placeholder="your_skate_name"
+        autocomplete="username"
+      >
+    </div>
+
+    <div class="field">
+      <label for="email">Email</label>
+
+      <input
+        type="email"
+        id="email"
+        placeholder="you@example.com"
+        autocomplete="email"
+        required
+      >
+    </div>
+
+    <div class="field">
+      <label for="password">Password</label>
+
+      <input
+        type="password"
+        id="password"
+        placeholder="••••••••"
+        autocomplete="current-password"
+        minlength="6"
+        required
+      >
+    </div>
+
+    <button
+      type="submit"
+      class="submit-btn"
+      id="submitBtn"
+    >
+      SIGN IN →
+    </button>
+
+  </form>
+
+  <div class="message" id="message"></div>
+
+  <p class="small-note">
+    Your private tricks and videos stay private unless you choose to make them public.
+  </p>
+
+</section>
+```
+
+  </main>
+
+  <!-- SUPABASE -->
+
+  <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+
+  <!-- YOUR SUPABASE CONNECTION -->
+
+  <script src="./supabase.js"></script>
+
+  <!-- AUTHENTICATION -->
+
+  <script>
+
+    const authForm = document.getElementById("authForm");
+    const loginMode = document.getElementById("loginMode");
+    const signupMode = document.getElementById("signupMode");
+
+    const usernameField = document.getElementById("usernameField");
+    const usernameInput = document.getElementById("username");
+
+    const emailInput = document.getElementById("email");
+    const passwordInput = document.getElementById("password");
+
+    const submitBtn = document.getElementById("submitBtn");
+
+    const title = document.getElementById("title");
+    const intro = document.getElementById("intro");
+    const message = document.getElementById("message");
 
 
-<!-- SUPABASE -->
-
-<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
-
-<script src="supabase.js"></script>
+    let mode = "login";
 
 
-<script>
+    // ============================================
+    // CHECK SUPABASE CONNECTION
+    // ============================================
 
-  // --------------------------------
-  // CHECK SUPABASE
-  // --------------------------------
+    if (!window.supabaseClient) {
 
-  if (
-    typeof window.supabase === "undefined"
-  ) {
+      showMessage(
+        "Supabase connection could not be loaded. Check your supabase.js file.",
+        "error"
+      );
 
-    console.error(
-      "Supabase library did not load."
-    );
-
-  }
-
-  if (
-    typeof supabaseClient === "undefined"
-  ) {
-
-    console.error(
-      "supabaseClient is not defined. Check supabase.js."
-    );
-
-  }
-
-
-  // --------------------------------
-  // ELEMENTS
-  // --------------------------------
-
-  const loginBox =
-    document.getElementById("loginBox");
-
-  const signupBox =
-    document.getElementById("signupBox");
-
-  const createButton =
-    document.getElementById("createButton");
-
-  const loginButtonSwitch =
-    document.getElementById("loginButtonSwitch");
-
-  const loginForm =
-    document.getElementById("loginForm");
-
-  const signupForm =
-    document.getElementById("signupForm");
-
-  const loginMessage =
-    document.getElementById("loginMessage");
-
-  const signupMessage =
-    document.getElementById("signupMessage");
-
-  const loginButton =
-    document.getElementById("loginButton");
-
-  const signupButton =
-    document.getElementById("signupButton");
-
-
-  // --------------------------------
-  // SHOW CREATE ACCOUNT
-  // --------------------------------
-
-  createButton.addEventListener(
-    "click",
-    function () {
-
-      loginBox.classList.add("hidden");
-
-      signupBox.classList.remove("hidden");
-
-      loginMessage.className = "message";
-
-      loginMessage.textContent = "";
-
-      signupMessage.className = "message";
-
-      signupMessage.textContent = "";
-
-      window.scrollTo(0, 0);
-
+      submitBtn.disabled = true;
     }
-  );
 
 
-  // --------------------------------
-  // SHOW LOGIN
-  // --------------------------------
+    // ============================================
+    // MESSAGE
+    // ============================================
 
-  loginButtonSwitch.addEventListener(
-    "click",
-    function () {
+    function showMessage(text, type) {
 
-      signupBox.classList.add("hidden");
+      message.textContent = text;
 
-      loginBox.classList.remove("hidden");
-
-      signupMessage.className = "message";
-
-      signupMessage.textContent = "";
-
-      loginMessage.className = "message";
-
-      loginMessage.textContent = "";
-
-      window.scrollTo(0, 0);
-
+      message.className = "message " + type;
     }
-  );
 
 
-  // --------------------------------
-  // LOGIN
-  // --------------------------------
+    // ============================================
+    // LOGIN MODE
+    // ============================================
 
-  loginForm.addEventListener(
-    "submit",
-    async function (event) {
+    loginMode.addEventListener("click", function () {
+
+      mode = "login";
+
+      loginMode.classList.add("active");
+      signupMode.classList.remove("active");
+
+      usernameField.style.display = "none";
+
+      usernameInput.required = false;
+
+      title.textContent = "SIGN IN.";
+
+      intro.textContent =
+        "Welcome back. Pick up where you left off.";
+
+      submitBtn.textContent = "SIGN IN →";
+
+      passwordInput.autocomplete = "current-password";
+
+      message.className = "message";
+      message.textContent = "";
+    });
+
+
+    // ============================================
+    // CREATE ACCOUNT MODE
+    // ============================================
+
+    signupMode.addEventListener("click", function () {
+
+      mode = "signup";
+
+      signupMode.classList.add("active");
+      loginMode.classList.remove("active");
+
+      usernameField.style.display = "block";
+
+      usernameInput.required = true;
+
+      title.textContent = "JOIN THE ARCHIVE.";
+
+      intro.textContent =
+        "Create your account and start documenting your progression.";
+
+      submitBtn.textContent = "CREATE ACCOUNT →";
+
+      passwordInput.autocomplete = "new-password";
+
+      message.className = "message";
+      message.textContent = "";
+    });
+
+
+    // ============================================
+    // FORM SUBMISSION
+    // ============================================
+
+    authForm.addEventListener("submit", async function (event) {
 
       event.preventDefault();
 
+      if (!window.supabaseClient) {
 
-      loginMessage.className =
-        "message";
+        showMessage(
+          "Supabase is not connected. Check supabase.js.",
+          "error"
+        );
 
-      loginMessage.textContent =
-        "";
-
-
-      loginButton.disabled =
-        true;
-
-      loginButton.textContent =
-        "SIGNING IN...";
+        return;
+      }
 
 
-      const email =
-        document
-          .getElementById("loginEmail")
-          .value
-          .trim();
+      const email = emailInput.value.trim();
+
+      const password = passwordInput.value;
+
+      const username = usernameInput.value.trim();
 
 
-      const password =
-        document
-          .getElementById("loginPassword")
-          .value;
+      if (!email || !password) {
+
+        showMessage(
+          "Please enter your email and password.",
+          "error"
+        );
+
+        return;
+      }
+
+
+      if (mode === "signup" && !username) {
+
+        showMessage(
+          "Please choose a username.",
+          "error"
+        );
+
+        return;
+      }
+
+
+      submitBtn.disabled = true;
+
+      submitBtn.textContent =
+        mode === "signup"
+          ? "CREATING..."
+          : "SIGNING IN...";
 
 
       try {
 
-        if (
-          typeof supabaseClient ===
-          "undefined"
-        ) {
 
-          throw new Error(
-            "Supabase is not connected. Check supabase.js."
+        // ========================================
+        // CREATE ACCOUNT
+        // ========================================
+
+        if (mode === "signup") {
+
+          const { data, error } =
+            await window.supabaseClient.auth.signUp({
+
+              email: email,
+
+              password: password,
+
+              options: {
+                data: {
+                  username: username
+                }
+              }
+
+            });
+
+
+          if (error) {
+            throw error;
+          }
+
+
+          if (!data || !data.user) {
+
+            throw new Error(
+              "Account creation did not return a user."
+            );
+
+          }
+
+
+          // --------------------------------------
+          // EMAIL CONFIRMATION IS ON
+          // --------------------------------------
+
+          if (!data.session) {
+
+            showMessage(
+              "ACCOUNT CREATED. Check your email to verify your account, then come back here and sign in.",
+              "success"
+            );
+
+            authForm.reset();
+
+            return;
+          }
+
+
+          // --------------------------------------
+          // IF EMAIL CONFIRMATION IS OFF
+          // --------------------------------------
+
+          await createProfile(
+            data.user,
+            username
           );
 
+
+          window.location.href = "dashboard.html";
+
+          return;
         }
 
 
-        const {
-          data,
-          error
-        } =
-          await supabaseClient.auth.signInWithPassword({
+        // ========================================
+        // SIGN IN
+        // ========================================
+
+        const { data, error } =
+          await window.supabaseClient.auth.signInWithPassword({
 
             email: email,
 
@@ -590,358 +605,126 @@
 
 
         if (error) {
-
           throw error;
+        }
+
+
+        if (!data || !data.user) {
+
+          throw new Error(
+            "Login did not return a user."
+          );
 
         }
 
 
-        if (
-          data &&
-          data.session
-        ) {
+        // --------------------------------------
+        // MAKE SURE PROFILE EXISTS
+        // --------------------------------------
 
-          // --------------------------------
-          // MAKE SURE PROFILE EXISTS
-          // --------------------------------
-
-          const username =
-            data.user.user_metadata?.username;
+        const savedUsername =
+          data.user.user_metadata?.username ||
+          email.split("@")[0];
 
 
-          if (username) {
-
-            const {
-              data: existingProfile,
-              error: profileLookupError
-            } =
-              await supabaseClient
-                .from("profiles")
-                .select("id")
-                .eq(
-                  "id",
-                  data.user.id
-                )
-                .maybeSingle();
-
-
-            if (
-              profileLookupError
-            ) {
-
-              console.error(
-                "PROFILE LOOKUP ERROR:",
-                profileLookupError
-              );
-
-            }
-
-
-            if (
-              !existingProfile
-            ) {
-
-              const {
-                error: profileError
-              } =
-                await supabaseClient
-                  .from("profiles")
-                  .insert({
-
-                    id: data.user.id,
-
-                    username: username
-
-                  });
-
-
-              if (
-                profileError
-              ) {
-
-                console.error(
-                  "PROFILE CREATION ERROR:",
-                  profileError
-                );
-
-              }
-
-            }
-
-          }
-
-
-          window.location.href =
-            "dashboard.html";
-
-          return;
-
-        }
-
-
-        throw new Error(
-          "Login succeeded, but no session was created."
+        await createProfile(
+          data.user,
+          savedUsername
         );
+
+
+        // --------------------------------------
+        // GO TO DASHBOARD
+        // --------------------------------------
+
+        window.location.href = "dashboard.html";
 
 
       } catch (error) {
 
-        console.error(
-          "LOGIN ERROR:",
-          error
+        console.error("AUTH ERROR:", error);
+
+        showMessage(
+          error.message || "Something went wrong. Please try again.",
+          "error"
         );
-
-
-        loginMessage.textContent =
-          error.message ||
-          "Something went wrong while signing in.";
-
-
-        loginMessage.className =
-          "message error";
 
       } finally {
 
-        loginButton.disabled =
-          false;
+        submitBtn.disabled = false;
 
-        loginButton.textContent =
-          "ENTER ARCHIVE →";
-
+        submitBtn.textContent =
+          mode === "signup"
+            ? "CREATE ACCOUNT →"
+            : "SIGN IN →";
       }
 
-    }
-  );
+    });
 
 
-  // --------------------------------
-  // CREATE ACCOUNT
-  // --------------------------------
+    // ============================================
+    // CREATE PROFILE
+    // ============================================
 
-  signupForm.addEventListener(
-    "submit",
-    async function (event) {
+    async function createProfile(user, username) {
 
-      event.preventDefault();
-
-
-      signupMessage.className =
-        "message";
-
-      signupMessage.textContent =
-        "";
+      if (!user) {
+        return;
+      }
 
 
-      signupButton.disabled =
-        true;
-
-      signupButton.textContent =
-        "CREATING...";
-
-
-      const username =
-        document
-          .getElementById("signupUsername")
-          .value
-          .trim();
+      const { data: existingProfile, error: profileCheckError } =
+        await window.supabaseClient
+          .from("profiles")
+          .select("id")
+          .eq("id", user.id)
+          .maybeSingle();
 
 
-      const email =
-        document
-          .getElementById("signupEmail")
-          .value
-          .trim();
+      if (profileCheckError) {
+
+        console.error(
+          "PROFILE CHECK ERROR:",
+          profileCheckError
+        );
+
+        return;
+      }
 
 
-      const password =
-        document
-          .getElementById("signupPassword")
-          .value;
+      if (existingProfile) {
+        return;
+      }
 
 
-      try {
+      const { error: profileError } =
+        await window.supabaseClient
+          .from("profiles")
+          .insert({
 
-        // --------------------------------
-        // CHECK SUPABASE
-        // --------------------------------
+            id: user.id,
 
-        if (
-          typeof supabaseClient ===
-          "undefined"
-        ) {
+            username: username,
 
-          throw new Error(
-            "Supabase is not connected. Check supabase.js."
-          );
-
-        }
-
-
-        // --------------------------------
-        // VALIDATE USERNAME
-        // --------------------------------
-
-        if (
-          username.length < 3
-        ) {
-
-          throw new Error(
-            "Username must be at least 3 characters."
-          );
-
-        }
-
-
-        // --------------------------------
-        // CREATE ACCOUNT
-        // --------------------------------
-
-        const {
-          data,
-          error
-        } =
-          await supabaseClient.auth.signUp({
-
-            email: email,
-
-            password: password,
-
-            options: {
-
-              data: {
-
-                username: username
-
-              }
-
-            }
+            display_name: username
 
           });
 
 
-        console.log(
-          "SIGNUP RESPONSE:",
-          data
-        );
+      if (profileError) {
 
-
-        // --------------------------------
-        // SUPABASE ERROR
-        // --------------------------------
-
-        if (error) {
-
-          throw error;
-
-        }
-
-
-        // --------------------------------
-        // NO USER RETURNED
-        // --------------------------------
-
-        if (
-          !data ||
-          !data.user
-        ) {
-
-          throw new Error(
-            "Account creation failed. Please try again."
-          );
-
-        }
-
-
-        // --------------------------------
-        // EMAIL CONFIRMATION ON
-        // --------------------------------
-
-        if (
-          !data.session
-        ) {
-
-          signupMessage.textContent =
-            "ACCOUNT CREATED. Check your email to verify your account, then sign in.";
-
-          signupMessage.className =
-            "message success";
-
-          signupForm.reset();
-
-          return;
-
-        }
-
-
-        // --------------------------------
-        // CREATE PROFILE
-        // --------------------------------
-
-        const {
-          error: profileError
-        } =
-          await supabaseClient
-            .from("profiles")
-            .insert({
-
-              id: data.user.id,
-
-              username: username
-
-            });
-
-
-        if (
-          profileError
-        ) {
-
-          console.error(
-            "PROFILE CREATION ERROR:",
-            profileError
-          );
-
-        }
-
-
-        // --------------------------------
-        // GO TO DASHBOARD
-        // --------------------------------
-
-        window.location.href =
-          "dashboard.html";
-
-
-      } catch (error) {
+        // Username may already exist.
+        // The account itself can still log in.
 
         console.error(
-          "SIGNUP ERROR:",
-          error
+          "PROFILE CREATE ERROR:",
+          profileError
         );
-
-
-        signupMessage.textContent =
-          error.message ||
-          "Something went wrong while creating your account.";
-
-
-        signupMessage.className =
-          "message error";
-
-
-      } finally {
-
-        signupButton.disabled =
-          false;
-
-        signupButton.textContent =
-          "CREATE ACCOUNT →";
-
       }
 
     }
-  );
 
-</script>
+  </script>
 
 </body>
 </html>
