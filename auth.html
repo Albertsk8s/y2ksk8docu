@@ -4,7 +4,7 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-  <title>y2ksk8docu — Sign In</title>
+  <title>y2ksk8docu — Account</title>
 
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -20,35 +20,18 @@
 
     body {
       min-height: 100vh;
-      background:
-        radial-gradient(circle at 20% 20%, rgba(229, 9, 20, 0.15), transparent 30%),
-        radial-gradient(circle at 80% 80%, rgba(229, 9, 20, 0.1), transparent 30%),
-        #050505;
-      color: #fff;
-      font-family: "Inter", sans-serif;
+      background: #050505;
+      color: white;
+      font-family: Inter, sans-serif;
       display: flex;
       align-items: center;
       justify-content: center;
-      padding: 24px;
+      padding: 20px;
     }
 
-    body::before {
-      content: "";
-      position: fixed;
-      inset: 0;
-      pointer-events: none;
-      opacity: 0.08;
-      background-image:
-        linear-gradient(rgba(255,255,255,.08) 1px, transparent 1px),
-        linear-gradient(90deg, rgba(255,255,255,.08) 1px, transparent 1px);
-      background-size: 40px 40px;
-    }
-
-    .auth-shell {
+    .container {
       width: 100%;
-      max-width: 470px;
-      position: relative;
-      z-index: 2;
+      max-width: 460px;
     }
 
     .brand {
@@ -56,19 +39,19 @@
       margin-bottom: 30px;
     }
 
-    .brand-mark {
+    .logo {
       width: 58px;
       height: 58px;
-      margin: 0 auto 14px;
+      background: #e50914;
+      color: #050505;
+      margin: 0 auto 15px;
       display: flex;
       align-items: center;
       justify-content: center;
-      background: #e50914;
-      color: #050505;
-      font-family: "Creepster", cursive;
-      font-size: 35px;
+      font-family: Creepster, cursive;
+      font-size: 36px;
       transform: rotate(-5deg);
-      box-shadow: 7px 7px 0 #fff;
+      box-shadow: 6px 6px white;
     }
 
     .brand-name {
@@ -77,38 +60,42 @@
       letter-spacing: 2px;
     }
 
-    .brand-sub {
-      color: #888;
+    .tagline {
+      color: #777;
       font-family: "Permanent Marker", cursive;
       font-size: 14px;
-      margin-top: 4px;
     }
 
     .card {
-      background: rgba(15, 15, 15, 0.9);
+      background: #111;
       border: 1px solid #292929;
-      border-radius: 24px;
-      padding: 34px;
-      box-shadow: 0 25px 80px rgba(0,0,0,.55);
-      backdrop-filter: blur(15px);
+      border-radius: 22px;
+      padding: 32px;
     }
 
-    .form-title {
+    h1 {
       font-family: "Bebas Neue", sans-serif;
-      font-size: 44px;
+      font-size: 46px;
       letter-spacing: 1px;
-      margin-bottom: 6px;
     }
 
-    .form-subtitle {
+    .line {
+      width: 65px;
+      height: 4px;
+      background: #e50914;
+      margin: 5px 0 22px;
+      transform: skewX(-25deg);
+    }
+
+    .description {
       color: #888;
       font-size: 14px;
       line-height: 1.6;
-      margin-bottom: 28px;
+      margin-bottom: 25px;
     }
 
-    .form-group {
-      margin-bottom: 18px;
+    .field {
+      margin-bottom: 17px;
     }
 
     label {
@@ -116,558 +103,418 @@
       color: #aaa;
       font-size: 11px;
       font-weight: 800;
-      letter-spacing: 1.5px;
+      letter-spacing: 1px;
       margin-bottom: 8px;
       text-transform: uppercase;
     }
 
     input {
       width: 100%;
-      padding: 15px 16px;
+      padding: 15px;
+      background: #080808;
       border: 1px solid #333;
-      border-radius: 12px;
-      background: #0a0a0a;
-      color: #fff;
-      outline: none;
+      border-radius: 11px;
+      color: white;
       font-size: 15px;
-      transition: .2s ease;
+      outline: none;
     }
 
     input:focus {
       border-color: #e50914;
-      box-shadow: 0 0 0 3px rgba(229, 9, 20, .12);
     }
 
-    .primary-btn {
+    button {
       width: 100%;
-      border: 0;
-      border-radius: 12px;
       padding: 16px;
+      border: none;
+      border-radius: 11px;
       background: #e50914;
-      color: #fff;
+      color: white;
       font-family: "Bebas Neue", sans-serif;
-      font-size: 22px;
+      font-size: 21px;
       letter-spacing: 1px;
       cursor: pointer;
-      transition: .2s ease;
-      margin-top: 4px;
     }
 
-    .primary-btn:hover {
-      transform: translateY(-2px);
-      box-shadow: 0 10px 30px rgba(229, 9, 20, .25);
+    button:hover {
+      opacity: .9;
     }
 
-    .primary-btn:disabled {
-      opacity: .6;
+    button:disabled {
+      opacity: .5;
       cursor: wait;
-      transform: none;
     }
 
-    .switch-text {
+    .switch {
       text-align: center;
       color: #777;
       font-size: 13px;
       margin-top: 22px;
     }
 
-    .switch-link {
-      border: 0;
-      background: transparent;
-      color: #e50914;
-      font-family: "Inter", sans-serif;
-      font-weight: 800;
-      font-size: 13px;
-      cursor: pointer;
+    .switch button {
+      width: auto;
       padding: 0;
-    }
-
-    .switch-link:hover {
-      text-decoration: underline;
-    }
-
-    .back-home {
-      display: block;
-      text-align: center;
-      margin-top: 22px;
-      color: #666;
-      text-decoration: none;
-      font-size: 12px;
-      transition: .2s ease;
-    }
-
-    .back-home:hover {
-      color: #fff;
+      margin-left: 4px;
+      background: none;
+      color: #e50914;
+      font-family: Inter, sans-serif;
+      font-size: 13px;
+      font-weight: 800;
     }
 
     .message {
       display: none;
-      margin-bottom: 18px;
-      padding: 13px 15px;
+      padding: 13px;
       border-radius: 10px;
+      margin-bottom: 18px;
       font-size: 13px;
       line-height: 1.5;
     }
 
-    .message.error {
+    .error {
       display: block;
+      color: #ff7378;
       background: rgba(229, 9, 20, .1);
-      border: 1px solid rgba(229, 9, 20, .35);
-      color: #ff7278;
+      border: 1px solid rgba(229, 9, 20, .3);
     }
 
-    .message.success {
+    .success {
       display: block;
+      color: #8be28b;
       background: rgba(50, 205, 50, .08);
       border: 1px solid rgba(50, 205, 50, .25);
-      color: #8be28b;
     }
 
     .hidden {
-      display: none !important;
+      display: none;
     }
 
-    .skate-line {
-      width: 70px;
-      height: 4px;
-      background: #e50914;
-      margin: 0 0 24px;
-      transform: skewX(-25deg);
+    .home {
+      display: block;
+      text-align: center;
+      color: #666;
+      text-decoration: none;
+      font-size: 12px;
+      margin-top: 20px;
     }
 
-    @media (max-width: 520px) {
-      .card {
-        padding: 25px 20px;
-      }
-
-      .form-title {
-        font-size: 38px;
-      }
-
-      .brand-name {
-        font-size: 32px;
-      }
+    .home:hover {
+      color: white;
     }
   </style>
 </head>
 
 <body>
 
-  <main class="auth-shell">
+<div class="container">
 
-    <div class="brand">
-      <div class="brand-mark">Y</div>
-      <div class="brand-name">y2ksk8docu</div>
-      <div class="brand-sub">land it. film it. refine it.</div>
-    </div>
+  <div class="brand">
+    <div class="logo">Y</div>
+    <div class="brand-name">y2ksk8docu</div>
+    <div class="tagline">land it. film it. refine it.</div>
+  </div>
 
-    <div class="card">
+  <div class="card">
 
-      <!-- LOGIN -->
-      <section id="loginSection">
+    <!-- LOGIN -->
+    <div id="loginBox">
 
-        <div class="form-title">SIGN IN.</div>
-        <div class="skate-line"></div>
+      <h1>SIGN IN.</h1>
+      <div class="line"></div>
 
-        <p class="form-subtitle">
-          Get back into your skate archive and keep progressing.
-        </p>
+      <p class="description">
+        Get back into your skate archive and keep progressing.
+      </p>
 
-        <div id="loginMessage" class="message"></div>
+      <div id="loginMessage" class="message"></div>
 
-        <form id="loginForm">
+      <form id="loginForm">
 
-          <div class="form-group">
-            <label for="loginEmail">Email</label>
-            <input
-              type="email"
-              id="loginEmail"
-              placeholder="you@email.com"
-              required
-            >
-          </div>
-
-          <div class="form-group">
-            <label for="loginPassword">Password</label>
-            <input
-              type="password"
-              id="loginPassword"
-              placeholder="••••••••"
-              required
-            >
-          </div>
-
-          <button type="submit" class="primary-btn" id="loginButton">
-            ENTER ARCHIVE →
-          </button>
-
-        </form>
-
-        <div class="switch-text">
-          Don't have an account?
-          <button
-            type="button"
-            class="switch-link"
-            id="showSignup"
+        <div class="field">
+          <label>Email</label>
+          <input
+            id="loginEmail"
+            type="email"
+            required
+            placeholder="you@email.com"
           >
-            CREATE
-          </button>
         </div>
 
-      </section>
-
-
-      <!-- SIGN UP -->
-      <section id="signupSection" class="hidden">
-
-        <div class="form-title">CREATE.</div>
-        <div class="skate-line"></div>
-
-        <p class="form-subtitle">
-          Start documenting your progression. Your archive is yours.
-        </p>
-
-        <div id="signupMessage" class="message"></div>
-
-        <form id="signupForm">
-
-          <div class="form-group">
-            <label for="signupUsername">Username</label>
-            <input
-              type="text"
-              id="signupUsername"
-              placeholder="skatername"
-              minlength="3"
-              maxlength="30"
-              required
-            >
-          </div>
-
-          <div class="form-group">
-            <label for="signupEmail">Email</label>
-            <input
-              type="email"
-              id="signupEmail"
-              placeholder="you@email.com"
-              required
-            >
-          </div>
-
-          <div class="form-group">
-            <label for="signupPassword">Password</label>
-            <input
-              type="password"
-              id="signupPassword"
-              placeholder="••••••••"
-              minlength="6"
-              required
-            >
-          </div>
-
-          <button type="submit" class="primary-btn" id="signupButton">
-            CREATE ACCOUNT →
-          </button>
-
-        </form>
-
-        <div class="switch-text">
-          Already have an account?
-          <button
-            type="button"
-            class="switch-link"
-            id="showLogin"
+        <div class="field">
+          <label>Password</label>
+          <input
+            id="loginPassword"
+            type="password"
+            required
+            placeholder="••••••••"
           >
-            SIGN IN
-          </button>
         </div>
 
-      </section>
+        <button id="loginButton" type="submit">
+          ENTER ARCHIVE →
+        </button>
+
+      </form>
+
+      <div class="switch">
+        Don't have an account?
+        <button id="createButton" type="button">
+          CREATE
+        </button>
+      </div>
 
     </div>
 
-    <a href="index.html" class="back-home">
-      ← BACK TO HOME
-    </a>
 
-  </main>
+    <!-- CREATE ACCOUNT -->
+    <div id="signupBox" class="hidden">
+
+      <h1>CREATE.</h1>
+      <div class="line"></div>
+
+      <p class="description">
+        Start documenting your skate progression.
+      </p>
+
+      <div id="signupMessage" class="message"></div>
+
+      <form id="signupForm">
+
+        <div class="field">
+          <label>Username</label>
+          <input
+            id="signupUsername"
+            type="text"
+            minlength="3"
+            maxlength="30"
+            required
+            placeholder="skatername"
+          >
+        </div>
+
+        <div class="field">
+          <label>Email</label>
+          <input
+            id="signupEmail"
+            type="email"
+            required
+            placeholder="you@email.com"
+          >
+        </div>
+
+        <div class="field">
+          <label>Password</label>
+          <input
+            id="signupPassword"
+            type="password"
+            minlength="6"
+            required
+            placeholder="••••••••"
+          >
+        </div>
+
+        <button id="signupButton" type="submit">
+          CREATE ACCOUNT →
+        </button>
+
+      </form>
+
+      <div class="switch">
+        Already have an account?
+        <button id="loginButtonSwitch" type="button">
+          SIGN IN
+        </button>
+      </div>
+
+    </div>
+
+  </div>
+
+  <a class="home" href="index.html">
+    ← BACK TO HOME
+  </a>
+
+</div>
 
 
-  <!-- Supabase -->
-  <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
-  <script src="supabase.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+<script src="supabase.js"></script>
 
-  <script>
+<script>
 
-    const loginSection = document.getElementById("loginSection");
-    const signupSection = document.getElementById("signupSection");
+  const loginBox = document.getElementById("loginBox");
+  const signupBox = document.getElementById("signupBox");
 
-    const loginForm = document.getElementById("loginForm");
-    const signupForm = document.getElementById("signupForm");
+  const createButton = document.getElementById("createButton");
+  const loginButtonSwitch = document.getElementById("loginButtonSwitch");
 
-    const showSignup = document.getElementById("showSignup");
-    const showLogin = document.getElementById("showLogin");
+  const loginForm = document.getElementById("loginForm");
+  const signupForm = document.getElementById("signupForm");
 
-    const loginMessage = document.getElementById("loginMessage");
-    const signupMessage = document.getElementById("signupMessage");
+  const loginMessage = document.getElementById("loginMessage");
+  const signupMessage = document.getElementById("signupMessage");
 
-    const loginButton = document.getElementById("loginButton");
-    const signupButton = document.getElementById("signupButton");
+  const loginButton = document.getElementById("loginButton");
+  const signupButton = document.getElementById("signupButton");
 
 
-    // -------------------------
-    // SWITCH TO SIGN UP
-    // -------------------------
+  // CREATE BUTTON
+  createButton.addEventListener("click", function() {
 
-    showSignup.addEventListener("click", function(event) {
-      event.preventDefault();
+    loginBox.classList.add("hidden");
+    signupBox.classList.remove("hidden");
 
-      loginSection.classList.add("hidden");
-      signupSection.classList.remove("hidden");
+    window.scrollTo(0, 0);
 
-      clearMessages();
+  });
 
-      window.scrollTo({
-        top: 0,
-        behavior: "smooth"
+
+  // SIGN IN BUTTON
+  loginButtonSwitch.addEventListener("click", function() {
+
+    signupBox.classList.add("hidden");
+    loginBox.classList.remove("hidden");
+
+    window.scrollTo(0, 0);
+
+  });
+
+
+  // LOGIN
+  loginForm.addEventListener("submit", async function(event) {
+
+    event.preventDefault();
+
+    loginMessage.className = "message";
+    loginMessage.textContent = "";
+
+    loginButton.disabled = true;
+    loginButton.textContent = "SIGNING IN...";
+
+    const email =
+      document.getElementById("loginEmail").value.trim();
+
+    const password =
+      document.getElementById("loginPassword").value;
+
+
+    const { data, error } =
+      await supabaseClient.auth.signInWithPassword({
+        email,
+        password
       });
-    });
 
 
-    // -------------------------
-    // SWITCH TO LOGIN
-    // -------------------------
+    if (error) {
 
-    showLogin.addEventListener("click", function(event) {
-      event.preventDefault();
+      loginMessage.textContent = error.message;
+      loginMessage.className = "message error";
 
-      signupSection.classList.add("hidden");
-      loginSection.classList.remove("hidden");
+      loginButton.disabled = false;
+      loginButton.textContent = "ENTER ARCHIVE →";
 
-      clearMessages();
-
-      window.scrollTo({
-        top: 0,
-        behavior: "smooth"
-      });
-    });
+      return;
+    }
 
 
-    // -------------------------
-    // LOGIN
-    // -------------------------
+    if (data.session) {
 
-    loginForm.addEventListener("submit", async function(event) {
+      window.location.href = "dashboard.html";
 
-      event.preventDefault();
+    }
 
-      clearMessages();
-
-      const email =
-        document.getElementById("loginEmail").value.trim();
-
-      const password =
-        document.getElementById("loginPassword").value;
+  });
 
 
-      loginButton.disabled = true;
-      loginButton.textContent = "SIGNING IN...";
+  // CREATE ACCOUNT
+  signupForm.addEventListener("submit", async function(event) {
+
+    event.preventDefault();
+
+    signupMessage.className = "message";
+    signupMessage.textContent = "";
+
+    signupButton.disabled = true;
+    signupButton.textContent = "CREATING...";
 
 
-      const { data, error } =
-        await supabaseClient.auth.signInWithPassword({
-          email: email,
-          password: password
-        });
+    const username =
+      document.getElementById("signupUsername").value.trim();
+
+    const email =
+      document.getElementById("signupEmail").value.trim();
+
+    const password =
+      document.getElementById("signupPassword").value;
 
 
-      if (error) {
+    const { data, error } =
+      await supabaseClient.auth.signUp({
 
-        showMessage(
-          loginMessage,
-          error.message,
-          "error"
-        );
+        email: email,
 
-        loginButton.disabled = false;
-        loginButton.textContent = "ENTER ARCHIVE →";
+        password: password,
 
-        return;
-      }
-
-
-      if (data.session && data.user) {
-
-        window.location.href = "dashboard.html";
-
-      } else {
-
-        showMessage(
-          loginMessage,
-          "Login successful, but no active session was created.",
-          "error"
-        );
-
-        loginButton.disabled = false;
-        loginButton.textContent = "ENTER ARCHIVE →";
-      }
-
-    });
-
-
-    // -------------------------
-    // SIGN UP
-    // -------------------------
-
-    signupForm.addEventListener("submit", async function(event) {
-
-      event.preventDefault();
-
-      clearMessages();
-
-      const username =
-        document.getElementById("signupUsername").value.trim();
-
-      const email =
-        document.getElementById("signupEmail").value.trim();
-
-      const password =
-        document.getElementById("signupPassword").value;
-
-
-      if (username.length < 3) {
-
-        showMessage(
-          signupMessage,
-          "Username must be at least 3 characters.",
-          "error"
-        );
-
-        return;
-      }
-
-
-      signupButton.disabled = true;
-      signupButton.textContent = "CREATING...";
-
-
-      const { data, error } =
-        await supabaseClient.auth.signUp({
-
-          email: email,
-
-          password: password,
-
-          options: {
-
-            data: {
-              username: username
-            }
-
+        options: {
+          data: {
+            username: username
           }
-
-        });
-
-
-      if (error) {
-
-        showMessage(
-          signupMessage,
-          error.message,
-          "error"
-        );
-
-        signupButton.disabled = false;
-        signupButton.textContent = "CREATE ACCOUNT →";
-
-        return;
-      }
-
-
-      // If email confirmation is OFF,
-      // Supabase gives us a session immediately.
-
-      if (data.session && data.user) {
-
-        const { error: profileError } =
-          await supabaseClient
-            .from("profiles")
-            .insert({
-
-              id: data.user.id,
-
-              username: username
-
-            });
-
-
-        if (profileError) {
-
-          console.error(
-            "Profile creation error:",
-            profileError
-          );
-
-          showMessage(
-            signupMessage,
-            "Account created, but your profile could not be created. You can still continue.",
-            "error"
-          );
-
-          signupButton.disabled = false;
-          signupButton.textContent = "CREATE ACCOUNT →";
-
-          return;
         }
 
-
-        window.location.href = "dashboard.html";
-
-        return;
-      }
+      });
 
 
-      // Your Supabase setup currently uses
-      // email confirmation.
+    if (error) {
 
-      showMessage(
-        signupMessage,
-        "ACCOUNT CREATED. Check your email to verify your account, then come back and sign in.",
-        "success"
-      );
-
-
-      signupForm.reset();
+      signupMessage.textContent = error.message;
+      signupMessage.className = "message error";
 
       signupButton.disabled = false;
       signupButton.textContent = "CREATE ACCOUNT →";
 
-    });
-
-
-    // -------------------------
-    // MESSAGE HELPERS
-    // -------------------------
-
-    function showMessage(element, text, type) {
-
-      element.textContent = text;
-
-      element.className = "message " + type;
-
+      return;
     }
 
 
-    function clearMessages() {
+    if (data.session && data.user) {
 
-      loginMessage.textContent = "";
-      loginMessage.className = "message";
+      const { error: profileError } =
+        await supabaseClient
+          .from("profiles")
+          .insert({
+            id: data.user.id,
+            username: username
+          });
 
-      signupMessage.textContent = "";
-      signupMessage.className = "message";
 
+      if (profileError) {
+
+        console.error(profileError);
+
+      }
+
+
+      window.location.href = "dashboard.html";
+
+      return;
     }
 
-  </script>
+
+    signupMessage.textContent =
+      "ACCOUNT CREATED. Check your email to verify your account, then sign in.";
+
+    signupMessage.className = "message success";
+
+    signupForm.reset();
+
+    signupButton.disabled = false;
+    signupButton.textContent = "CREATE ACCOUNT →";
+
+  });
+
+</script>
 
 </body>
 </html>
+```
